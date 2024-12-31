@@ -1,0 +1,104 @@
+.image-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    /* Optional: keeps the container only as wide as the image */
+}
+
+.image {
+    display: block;
+    /* Ensures no gaps around the image */
+    width: 100%;
+    /* Optional: ensures the image fills the container */
+    height: 100%;
+}
+
+.centered-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    /* Optional: change text color */
+    /* text-align: center; */
+    /* Additional styling as needed */
+}
+
+.h3 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.language {
+    padding: 15px 0px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.custom-dropdown {
+    max-height: 200px;
+    /* Set the max height of the dropdown */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+}
+
+.countryBtn {
+    background-color: #5E0738;
+}
+
+.label {
+    width: 100%;
+    text-align: start;
+}
+
+/* .inputField {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+} */
+
+.popup-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #7bd5ea;
+    /* border: 1px solid #ccc; */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 65%;
+    z-index: 2;
+    border-radius: 5px;
+}
+
+.availabel {
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: black;
+}
+
+.notAvailable {
+    color: black;
+    font-weight: 500;
+}
+
+.callNow {
+    background-color: #5E0738;
+    color: white;
+    margin: 15px 0px;
+}
+
+/* .callNow:hover {
+    background-color: #0d6efd;
+    color: white;
+} */
+
+@media(min-width:1440px) {
+    .vdoImg {
+        width: 100%;
+    }
+}

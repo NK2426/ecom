@@ -1,0 +1,20 @@
+<app-header></app-header>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-6" *ngFor="let item of blogsList">
+            <div class="card m-3">
+                <div class="card-body ">
+                    <img style="height: 400px;" [src]="item.image" alt="" class="card-img-top">
+                    <p class="card-text mt-1" style="color: #a91be9;">{{item.createdAt | date }}</p>
+                    <h3 class="card-title">{{item.title}}</h3>
+                    <button mat-raised-button style="color: #ffffff;background-color: #a91be9;" (click)="viewBlog(item.slug)">Read More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+//<app-overlay></app-overlay>
+
+<app-footer></app-footer>

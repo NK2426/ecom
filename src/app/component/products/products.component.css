@@ -1,0 +1,132 @@
+.product {
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.product:hover {
+  border-radius: 5px;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
+    rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+}
+
+.image-container {
+  overflow: hidden;
+}
+
+.image-container img {
+  transition: transform 0.3s ease;
+  /* Add transition effect */
+}
+
+.image-container:hover img {
+  transform: scale(0.9);
+  /* Apply scale transformation on hover */
+}
+.product {
+  height: 250px; /* Set a fixed height for the product card */
+  overflow: hidden; /* Hide any content that overflows the fixed height */
+  position: relative; /* Ensure proper positioning for child elements */
+}
+
+.product img {
+  width: 70%; /* Make the image fill the width of the product card */
+  height: auto; /* Ensure the image scales proportionally */
+  position: relative; /* Position the image absolutely within the product card */
+  top: 0; /* Align the image to the top of the card */
+  left: 0; /* Align the image to the left of the card */
+}
+
+.mrp {
+  color: rgb(155, 154, 154);
+  font-size: 12px;
+}
+
+.no-items {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 25px;
+}
+
+@media (max-width: 426px) {
+  .product-list {
+    width: 50%;
+  }
+  .product-price {
+    font-size: 12px;
+  }
+  .product {
+    height: 200px;
+  }
+  .product-name {
+    font-size: 12px;
+  }
+  .fa-indian-rupee-sign {
+    font-size: 11px;
+  }
+  .mrp {
+    color: rgb(155, 154, 154);
+    font-size: 11px;
+  }
+}
+
+.all-prod {
+  margin-left: 15px;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  /* color: #85d508; */
+  font-size: 20px;
+}
+
+@media (max-width: 769px) {
+  .all-prod {
+    font-size: 16px;
+  }
+}
+
+.mat-pseudo-checkbox {
+  display: none !important;
+}
+
+@media screen and (min-width: 420px) and (max-width: 575px) {
+  .product-list {
+    width: 50%;
+  }
+  .product-price {
+    font-size: 12px;
+  }
+  .product {
+    height: 250px !important;
+  }
+  .product-name {
+    font-size: 12px;
+  }
+  .fa-indian-rupee-sign {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .product {
+    height: 200px;
+  }
+}
+
+.product-detail {
+  position: absolute;
+  bottom: 0; /* Align the text to the bottom of the card */
+  width: 100%;
+  right: 1px;
+  color: #000000; /* Text color */
+  padding: 10px; /* Add padding to the text */
+  box-sizing: border-box; /* Ensure padding doesn't affect the width */
+}
+
+@media (min-width: 1700px) {
+  .product {
+    height: 300px;
+  }
+}

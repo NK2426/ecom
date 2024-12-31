@@ -1,0 +1,28 @@
+<div class="dialog-content">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Comments Field -->
+      <div class="form-group">
+        <label for="comments">Reviews:</label>
+        <textarea
+          id="review"
+          formControlName="review"
+          placeholder="Enter your reviews here..."
+          rows="4"
+          style="width: 100%;"
+        ></textarea>
+        <div *ngIf="comments?.invalid && (comments?.dirty || comments?.touched)" class="error-message">
+          <span *ngIf="comments?.errors?.['required']">Reviews are required.</span>
+          <span *ngIf="comments?.errors?.['minlength']">Reviews must be at least 10 characters long.</span>
+        </div>
+      </div>
+  
+    
+  
+      <!-- Action Buttons -->
+      <div class="dialog-actions">
+        <button type="button" class="cancel-button" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="submit-button" [disabled]="form.invalid">Submit</button>
+      </div>
+    </form>
+  </div>
+  

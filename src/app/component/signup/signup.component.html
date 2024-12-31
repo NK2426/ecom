@@ -1,0 +1,449 @@
+<app-header></app-header> <br /><br />
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 mobile-banner">
+      <img
+        src="./assets/image/register-banner.png"
+        alt=""
+        class="img-fluid"
+        srcset=""
+      />
+    </div>
+    <div class="col-md-5 form-container">
+      <div class="container">
+        <img
+          src="../../../assets/image/mugdha-logo.png"
+          class="img-fluid logo"
+          width="300px"
+          alt=""
+        />
+        <h2 class="text-center signup-heading">Welcome !</h2>
+        <h5 class="text-center" *ngIf="!isSignup">
+          If you have an account, Please
+          <span routerLink="/login" class="login-link">Log in</span>
+        </h5>
+        <h5 class="text-center" *ngIf="isSignup">Please Enter Your Otp</h5>
+        <form
+          [formGroup]="profileForm"
+          (ngSubmit)="formSubmit()"
+          *ngIf="!isSignup"
+          autocomplete="off"
+        >
+          <label for="name" class="mobile-input-lable">Name: </label>
+
+          <input
+            class="form-control mobile-input"
+            id="name"
+            type="text"
+            formControlName="name"
+            [ngClass]="{
+              'is-invalid':
+                (isSubmit && formControls['name'].errors) ||
+                (formControls['name'].invalid &&
+                  (formControls['name'].dirty || formControls['name'].touched))
+            }"
+          />
+
+          <div
+            *ngIf="
+              (isSubmit && formControls['name']?.errors) ||
+              (formControls['name']?.invalid &&
+                (formControls['name']?.dirty || formControls['name']?.touched))
+            "
+            class="invalid-feedback input-error"
+          >
+            <span *ngIf="formControls['name'].errors?.['required']"
+              >Name is Required</span
+            >
+            <span *ngIf="formControls['name'].errors?.['minlength']"
+              >Minimum Length 3 Characters.</span
+            >
+            <span *ngIf="formControls['name'].errors?.['pattern']"
+              >Enter Alphabit Only</span
+            >
+          </div>
+          <br />
+          <label for="mobile" class="mobile-input-label">Mobile Number: </label>
+          <div style="display: flex; justify-content: center">
+            <div class="input-group mb-3" style="">
+              <div class="input-group-prepend">
+                <button
+                  class="btn btn-outline-secondary dropdown-toggle country-btn"
+                  type="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {{ selectedDialingCode }}
+                </button>
+                <div class="dropdown-menu custom-dropdown">
+                  <a
+                    class="dropdown-item"
+                    *ngFor="let item of country"
+                    (click)="selectDialingCode(item.dialingCode)"
+                  >
+                    <img
+                      [src]="item.flagUrl"
+                      class="img-fluid"
+                      width="20px"
+                      alt=""
+                    />
+                    &nbsp; {{ item.dialingCode }}
+                  </a>
+                </div>
+              </div>
+              <ng-container *ngIf="selectedDialingCode == '+91'">
+                <input
+                  class="form-control mobile-input"
+                  id="mobile"
+                  type="text"
+                  formControlName="mobile"
+                  style="border-radius: 0"
+                  (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+                  (keydown)="onKeyDown($event)"
+                  minlength="10"
+                  maxlength="10"
+                  (input)="onInputChange($event)"
+                  [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControls['mobile'].errors) ||
+                      (formControls['mobile'].invalid &&
+                        (formControls['mobile'].dirty ||
+                          formControls['mobile'].touched))
+                  }"
+                />
+
+                <div
+                  *ngIf="
+                    (isSubmit && formControls['mobile']?.errors) ||
+                    (formControls['mobile']?.invalid &&
+                      (formControls['mobile']?.dirty ||
+                        formControls['mobile']?.touched))
+                  "
+                  class="invalid-feedback input-error"
+                >
+                  <span *ngIf="formControls['mobile']?.errors?.['required']"
+                    >Mobile Number Is Required</span
+                  >
+                </div>
+              </ng-container>
+              <ng-container *ngIf="selectedDialingCode !== '+91'">
+                <input
+                  class="form-control mobile-input"
+                  id="mobile"
+                  type="text"
+                  formControlName="mobile"
+                  style="border-radius: 0"
+                  (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+                  (keydown)="onKeyDown($event)"
+                  minlength="7"
+                  maxlength="15"
+                  (input)="onInputChange($event)"
+                  [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControls['mobile'].errors) ||
+                      (formControls['mobile'].invalid &&
+                        (formControls['mobile'].dirty ||
+                          formControls['mobile'].touched))
+                  }"
+                />
+
+                <div
+                  *ngIf="
+                    (isSubmit && formControls['mobile']?.errors) ||
+                    (formControls['mobile']?.invalid &&
+                      (formControls['mobile']?.dirty ||
+                        formControls['mobile']?.touched))
+                  "
+                  class="invalid-feedback input-error"
+                >
+                  <span *ngIf="formControls['mobile']?.errors?.['required']"
+                    >Mobile Number Is Required</span
+                  >
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+          <br />
+
+          <label for="email" class="mobile-input-label">Email Id: </label>
+          <input
+            class="form-control mobile-input"
+            id="email"
+            type="text"
+            formControlName="email"
+            [ngClass]="{
+              'is-invalid':
+                (isSubmit && formControls['email'].errors) ||
+                (formControls['email'].invalid &&
+                  (formControls['email'].dirty ||
+                    formControls['email'].touched))
+            }"
+          />
+          <div
+            *ngIf="
+              (isSubmit && formControls['email']?.errors) ||
+              (formControls['email']?.invalid &&
+                (formControls['email']?.dirty ||
+                  formControls['email']?.touched))
+            "
+            class="invalid-feedback input-error"
+          >
+            <span *ngIf="formControls['email']?.errors?.['required']"
+              >Email Is Required</span
+            >
+          </div>
+
+          <!-- <div class="">
+              <div class="radio-switch">
+                <label class="radio-container">
+                  <input type="radio" name="location" value="1" formControlName="region" (change)="onInputSelectionChange($event)">
+                  <span class="checkmark"></span>
+                  Inside India
+                </label>
+                <label class="radio-container">
+                  <input type="radio" name="location" value="0" formControlName="region" (change)="onInputSelectionChange($event)">
+                  <span class="checkmark"></span>
+                  Outside India
+                </label>
+              </div>
+            </div> -->
+
+          <button
+            mat-raised-button
+            class="signup-submit"
+            type="submit"
+            [disabled]="!profileForm.valid"
+          >
+            Submit
+          </button>
+          <div class="login-button">
+            <button class="google-btn" (click)="signInWithGoogle()">
+              <div class="google-icon-wrapper">
+                <i class="fa-brands fa-google" style="color: #4285f4"></i>
+              </div>
+              <span class="button-text">Sign in with Google</span>
+            </button>
+          </div>
+
+          <div class="container">
+            <p style="color: #a91be9; margin-top: 20px">
+              You have received a One-Time Password (OTP) for your account to
+              your registered Email while you are abroad.
+            </p>
+          </div>
+        </form>
+
+        <form *ngIf="isSignup" [formGroup]="otpform">
+          <div class="otp-field">
+            <!-- comment line     <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:6}" ></ng-otp-input> -->
+            <code-input
+              [isCodeHidden]="false"
+              [codeLength]="6"
+              (onInputChange)="onOtpChange($event)"
+              (codeCompleted)="onCodeCompleted($event)"
+            >
+            </code-input>
+          </div>
+          <p style="margin-top: 15px">
+            OTP sent to your {{ device }}
+            <span style="color: #a91be9">{{ userresponse }}</span>
+          </p>
+          <button
+            mat-raised-button
+            class="signup-submit"
+            (click)="submitOtp()"
+            [disabled]="otpform.invalid"
+          >
+            Submit Otp
+          </button>
+        </form>
+        <div class="otp-container" *ngIf="isSignup">
+          <span *ngIf="isResendDisabled" class="fw-bold">
+            Resend OTP in {{ countdown }}s
+          </span>
+          <button
+            (click)="resendOtp()"
+            [disabled]="isResendDisabled"
+            class="resendbtn btn-sm"
+          >
+            Resend OTP
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <form
+    [formGroup]="signupForm"
+    novalidate="novalidate"
+    (ngSubmit)="formSubmit()"
+  >
+    <div class="row">
+      <div class="col-sm-6 m-auto">
+        <div class="order-1">
+          <h1 class="fw-bold">CREATE ACCOUNT</h1>
+          <p class="p-0" style="color: #767676">
+            Register here to access the wide range of products to purchase
+          </p>
+         
+          <div class="form-group py-2">
+            <label class="form-label">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="email"
+              style="border-radius: 25px; height: 45px"
+              [ngClass]="{
+                'is-invalid':
+                  (isSubmit && formControls['email'].errors) ||
+                  (formControls['email'].invalid &&
+                    (formControls['email'].dirty ||
+                      formControls['email'].touched))
+              }"
+            />
+            <div
+              *ngIf="
+                (isSubmit && formControls['email']?.errors) ||
+                (formControls['email']?.invalid &&
+                  (formControls['email']?.dirty ||
+                    formControls['email']?.touched))
+              "
+              class="invalid-feedback"
+            >
+              <span *ngIf="formControls['email'].errors?.['required']"
+                >User Email is Required.
+              </span>
+            </div>
+          </div>
+
+      
+          <div class="form-group py-2">
+            <label class="form-label">Mobile</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="mobile"
+              style="border-radius: 25px; height: 45px"
+              [ngClass]="{
+                'is-invalid':
+                  (isSubmit && formControls['mobile'].errors) ||
+                  (formControls['mobile'].invalid &&
+                    (formControls['mobile'].dirty ||
+                      formControls['mobile'].touched))
+              }"
+            />
+            <div
+              *ngIf="
+                (isSubmit && formControls['mobile']?.errors) ||
+                (formControls['mobile']?.invalid &&
+                  (formControls['mobile']?.dirty ||
+                    formControls['mobile']?.touched))
+              "
+              class="invalid-feedback"
+            >
+              <span *ngIf="formControls['mobile'].errors?.['required']"
+                >User Mobile is Required.
+              </span>
+            </div>
+          </div>
+
+       
+          <div class="form-group py-2">
+            <label class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              style="border-radius: 25px; height: 45px"
+              [ngClass]="{
+                'is-invalid':
+                  (isSubmit && formControls['name'].errors) ||
+                  (formControls['name'].invalid &&
+                    (formControls['name'].dirty ||
+                      formControls['name'].touched))
+              }"
+            />
+            <div
+              *ngIf="
+                (isSubmit && formControls['name']?.errors) ||
+                (formControls['name']?.invalid &&
+                  (formControls['name']?.dirty ||
+                    formControls['name']?.touched))
+              "
+              class="invalid-feedback"
+            >
+              <span *ngIf="formControls['name'].errors?.['required']"
+                >User Name is Required.
+              </span>
+            </div>
+          </div>
+
+    
+          <div class="form-group py-2">
+            <label class="form-label">Password</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="password"
+              style="border-radius: 25px; height: 45px"
+              [ngClass]="{
+                'is-invalid':
+                  (isSubmit && formControls['password'].errors) ||
+                  (formControls['password'].invalid &&
+                    (formControls['password'].dirty ||
+                      formControls['password'].touched))
+              }"
+            />
+            <div
+              *ngIf="
+                (isSubmit && formControls['password']?.errors) ||
+                (formControls['password']?.invalid &&
+                  (formControls['password']?.dirty ||
+                    formControls['password']?.touched))
+              "
+              class="invalid-feedback"
+            >
+              <span *ngIf="formControls['password'].errors?.['required']"
+                >User Password is Required.
+              </span>
+            </div>
+          </div>
+          <div class="form-group py-2">
+            <button
+              class="btn text-white w-100"
+              style="
+                background-color: #a91be9;
+                border-radius: 25px;
+                height: 45px;
+              "
+            >
+              Sign Up
+            </button>
+            <p class="text-center py-5">
+              <span style="color: #767676">Already have an Account? </span>
+              <a
+                style="color: #a91be9; text-decoration: underline"
+                routerLink="/login"
+                >Sign In</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div>
+          <img
+            style="border-radius: 15px"
+            class="w-70"
+            src="./assets/image/register-banner.png"
+            alt="No Image"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div> -->

@@ -1,0 +1,142 @@
+.cart {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .toolbar-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0px;
+    z-index: 1000;
+    width: 300px; /* Adjust width as needed */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none;
+  }
+  
+  .cart:hover .toolbar-dropdown {
+    display: block;
+  }
+  
+  .dropdown-product-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .dropdown-product-thumb img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .dropdown-product-info {
+    flex: 1;
+  }
+  
+  .dropdown-product-title {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    width: 200px;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .dropdown-product-details {
+    font-size: 0.9rem;
+    color: #777;
+  }
+  
+  .toolbar-dropdown-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .text-lg {
+    font-size: 1.1rem;
+  }
+
+  .cart-items-container {
+    max-height: 200px; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+    
+}
+.cart-items-container::-webkit-scrollbar {
+  display: none;
+}
+  
+  .text-medium {
+    font-weight: bold;
+  }
+  
+  .btn {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    padding: 8px 12px;
+    text-align: center;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+  }
+  
+  .btn:hover {
+    opacity: 0.9;
+  }
+  
+  /* Adjust styles as needed */
+  @media (max-width: 480px){
+    .toolbar-dropdown{
+        right: -60px;
+        width: 280px;
+    }
+    .dropdown-product-title{
+      font-size: 12px;
+    }
+  
+  }
+
+  .empty-cart{
+    font-size: 16px;
+  }
+
+
+    .cart-badge{
+      width: 30px;
+        height: 30px;
+        font-size: 22px;
+        border-radius: 51px;
+        transform: perspective(0px) translate(-12px) rotate(0deg) scale(0.59);
+        transform-origin: top;
+        padding-right: 0;
+        padding-top: 4px;
+        padding-left: 0px;
+        text-align: center;
+        border-width: 6px;
+        background-color: #a91be9;
+        cursor: pointer;
+    }
+
+    .fa-shopping-cart:hover{
+      color: #a91be9 !important;
+      cursor: pointer;
+    }

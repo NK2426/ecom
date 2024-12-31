@@ -1,0 +1,393 @@
+<app-header></app-header>
+
+<br /><br />
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 mobile-banner">
+      <img
+        src="./assets/image/login-banner.png"
+        alt=""
+        class="img-fluid"
+        srcset=""
+      />
+    </div>
+    <div class="col-md-5">
+      <div class="container">
+        <p
+          class="text-center"
+          *ngIf="isError"
+          style="color: red; font-size: 20px"
+        >
+          {{ message }}
+        </p>
+        <img
+          src="../../../assets/image/mugdha-logo.png"
+          class="img-fluid logo"
+          width="300px"
+          alt=""
+        />
+        <h2 class="text-center login-heading">Welcome Back!</h2>
+        <h5 class="text-center" *ngIf="!isLogin">
+          Do you have an account?
+          <span routerLink="/signup" class="signup-link">Create Account</span>
+        </h5>
+        <h5 class="text-center" *ngIf="isLogin">Please Enter Your Otp</h5>
+
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="formSubmit()"
+          *ngIf="!isLogin"
+          autocomplete="off"
+        >
+          <div class="d-flex justify-content-center">
+            <div class="toggle-switch">
+              <input
+                type="radio"
+                id="mobile"
+                formControlName="inputType"
+                value="mobile"
+                (change)="onInputSelectionChange('mobile')"
+              />
+              <input
+                type="radio"
+                id="email"
+                formControlName="inputType"
+                value="email"
+                (change)="onInputSelectionChange('email')"
+              />
+              <div class="switch">
+                <label for="mobile" class="mobile-label"
+                  ><span style="color: white">Mobile</span></label
+                >
+                <label for="email" class="email-label"
+                  ><span style="color: white">Email</span></label
+                >
+                <div class="slider"></div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="loginForm.get('inputType')?.value === 'mobile'">
+            <label for="mobile" class="mobile-input-label"
+              >Mobile Number:
+            </label>
+            <div style="display: flex; justify-content: center">
+              <div class="input-group mb-3" style="width: 80%">
+                <div class="input-group-prepend">
+                  <button
+                    class="btn btn-outline-secondary dropdown-toggle country-btn"
+                    type="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {{ selectedDialingCode }}
+                  </button>
+                  <div class="dropdown-menu custom-dropdown">
+                    <a
+                      class="dropdown-item"
+                      *ngFor="let item of country"
+                      (click)="selectDialingCode(item.dialingCode)"
+                    >
+                      <img
+                        [src]="item.flagUrl"
+                        class="img-fluid"
+                        width="20px"
+                        alt=""
+                      />
+                      &nbsp; {{ item.dialingCode }}
+                    </a>
+                  </div>
+                </div>
+                <ng-container *ngIf="selectedDialingCode == '+91'">
+                  <input
+                    class="form-control mobile-input"
+                    id="mobile"
+                    type="text"
+                    formControlName="mobile"
+                    style="border-radius: 0"
+                    (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+                    (keydown)="onKeyDown($event)"
+                    minlength="10"
+                    maxlength="10"
+                    (input)="onInputChange($event)"
+                    [ngClass]="{
+                      'is-invalid':
+                        (isSubmit && formControls['mobile'].errors) ||
+                        (formControls['mobile'].invalid &&
+                          (formControls['mobile'].dirty ||
+                            formControls['mobile'].touched))
+                    }"
+                  />
+
+                  <div
+                    *ngIf="
+                      (isSubmit && formControls['mobile']?.errors) ||
+                      (formControls['mobile']?.invalid &&
+                        (formControls['mobile']?.dirty ||
+                          formControls['mobile']?.touched))
+                    "
+                    class="invalid-feedback input-error"
+                  >
+                    <span *ngIf="formControls['mobile']?.errors?.['required']"
+                      >Mobile Number Is Required</span
+                    >
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="selectedDialingCode !== '+91'">
+                  <input
+                    class="form-control mobile-input"
+                    id="mobile"
+                    type="text"
+                    formControlName="mobile"
+                    style="border-radius: 0"
+                    (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+                    (keydown)="onKeyDown($event)"
+                    minlength="7"
+                    maxlength="15"
+                    (input)="onInputChange($event)"
+                    [ngClass]="{
+                      'is-invalid':
+                        (isSubmit && formControls['mobile'].errors) ||
+                        (formControls['mobile'].invalid &&
+                          (formControls['mobile'].dirty ||
+                            formControls['mobile'].touched))
+                    }"
+                  />
+
+                  <div
+                    *ngIf="
+                      (isSubmit && formControls['mobile']?.errors) ||
+                      (formControls['mobile']?.invalid &&
+                        (formControls['mobile']?.dirty ||
+                          formControls['mobile']?.touched))
+                    "
+                    class="invalid-feedback input-error"
+                  >
+                    <span *ngIf="formControls['mobile']?.errors?.['required']"
+                      >Mobile Number Is Required</span
+                    >
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="loginForm.get('inputType')?.value === 'email'">
+            <label for="email" class="mobile-input-label">Email Id: </label>
+            <div class="input-width">
+              <input
+                class="form-control mobile-input wds"
+                id="email"
+                type="text"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['email'].errors) ||
+                    (formControls['email'].invalid &&
+                      (formControls['email'].dirty ||
+                        formControls['email'].touched))
+                }"
+              />
+              <div
+                *ngIf="
+                  (isSubmit && formControls['email']?.errors) ||
+                  (formControls['email']?.invalid &&
+                    (formControls['email']?.dirty ||
+                      formControls['email']?.touched))
+                "
+                class="invalid-feedback input-error"
+              >
+                <span *ngIf="formControls['email']?.errors?.['required']"
+                  >Email Is Required</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <button
+            mat-raised-button
+            class="login-submit"
+            type="submit"
+            [disabled]="!loginForm.valid"
+          >
+            Submit
+          </button>
+        </form>
+        <div class="login-button">
+          <button class="google-btn" (click)="signInWithGoogle()">
+            <div class="google-icon-wrapper">
+              <i class="fa-brands fa-google" style="color: #4285f4"></i>
+            </div>
+            <span class="button-text">Sign in with Google</span>
+          </button>
+        </div>
+
+        <br /><br />
+        <!-- login.component.html -->
+        <form
+          *ngIf="isLogin"
+          [formGroup]="otpForm1"
+          (ngSubmit)="submitOtp()"
+          autocomplete="off"
+        >
+          <div class="otp-field" formGroupName="otp">
+            <input
+              *ngFor="let control of otpControls; let i = index"
+              type="text"
+              maxlength="1"
+              formControlName="{{ i }}"
+              (input)="onInput($event, i)"
+              (keydown)="onKeyDown1($event, i)"
+              class="otp-input"
+            />
+          </div>
+          <button
+            mat-raised-button
+            class="login-submit"
+            type="submit"
+            [disabled]="otpForm1.invalid"
+          >
+            Submit Otp
+          </button>
+        </form>
+
+        <div class="otp-container" *ngIf="isLogin">
+          <span *ngIf="isResendDisabled" class="fw-bold">
+            Resend OTP in {{ countdown }}s
+          </span>
+          <button
+            (click)="resendOtp()"
+            [disabled]="isResendDisabled"
+            class="resendbtn btn-sm"
+          >
+            Resend OTP
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <form
+    [formGroup]="loginForm"
+    novalidate="novalidate"
+    (ngSubmit)="formSubmit()"
+  >
+    <div class="row">
+      <div class="col-sm-6 m-auto">
+        <div class="order-1">
+          <div class="form-grouop pt-3">
+            <h1 class="fw-bold">LOGIN</h1>
+            <p style="color: #767676">
+              Login here to access the wide range of products to purchase
+            </p>
+          </div>
+         
+          <div class="form-group py-3">
+            <label class="form-label" style="font-weight: 500">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="userEmail"
+              style="border-radius: 25px; height: 45px"
+              [ngClass]="{
+                'is-invalid':
+                  (submitBtn && formControls['userEmail'].errors) ||
+                  (formControls['userEmail'].invalid &&
+                    (formControls['userEmail'].dirty ||
+                      formControls['userEmail'].touched))
+              }"
+            />
+            <div
+              *ngIf="
+                (submitBtn && formControls['userEmail']?.errors) ||
+                (formControls['userEmail']?.invalid &&
+                  (formControls['userEmail']?.dirty ||
+                    formControls['userEmail']?.touched))
+              "
+              class="invalid-feedback"
+            >
+              <span *ngIf="formControls['userEmail'].errors?.['required']"
+                >User Email is Required.
+              </span>
+            </div>
+          </div>
+
+         
+          <div class="form-group py-3">
+            <label class="form-label" style="font-weight: 500">Password</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="userPassword"
+              style="border-radius: 25px; height: 45px"
+              [ngClass]="{
+                'is-invalid':
+                  (submitBtn && formControls['userPassword'].errors) ||
+                  (formControls['userPassword'].invalid &&
+                    (formControls['userPassword'].dirty ||
+                    formControls['userPassword'].touched))
+              }"
+            />
+            <div
+              *ngIf="
+                (submitBtn && formControls['userPassword']?.errors) ||
+                (formControls['userPassword']?.invalid &&
+                  (formControls['userPassword']?.dirty ||
+                  formControls['userPassword']?.touched))
+              "
+              class="invalid-feedback"
+            >
+              <span *ngIf="formControls['userPassword'].errors?.['required']"
+                >UserPassword is Required.
+              </span>
+              <span
+                *ngIf="formControls['userPassword'].errors?.['pattern']"
+                style="text-wrap: wrap"
+              >
+                
+                Your password must be at least 6 characters long, contain at
+                least one number and have a mixture of uppercase, lowercase and
+                Special Character (Eg: . , ! @ # $).
+              </span>
+            </div>
+            <p class="text-end pt-3" style="color: #767676">Forgot Password?</p>
+          </div>
+          <div class="form-group py-3">
+            <button
+              class="btn tbn-sm w-100 text-white"
+              style="
+                background-color: #a91be9;
+                border-radius: 25px;
+                height: 45px;
+              "
+            >
+              Signin
+            </button>
+            <h5 class="text-center py-3">
+              <span style="color: #767676">If you are new, </span>
+              <a
+                style="color: #a91be9; text-decoration: underline"
+                class="fw-bold"
+                routerLink="/signup"
+                >Create Now</a
+              >
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 order-2">
+        <div>
+          <img
+            class="w-100"
+            style="border-radius: 15px"
+            src="./assets/image/login-banner.png"
+            alt="No image"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div> -->

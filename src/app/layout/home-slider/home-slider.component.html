@@ -1,0 +1,27 @@
+<br>
+<br>
+<div class="container-fluid slider-home">
+    <div class="carousel-wrapper" style="overflow: hidden;">
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+            <div ngxSlickItem *ngFor="let slide of banners">
+                <div class="slide">
+                    <!-- Desktop Image -->
+                    <img [src]="slide.path" alt="" width="100%" (click)="navigateTo(slide.link,slide.type)">
+
+                    <span *ngIf="slide.link" (click)="navigateTo(slide.link,slide.type)">
+                        
+                   
+                    </span>
+                </div>
+
+            </div>
+        </ngx-slick-carousel>
+
+        <button mat-mini-fab class="prev" (click)="slickModal.slickPrev()"><i class="fa-solid fa-arrow-left"
+                style="color: #000000;"></i></button>
+        <button mat-mini-fab class="next" (click)="slickModal.slickNext()"><i class="fa-solid fa-arrow-right"
+                style="color: #000000;"></i></button>
+    </div>
+</div>
+
+

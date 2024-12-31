@@ -1,0 +1,173 @@
+/* whatsapp-icon.component.css */
+
+.whatsapp {
+  color: #25D366;
+  /* WhatsApp's brand color */
+  /* font-size: 75px; */
+  position: fixed;
+  bottom: 80px;
+  right: 40px;
+  fill: white;
+  text-decoration: none;
+  z-index: 1000;
+  animation: pulse 2s infinite;
+  /* Adds a pulsing animation */
+  transition: color 0.3s ease-in-out;
+  /* Smooth color transition */
+}
+
+.whatsapp:hover {
+  color: #11db0a;
+  /* Darker green on hover */
+}
+
+/* Keyframes for pulsing animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+    /* Scale up the icon */
+  }
+
+  100% {
+    transform: scale(1);
+    /* Scale back down to normal */
+  }
+}
+
+/* On screens smaller than 768px */
+@media (max-width: 767px) {
+  a {
+    font-size: 40px;
+    bottom: 0px;
+    right: 6px;
+
+  }
+}
+
+/* video-icon.component.css */
+.video {
+  color: #a91be9;
+  /* font-size: 55px; */
+  position: fixed;
+  bottom: 200px;
+  right: 40px;
+  fill: white;
+  text-decoration: none;
+  z-index: 1000;
+ 
+  transition: color 0.3s ease-in-out;
+}
+
+.video:hover {
+  color: #a91be9;
+  cursor: pointer;
+}
+
+/* Keyframes for pulsing animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+    /* Scale up the icon */
+  }
+
+  100% {
+    transform: scale(1);
+    /* Scale back down to normal */
+  }
+}
+
+/* On screens smaller than 768px */
+@media (max-width: 767px) {
+  a {
+    font-size: 40px;
+    bottom: 0px;
+    right: 6px;
+
+  }
+}
+
+@media(min-width:320px) and (max-width:767px) {
+  .fa-whatsapp {
+    font-size: 35px;
+  }
+
+  .fa-video {
+    font-size: 25px;
+    animation: pulse 2s infinite;
+  }
+}
+
+@media(min-width:768px) and (max-width:1023px) {
+  .fa-whatsapp {
+    font-size: 65px;
+  }
+
+  .fa-video {
+    font-size: 55px;
+    animation: pulse 2s infinite;
+  }
+}
+
+@media(max-width:1024px) {
+  .fa-whatsapp {
+    font-size: 55px;
+    margin-right: 15px;
+  }
+
+  .fa-video {
+    font-size: 45px;
+    margin-right: 15px;
+    animation: bounce  2s infinite;
+  }
+}
+
+@media(min-width:1025px) {
+  .fa-video {
+    font-size: 50px;
+    margin-right: 15px;
+    animation: bounce  2s infinite;
+  }
+
+  .fa-whatsapp {
+    font-size: 55px;
+    margin-right: 15px;
+  }
+}
+
+.modal-dialog.fullscreen-modal {
+  max-width: 100%;
+  margin: 0;
+}
+
+.modal-content.fullscreen-modal {
+  /* height: 100vh; */
+  /* Full viewport height */
+  border-radius: 0;
+  /* Remove border radius for a full-screen effect */
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-40px); /* Bounce up */
+  }
+  50% {
+    transform: translateY(0); /* Back to original position */
+  }
+  70% {
+    transform: translateY(-5px); /* Small bounce up */
+  }
+  100% {
+    transform: translateY(0); /* Back to original position */
+  }
+}

@@ -1,0 +1,396 @@
+<app-header></app-header>
+
+<!-- <app-home-slider></app-home-slider> -->
+
+<div *ngFor="let section of section">
+
+  <!-- Banner -->
+  <div class="container-fluid slider-home" *ngIf="section.type == 'Banner'">
+    <div class="carousel-wrapper" style="overflow: hidden">
+      <ngx-slick-carousel
+        class="carousel"
+        #slickModal="slick-carousel"
+        [config]="slideConfig"
+      >
+        <div ngxSlickItem *ngFor="let slide of section.sectionitems">
+          <div class="slide">
+            <!-- Desktop Image -->
+            <img
+              [src]="slide.path"
+              alt=""
+              width="100%"
+              (click)="navigateTo(slide.link, slide.type)"
+            />
+            <span
+              *ngIf="slide.link"
+              (click)="navigateTo(slide.link, slide.type)"
+            >
+            </span>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+
+      <button mat-mini-fab class="prev" (click)="slickModal.slickPrev()">
+        <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+      </button>
+      <button mat-mini-fab class="next" (click)="slickModal.slickNext()">
+        <i class="fa-solid fa-arrow-right" style="color: #000000"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Short By Category -->
+  <div style="background-color: #f6f6f6" *ngIf="section.type == 'Section'">
+    <div class="container py-5">
+      <h1 class="text-left main-headings">{{ section.title }}</h1>
+      
+      <div class="row" style="margin-top: 20px">
+        <div
+          class="col-md-6 col-sm-6 col-lg-4 col-xl-3 my-2 shopby-cat"
+          *ngFor="let item of section.sectionitems"
+        >
+          <div class="card border border-0">
+            <img
+              style="border-radius: 10px; cursor: pointer"
+              (click)="getSubcategory(item?.link,item.type,item.title)"
+              [src]="item?.path"
+              class="img-fluid first-image"
+              alt=""
+            />
+            <div class="overlay" style="border-radius: 10px">
+              <div class="text">{{ item?.title }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Short By saree types -->
+  <div class="container py-3" *ngIf="section.type == 'Tag'">
+    <h1 class="text-left main-headings">{{ section.title }}</h1>
+    <div class="underline-container">
+      <span class="underline"></span>
+      <span class="diamond"></span>
+      <span class="underline"></span>
+    </div>
+    <div class="carousel-wrapper">
+      <ngx-slick-carousel
+        #slickModal4="slick-carousel"
+        [config]="slideConfigTag"
+        style="overflow: hidden; margin-top: 20px"
+      >
+        <div
+          ngxSlickItem
+          *ngFor="let item of section.sectionitems"
+          class="carousel-item"
+        >
+          <div class="testimonial-container m-auto">
+            <div
+              class="testimonial"
+              style="cursor: pointer"
+              (click)="getTagWithUUID(item.link)"
+            >
+              <img
+                src="{{ item?.path }}"
+                alt="No Image"
+                class="saree-type-img tagImage"
+                style="
+                  object-fit: cover;
+                  object-position: top;
+                  border-radius: 15px;
+                  margin: auto;
+                "
+              />
+              <h4 style="color: #a91be9" class="pt-3">{{ item.title }}</h4>
+            </div>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+
+      <button mat-mini-fab class="prev" (click)="slickModal4.slickPrev()">
+        <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+      </button>
+      <button mat-mini-fab class="next" (click)="slickModal4.slickNext()">
+        <i class="fa-solid fa-arrow-right" style="color: #000000"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Bridal collections  -->
+  <div *ngIf="section.type == 'List'">
+    <div class="container py-5">
+      <h1 class="text-left main-headings">{{ section.title }}</h1>
+      
+      <ngx-slick-carousel
+        #slickModal3="slick-carousel"
+        [config]="slideConfig3"
+        style="overflow: hidden; margin-top: 20px"
+      >
+        <div
+          ngxSlickItem
+          *ngFor="let item of section.sectionitems"
+          class="carousel-item"
+          style="position: relative"
+        >
+          <div>
+            <!-- Wishlist Icon -->
+            <!-- <div class="wishlist-icon" [ngClass]="{
+              'in-wishlist': item.wishlist !== 0,
+              'not-in-wishlist': item.wishlist === 0
+            }" (click)="toggleWishlist(item, 'exclusive')" title="Add to Wishlist">
+              <mat-icon>{{
+                item.wishlist !== 0 ? "favorite" : "favorite_border"
+                }}</mat-icon>
+            </div> -->
+
+            <img
+              [src]="item?.path"
+              alt=""
+              class="mb-2 mt-2"
+              style="margin: auto; width: 70%"
+              (click)="getSingleProduct(item?.link)"
+            />
+            <div
+              class="row py-2"
+              style="cursor: pointer; width: 70%; margin: auto"
+              (click)="getSingleProduct(item?.slug)"
+            >
+              <!-- {{item | json}} -->
+              <!-- <span class="w-50 text-center">Silk</span>
+              <span class="w-50 d-flex text-center">
+                <i class="fa fa-star text-warning" style="font-size: 14px"></i>
+                <i class="fa fa-star text-warning" style="font-size: 14px"></i>
+                <i class="fa fa-star text-warning" style="font-size: 14px"></i>
+                <i class="fa fa-star text-warning" style="font-size: 14px"></i>
+                <i class="fa fa-star text-warning" style="font-size: 14px"></i>
+              </span> -->
+
+              <p
+                class="prod-name py-2 m-0 text-start"
+                style="cursor: pointer"
+                (click)="getSingleProduct(item?.slug)"
+              >
+                {{ item?.title }}
+              </p>
+              <p
+                class="actual-price py-2 fw-bold text-start"
+                style="cursor: pointer"
+                (click)="getSingleProduct(item?.slug)"
+              >
+                <i class="fa-solid fa-indian-rupee-sign"></i> {{ item?.price }}
+              </p>
+            </div>
+          </div>
+        </div>
+        
+      </ngx-slick-carousel>
+    </div>
+  </div>
+  <div *ngIf="section.type == 'RSection'">
+    <div class="container py-5">
+      <h1 class="text-left main-headings">{{ section.title }}</h1>
+      
+      <ngx-slick-carousel
+        #slickModal3="slick-carousel"
+        [config]="slideConfig3"
+        style="overflow: hidden; margin-top: 20px"
+      >
+        <div
+          ngxSlickItem
+          *ngFor="let item of section.sectionitems"
+          class="carousel-item"
+          style="position: relative"
+        >
+          <div>
+            <!-- Wishlist Icon -->
+            <!-- <div class="wishlist-icon" [ngClass]="{
+              'in-wishlist': item.wishlist !== 0,
+              'not-in-wishlist': item.wishlist === 0
+            }" (click)="toggleWishlist(item, 'exclusive')" title="Add to Wishlist">
+              <mat-icon>{{
+                item.wishlist !== 0 ? "favorite" : "favorite_border"
+                }}</mat-icon>
+            </div> -->
+
+            <img
+              [src]="item?.path"
+              alt=""
+              class="mb-2 mt-2"
+              style="margin: auto; width: 70%"
+              (click)="getSingleProduct(item?.link)"
+            />
+            <div
+              class="row py-2"
+              style="cursor: pointer; width: 70%; margin: auto"
+              (click)="getSingleProduct(item?.slug)"
+            >
+              <!-- {{item | json}} -->
+              <!-- <span class="w-50 text-center">Silk</span>
+              <span class="w-50 d-flex text-center">
+                <i class="fa fa-star text-warning" style="font-size: 14px"></i>
+                <i class="fa fa-star text-warning" style="font-size: 14px"></i>
+                <i class="fa fa-star text-warning" style="font-size: 14px"></i>
+                <i class="fa fa-star text-warning" style="font-size: 14px"></i>
+                <i class="fa fa-star text-warning" style="font-size: 14px"></i>
+              </span> -->
+
+              <p
+                class="prod-name py-2 m-0 text-start"
+                style="cursor: pointer"
+                (click)="getSingleProduct(item?.slug)"
+              >
+                {{ item?.title }}
+              </p>
+              <p
+                class="actual-price py-2 fw-bold text-start"
+                style="cursor: pointer"
+                (click)="getSingleProduct(item?.slug)"
+              >
+                <i class="fa-solid fa-indian-rupee-sign"></i> {{ item?.price }}
+              </p>
+            </div>
+          </div>
+        </div>
+        
+      </ngx-slick-carousel>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Coupon offer -->
+<!-- <div *ngIf="isCoupon == '0' || isCoupon == ''">
+  <div
+    class="coupon-container"
+    [ngClass]="{ active: isCouponActive }"
+    *ngFor="let item of couponList"
+  >
+    <div class="row offerPart">
+      <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7">
+        <div class="coupon-content">
+          <h6 class="avail">{{ item?.name }}</h6>
+          <h2 class="off">{{ item?.discount }}%</h2>
+          <h4 class="coupon">
+            Coupon Code: <span class="coupon1">{{ item?.coupon_code }}</span>
+          </h4>
+          <p class="Applicable">Applicable on your first order</p>
+          <p class="Applicable">Use Couponcode After SignIn</p>
+        </div>
+      </div>
+      <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5 text-center">
+        <img src="{{ item?.path }}" alt="No image" class="shopImg" />
+      </div>
+    </div>
+  
+    <div class="row footPop">
+      <div class="col-md-5 col-lg-5 col-sm-6 col-xs-6 listttttt">
+        <i aria-hidden="true" class="fa fa-shopping-basket"></i
+        ><span>Genuine Products</span>
+      </div>
+      <div class="col-md-7 col-lg-7 col-sm-6 col-xs-6 listttttt">
+        <i aria-hidden="true" class="fa fa-exchange"></i>
+        Easy Returns
+      </div>
+    </div>
+    <button class="toggle-button" (click)="toggleCoupon()">
+      <div>
+        <div *ngIf="isCouponActive == false">
+          <i class="fa fa-caret-right me-2 fs-4"></i
+          ><span>FLAT {{ item?.discount }}% OFF</span>
+        </div>
+        <div *ngIf="isCouponActive == true">
+          <i class="fa fa-caret-left me-2 fs-4"></i
+          ><span>FLAT {{ item?.discount }}% OFF</span>
+        </div>
+      </div>
+    </button>
+  </div>
+</div> -->
+
+//<app-overlay></app-overlay>
+<app-footer></app-footer>
+
+<!-- newsletter -->
+<!-- <div
+  class="modal fade"
+  id="newsletterModal"
+  tabindex="-1"
+  aria-labelledby="newsletterModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="p-2">
+        <button
+          type="button"
+          class="btn-close"
+          style="float: right"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="col-sm-12 row m-0">
+        <div class="col-sm-5">
+          <div class="text-center">
+            <img
+              class="newsLetter"
+              src="../../../assets/image/saree1.jpg"
+              alt="no image"
+            />
+          </div>
+        </div>
+        <div class="col-sm-7" style="align-content: center">
+          <div>
+            <h2 class="text-center">JOIN OUR NEWSLETTER</h2>
+            <p class="text-center">Sign Up To Get Updates From Our Studio,</p>
+            <p class="text-center">Promotions</p>
+            <p class="text-center">
+              And Sneak Peaks Of Our Upcomming Products.
+            </p>
+            <form [formGroup]="emailForm" (ngSubmit)="submitemail()">
+              <div>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter your email"
+                  formControlName="email"
+                  [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControls['email'].errors) ||
+                      (formControls['email'].invalid &&
+                        (formControls['email'].dirty ||
+                          formControls['email'].touched))
+                  }"
+                />
+                <div
+                  *ngIf="
+                    (isSubmit && formControls['email']?.errors) ||
+                    (formControls['email']?.invalid &&
+                      (formControls['email']?.dirty ||
+                        formControls['email']?.touched))
+                  "
+                  class="invalid-feedback input-error"
+                >
+                  <span *ngIf="formControls['email'].errors?.['required']"
+                    >Email Is Required</span
+                  >
+                  <span *ngIf="formControls['email'].errors?.['pattern']"
+                    >Valid Email Id</span
+                  >
+                </div>
+                <button
+                  class="px-3 text-white bg-dark border border-0 btn btn-sm mt-3"
+                  type="submit"
+                >
+                  SUBSCRIBE
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

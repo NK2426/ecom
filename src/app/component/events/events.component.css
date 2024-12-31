@@ -1,0 +1,34 @@
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.image-content {
+    flex-shrink: 0;
+    margin-left: 20px;
+}
+
+.bottom-content {
+    margin-top: auto;
+}
+/* styles.css or your component's stylesheet */
+
+/* On screens larger than 768px */
+@media (min-width: 768px) {
+    .image-content {
+      margin-bottom: 0 !important; /* Removes bottom margin on larger screens */
+    }
+  }
+  
+  /* On screens smaller than 768px */
+  @media (max-width: 767.98px) {
+    .text-content {
+      text-align: center; /* Centers the text content on mobile for better UX */
+    }
+  }
+  
+ 

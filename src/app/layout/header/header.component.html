@@ -1,0 +1,564 @@
+<div class="sticky-navigation">
+  <div class="top-bar py-2">
+    <p class="m-0 fs-6">
+      <!-- Free Shipping & Delivery - All India (whatsapp:
+      <span
+        ><a href="tel:+91 7993710111" style="text-decoration: none; color: #fff"
+          >+917993710111</a
+        >
+      </span>
+      ) -->
+    </p>
+  </div>
+  <mat-toolbar
+    class="w-100 py-5"
+    style="box-shadow: 0 9px 10px -8px #0000001f !important"
+  >
+    <span routerLink="/"
+      ><img
+        src="../../../assets/image/logo-7.png"
+        width="50px"
+        class="mobile-logo"
+        alt=""
+        style="cursor: pointer; margin-left: 10px"
+    /></span>
+    <div class="navigation">
+      <div class="dropdown1">
+        <span
+          class="nav-link dropdown1-toggle"
+          id="product_list"
+          style="color: #a91be9; font-weight: 600"
+          routerLink="/"
+          >Sarees</span
+        >
+        <div class="dropdown1-menu" style="height: auto; padding-top: 10px">
+          <div
+            style="overflow: auto; width: 70px; padding: 30px; margin-left: 5px"
+            class="dropdown-menu show onlineShop"
+          >
+            <a class="nav-link m-0 sub-cate-link" style="line-height: 25px"
+              >About</a
+            >
+            <a class="nav-link m-0 sub-cate-link" style="line-height: 25px"
+              >Gallery</a
+            >
+            <a
+              class="nav-link m-0 sub-cate-link"
+              style="line-height: 25px"
+              [routerLink]="['/live-events']"
+              >Events</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- <span routerLink="/product-list" class="nav-link" id="product_list">Online Shop</span> -->
+      <div class="dropdown1">
+        <span
+          class="nav-link dropdown1-toggle"
+          id="product_list"
+          style="color: #a91be9; font-weight: 600"
+          >Kurthi's</span
+        >
+        <div class="dropdown1-menu" style="height: auto; padding-top: 10px">
+          <div
+            style="
+              overflow: auto;
+
+              padding: 30px;
+            "
+            class="dropdown-menu mega-element-menu full_menu show onlineShop"
+          >
+            <div class="pe-2 row">
+              <ul
+                class="mugdha-list p-0 col"
+                *ngFor="let item of onlineShopMenu; let i = index"
+              >
+                <li
+                  class="nav-item dropdown dropdown-mega sub_show"
+                  style="list-style: none"
+                >
+                  <a
+                    class="nav-link ps-3 fw-bold"
+                    style="
+                      font-weight: 300;
+                      line-height: 13px;
+                      text-transform: capitalize;
+                      padding-left: 10px !important;
+                    "
+                  >
+                    <p
+                      style="font-size: 17px; font-weight: 500; color: #a91be9"
+                    >
+                      {{ item.name }}
+                    </p>
+                  </a>
+                  <ul
+                    class="mugdha-list menulinks"
+                    style="flex-direction: column"
+                    *ngFor="let group of item.groups"
+                  >
+                    <li
+                      style="
+                        text-wrap: wrap;
+                        list-style: none;
+                        padding: 5px 0px;
+                      "
+                      class="nav-item dropdown dropdown-mega sub_show"
+                    >
+                      <a
+                        (click)="goToProductList(group)"
+                        class="nav-link m-0 sub-cate-link"
+                        style=""
+                        >{{ group?.name }}</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Store Locator -->
+      <div class="dropdown1">
+        <span
+          class="nav-link dropdown1-toggle"
+          id="product_list"
+          style="color: #a91be9; font-weight: 600"
+          >Jwellerys </span
+        >
+        <div class="dropdown1-menu" style="height: auto; padding-top: 10px">
+          <div
+            style="
+              overflow: auto;
+
+              padding: 30px;
+            "
+            class="dropdown-menu mega-element-menu full_menu show onlineShop"
+          >
+            <div class="pe-2 row">
+              <ul
+                class="mugdha-list p-0 col"
+                *ngFor="let item of store; let i = index"
+              >
+                <li
+                  class="nav-item dropdown dropdown-mega sub_show"
+                  style="list-style: none"
+                >
+                  <a
+                    class="nav-link ps-3 fw-bold"
+                    style="
+                      font-weight: 300;
+                      line-height: 13px;
+                      text-transform: capitalize;
+                      padding-left: 10px !important;
+                    "
+                  >
+                    <p
+                      style="font-size: 17px; font-weight: 500; color: #a91be9"
+                    >
+                      {{ item?.state_name }}
+                    </p>
+                  </a>
+                  <ul
+                    class="mugdha-list menulinks"
+                    style="flex-direction: column"
+                    *ngFor="let store of item?.stores"
+                  >
+                    <li
+                      style="
+                        text-wrap: wrap;
+                        list-style: none;
+                        padding: 5px 0px;
+                      "
+                      class="nav-item dropdown dropdown-mega sub_show"
+                    >
+                      <a
+                        (click)="goToStoreList(store)"
+                        class="nav-link m-0 sub-cate-link"
+                        style=""
+                        >{{ store?.store_name }}</a
+                      >
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <span
+        routerLink="/blogs"
+        class="nav-link"
+        id="product_list"
+        style="color: #a91be9; font-weight: 600"
+        >Blouse</span
+      >
+      <!-- <span
+        routerLink="/live-events"
+        class="nav-link"
+        id="product_list"
+        style="color: #a91be9; font-weight: 600"
+        >Live Events</span
+      > -->
+      <div class="dropdown1">
+        <span
+          class="nav-link dropdown1-toggle"
+          id="product_list"
+          style="color: #a91be9; font-weight: 600"
+          ><a
+          class="nav-link m-0 sub-cate-link"
+          style="line-height: 25px"
+          [routerLink]="['/contact']"
+          >Contact Us</a
+        ></span
+        >
+        
+      </div>
+      <!-- <span routerLink="/home" class="nav-link" id="product_list"
+        >Live Events</span
+      > -->
+      <!-- <span routerLink="/product-list" class="nav-link" id="product_list">Customer Care</span> -->
+    </div>
+
+    <div
+      style="
+        width: 100%;
+        margin: auto;
+        font-size: 14px;
+        font-weight: 300;
+        margin-top: -52px;
+      "
+      class="row"
+    >
+      <div class="w-50 d-flex justify-content-center logo-middle">
+        <span style="margin: auto; margin-top: 10px" routerLink="/"
+          ><img
+            src="../../../assets/image/logo-8.png"
+            class="web-logo"
+            alt=""
+            style="
+              cursor: pointer;
+              width: 390px;
+            "
+        /></span>
+      </div>
+      <div class="pe-4 hide-search">
+        <div class="search-container">
+          <input
+            *ngIf="showSearch"
+            type="text"
+            style="
+              border-radius: 50px;
+              height: 2.5rem;
+              border: 1px solid #000000;
+            "
+            class="form-control nav-search"
+            [(ngModel)]="searchProduct"
+            placeholder="Search Product.."
+            (ngModelChange)="onSearchChange($event)"
+            (keydown.enter)="onEnterPressed()"
+          />
+          <i
+            *ngIf="showSearch"
+            class="fa-solid fa-magnifying-glass search-icon mblDevice"
+            style="
+              color: #ffffff;
+              background-color: #a91be9;
+              padding: 10px;
+              border-radius: 100%;
+            "
+          ></i>
+        </div>
+        <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+
+        <div class="search-results" #elementClass>
+          <div
+            class="result-item nav-search"
+            *ngFor="let item of searchProducts"
+            (click)="onResultSelected(item)"
+          >
+            <!-- closeDropdown() -->
+            <img
+              [src]="item.image"
+              class="img-fluid"
+              width="50px"
+              height="50px"
+              alt=""
+            /><span style="margin-left: 20px">{{ item.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-cart *ngIf="this.token" class="app-cart"></app-cart>
+    <!-- <div style="margin-right: 15px; cursor: pointer" *ngIf="isCheckoutRoute()" routerLink="/cart">
+      Cart
+    </div> -->
+    <div routerLink="/wishlist" class="favlist" *ngIf="this.token">
+      <i class="fa-solid fa-heart" style="color: #f60187"></i>
+      <div class="badge cart">
+        <span>{{ wishlistcount }}</span>
+      </div>
+    </div>
+    <span
+      class="nav-button search-icon-model"
+      style="margin-right: 15px; cursor: pointer"
+      data-tab-target="#tab1"
+      data-toggle="modal"
+      data-target="#exampleModal3"
+    >
+      <img
+        class="image-icon"
+        src="../../../assets/image/search.svg"
+        alt=""
+        width="30px"
+        height="30px"
+      />
+    </span>
+
+    <div class="dropdown">
+      <a
+        class=""
+        (click)="loginRoute()"
+        style="
+          margin-right: 20px;
+          cursor: pointer;
+          text-decoration: none;
+          color: #000000;
+        "
+        *ngIf="!isLoggedIn"
+        ><i class="fa-regular fa-user"></i> Sign in</a
+      >
+      <span
+        class="dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        *ngIf="isLoggedIn"
+        style="margin-right: 20px"
+      >
+        <i class="fa-regular fa-user pl-2"></i>
+      </span>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" routerLink="/account">Account</a>
+        <span
+          routerLink="/orderstatus"
+          *ngIf="this.token"
+          style="cursor: pointer; margin-right: 15px"
+          class="my-orders-link dropdown-item"
+          >My Orders</span
+        >
+
+        <a
+          class="dropdown-item"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Logout</a
+        >
+      </div>
+    </div>
+    <!-- Mobile Menu Trigger -->
+    <!-- Mobile Menu Trigger -->
+    <span
+      class="hamburger-icon"
+      style="margin-right: 15px"
+      id="product_list"
+      (click)="toggleMenu()"
+    >
+      <i class="fa-solid fa-bars"></i>
+    </span>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" [ngClass]="{ open: isMenuOpen }">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="dropdown-mob">
+            <button class="close-button" (click)="toggleMenu()">
+              <i class="fa-solid fa-times"></i>
+            </button>
+            <br />
+            <span class="dropdown2-toggle" (click)="toggleOnlineShopMenuOne()">
+              <mugdha routerLink="/">Home</mugdha>
+              <i
+                class="fa-solid"
+                style="float: right; margin-top: 10px"
+                [ngClass]="{
+                  'fa-chevron-up': isOnlineShopMenuOneOpen,
+                  'fa-chevron-down': !isOnlineShopMenuOneOpen
+                }"
+              ></i>
+            </span>
+
+            <div
+              class="dropdown2-menu"
+              [ngClass]="{ show: isOnlineShopMenuOneOpen }"
+            >
+              <div class="m-0 p-0">
+                <p style="font-size: 12px">About</p>
+                <p style="font-size: 12px">Gallery</p>
+                <p style="font-size: 12px" routerLink="/live-events">Events</p>
+              </div>
+            </div>
+
+            <span class="dropdown2-toggle" (click)="toggleOnlineShopMenu()">
+              Online Shop
+              <i
+                class="fa-solid"
+                style="float: right; margin-top: 10px"
+                [ngClass]="{
+                  'fa-chevron-up': isOnlineShopMenuOpen,
+                  'fa-chevron-down': !isOnlineShopMenuOpen
+                }"
+              ></i>
+            </span>
+            <div
+              class="dropdown2-menu"
+              [ngClass]="{ show: isOnlineShopMenuOpen }"
+            >
+              <div class="m-0 p-0">
+                <ul *ngFor="let item of onlineShopMenu; let i = index">
+                  <li>
+                    <a href="#">
+                      <p
+                        style="
+                          font-size: 17px;
+                          font-weight: 500;
+                          color: #a91be9;
+                        "
+                      >
+                        {{ item.name }}
+                      </p>
+                    </a>
+                    <ul>
+                      <li *ngFor="let group of item.groups">
+                        <a (click)="goToProductList(group)">
+                          {{ group?.name }}
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Store Locator -->
+            <span
+              class="dropdown2-toggle"
+              (click)="toggleOnlineShopMenuThree()"
+            >
+              Store Locator
+              <i
+                class="fa-solid"
+                style="float: right; margin-top: 10px"
+                [ngClass]="{
+                  'fa-chevron-up': isStoreLocatorMenuOpen,
+                  'fa-chevron-down': !isStoreLocatorMenuOpen
+                }"
+              ></i>
+            </span>
+            <div
+              class="dropdown2-menu"
+              [ngClass]="{ show: isStoreLocatorMenuOpen }"
+            >
+              <div class="m-0 p-0">
+                <ul *ngFor="let item of store; let i = index">
+                  <li>
+                    <a href="#">
+                      <p
+                        style="
+                          font-size: 17px;
+                          font-weight: 500;
+                          color: #a91be9;
+                        "
+                      >
+                        {{ item?.state_name }}
+                      </p>
+                    </a>
+                    <ul>
+                      <li *ngFor="let store of item?.stores">
+                        <a (click)="goToStoreList(store)">
+                          {{ store?.store_name }}
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <span class="dropdown2-toggle">
+              <span routerLink="/blogs">Blog</span>
+            </span>
+
+            <!-- <span class="dropdown2-toggle">
+              <span>Live Events</span>
+            </span> -->
+
+            <span class="dropdown2-toggle" (click)="toggleOnlineShopMenuTwo()">
+              <a>Customer Care</a>
+              <i
+                class="fa-solid"
+                style="float: right; margin-top: 10px"
+                [ngClass]="{
+                  'fa-chevron-up': isOnlineShopMenuTwoOpen,
+                  'fa-chevron-down': !isOnlineShopMenuTwoOpen
+                }"
+              ></i>
+            </span>
+
+            <div
+              class="dropdown2-menu"
+              [ngClass]="{ show: isOnlineShopMenuTwoOpen }"
+            >
+              <div class="m-0 p-0">
+                <p style="font-size: 12px" [routerLink]="['/contact']">
+                  Contact Us
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header m-auto">
+        <h2 class="modal-title" id="exampleModalLabel">
+          Are you sure want to Signout?
+        </h2>
+      </div>
+      <div class="modal-body m-auto">
+        <button
+          type="button"
+          class="btn btn-secondary m-1"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+        <button mat-raised-button type="button" class="m-1" (click)="logOut()">
+          Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <app-google-account></app-google-account> -->
+<br /><br /><br /><br /><br />

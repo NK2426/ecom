@@ -1,0 +1,112 @@
+
+@media(min-width:1400px) {
+    .fluid {
+        width: 80% !important;
+        margin: auto;
+    }
+
+    .cardTwo {
+        width: 50%;
+    }
+}
+
+@media(max-width:1300px) {
+    .fluid {
+        width: 100% !important;
+    }
+
+    .number {
+        width: 100%;
+    }
+
+    .email {
+        width: 100%;
+    }
+}
+
+@media(max-width:992px) {
+    .fluid {
+        width: 100% !important;
+    }
+
+    .cardOne {
+        width: 100%;
+    }
+
+    .cardTwo {
+        width: 100%;
+    }
+}
+
+@media(min-width:376px) and (max-width:450px) {
+    .fluid {
+        width: 100% !important;
+    }
+
+    .address .addressIcon {
+        width: 15%;
+    }
+
+    .address .addressText {
+        width: 85%;
+    }
+
+    .otherIcon {
+        width: 15%;
+    }
+
+    .otherText {
+        width: 85%;
+    }
+}
+
+@media(max-width:375px) {
+    .fluid {
+        width: 100% !important;
+    }
+
+    .cardTwo {
+        padding: 0px;
+    }
+
+    .cardOne {
+        padding: 0px;
+    }
+
+    .addressIcon {
+        width: 100%;
+    }
+
+    .addressText {
+        width: 100%;
+        text-align: start;
+        padding: 10px 0px;
+    }
+
+    .numberIcon {
+        width: 100%;
+    }
+
+    .numberText {
+        width: 100%;
+        padding: 10px 0px;
+    }
+
+    .emailIcon {
+        width: 100%;
+    }
+
+    .emailText {
+        width: 100%;
+        padding: 10px 0px;
+    }
+
+    .otherIcon {
+        width: 100%;
+    }
+
+    .otherText {
+        width: 100%;
+        padding: 10px 0px;
+    }
+}

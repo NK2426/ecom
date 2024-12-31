@@ -1,0 +1,59 @@
+<div class="cart" *ngIf="!cartShow">
+  <span routerLink="/cart"></span>
+  <!-- <i class="fas fa-shopping-cart ">{{0}}</i> -->
+  <div routerLink="/cart">
+    <i class="fas fa-shopping-cart"></i>
+    <div class="badge cart-badge">
+      <span>{{ count }}</span>
+    </div>
+  </div>
+
+  <!-- <span class="count">{{items.length || 0}}</span> -->
+  <!-- <span class="subtotal" *ngIf="updateCart">{{ total | currency:'INR':'symbol' }}</span> -->
+  <div class="toolbar-dropdown" *ngIf="updateCart">
+    <div class="cart-items-container" *ngIf="items?.length; else noItemsInCart">
+      <div *ngFor="let item of items" class="dropdown-product-item">
+        <span class="dropdown-product-thumb" (click)="navigateProduct(item.slug)">
+          <img [src]="item.path" alt="{{ item.name }}" />
+        </span>
+        <div class="dropdown-product-info">
+          <div>
+            <p class="dropdown-product-title">{{ item?.name }}</p>
+          </div>
+
+          <span *ngIf="item.qty !== 0">
+            <span class="dropdown-product-details">{{ item.qty }} x
+              <span>{{ item.amount | currency : "INR" : "symbol" }}</span></span>
+          </span>
+          <span *ngIf="item.qty == 0">
+            <span class="dropdown-product-details" style="color: red;">Out of Stock</span>
+          </span>
+          <span *ngIf="item.qty !== 0" style="float: right; color: red" (click)="deleteCartItem(item.itemslist_uuid)">
+            <i class="fa-solid fa-trash"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <ng-template #noItemsInCart>
+      <div>
+        <p class="empty-cart">There are no items in your cart..</p>
+      </div>
+    </ng-template>
+    <div class="toolbar-dropdown-group">
+      <!-- <div class="column">
+                <span class="text-lg">Total:</span>
+            </div> -->
+      <div class="column text-right">
+        <span class="text-lg text-medium" [innerHTML]="total | currency : 'INR' : 'symbol'">&nbsp;</span>
+      </div>
+    </div>
+    <div class="toolbar-dropdown-group">
+      <div class="column">
+        <a mat-flat-button style="background-color: #a91be9; color: #fff" routerLink="/cart">View Cart</a>
+      </div>
+      <!-- <div class="column">
+                <a mat-raised-button style="background-color: #85d600;color: #fff;" routerLink="/checkout">Checkout</a>
+            </div> -->
+    </div>
+  </div>
+</div>

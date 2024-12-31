@@ -1,0 +1,525 @@
+.carousel {
+  border: 0.5px solid #e1e0e0cd;
+  border-radius: 5px;
+  margin: auto;
+  overflow: hidden;
+  height: 500px;
+  width: 450px;
+}
+
+
+
+.carousel-wrapper {
+  position: relative;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.929);
+
+  cursor: pointer;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.product-tumbnail {
+  border: 0.5px solid #e1e0e0cd;
+  border-radius: 5px;
+  margin-bottom: 3px;
+  width: 140px;
+  margin: auto;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 15px;
+  width: 75px;
+}
+
+.thumb-img {
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.image-container img {
+  transition: transform 0.3s ease;
+}
+
+.image-container:hover img {
+  transform: scale(0.9);
+  /* border: 1px solid red; */
+  border-radius: 5px;
+}
+
+.active {
+  border: 1.5px solid #a91be9;
+}
+
+.product-name {
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+.product-price {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.single-prod-cont {
+  margin-top: 5%;
+}
+
+@media (max-width:992px) {
+  .single-prod-cont {
+    display: none;
+  }
+}
+
+@media (min-width:993px) {
+  .single-prod-cont2 {
+    display: none;
+  }
+}
+
+.mat-tab-view {
+  color: #a91be9 !important;
+}
+
+.add-to-cart {
+  width: 350px;
+  justify-content: center;
+  display: flex;
+  margin: auto;
+  margin-top: 20px;
+  padding: 22px;
+  border-radius: 15px;
+  background-color: #a91be9 !important;
+  color: #ffffff !important;
+}
+
+.favorite {
+  color: #f60187;
+}
+.main-headings {
+  color: #a91be9;
+  font-weight: 600;
+}
+.fav-button {
+  margin-top: 10px;
+}
+
+.add-input {
+  padding: 8px;
+  /* border: none; */
+  /* background-color: #fbe0ef; */
+  /* font-size: 16px; */
+  border: 1px solid #a91be9;
+  border-radius: 5px;
+  margin: 0px 10px;
+  width: 50px;
+}
+
+.add-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  /* Optional */
+}
+
+/* .add-input-container {
+  background-color: #fbe0ef;
+  padding: 3px;
+  border-radius: 15px;
+  width: 350px;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+} */
+
+.add-sub {
+  /* border: none;
+  box-shadow: none; */
+  background-color: white;
+  color: #000000;
+  /* font-size: 24px; */
+  border-radius: 50%;
+  border: 1px solid #a91be9;
+  text-align: center;
+  font-weight: bold;
+  margin: 0px 10px;
+}
+
+
+.home-add {
+  background-image: url("https://borobazar.vercel.app/assets/images/app-bg.png");
+}
+
+.home-add-content {
+  margin-top: 150px;
+}
+
+.home-add-heading {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.home-add-para {
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 769px) {
+  .thumb-container {
+    display: none;
+  }
+}
+
+.thumb-container {
+  height: 500px;
+  overflow: auto;
+  scrollbar-width: none;
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
+
+}
+
+.carousel {
+  width: 85%;
+  height: 85%;
+}
+
+.slide {
+  position: relative;
+  width: 85%;
+  height: 85%;
+  margin: auto;
+}
+
+.carousel-image {
+  width: 85%;
+  height: 85%;
+  object-fit: cover;
+  /* Ensures the image covers the container without distorting */
+  margin: auto;
+}
+
+@media only screen and (max-width: 992px) {
+  .product-tumbnail {
+    border: 0.5px solid #e1e0e0cd;
+    border-radius: 5px;
+    margin-bottom: 3px;
+    width: 100px;
+    padding: 4px;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 5px;
+  }
+}
+
+.large-sa-popup {
+  height: 40px;
+}
+
+@media (max-width: 426px) {
+  .product-name {
+    font-size: 18px;
+    margin-top: 10px;
+    line-height: 1.1;
+  }
+
+  .add-to-cart {
+    padding: 10px;
+    border-radius: 35px;
+    width: 100%;
+  }
+
+  .carousel {
+    border: 0.5px solid #e1e0e0cd;
+    border-radius: 5px;
+    margin: auto;
+    overflow: hidden;
+    height: 205px;
+    width: 100%;
+  }
+
+  .add-input-container {
+    /* background-color: #b50067; */
+    padding: 3px;
+    border-radius: 15px;
+    width: 100%;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+  }
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.similar-slide {
+  margin: 40px;
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+@media (max-width: 426px) {
+  .slide {
+    width: 200px;
+    margin: auto;
+    display: flex;
+  }
+}
+
+.text-red {
+  color: red;
+}
+
+.stock {
+  color: #a91be9 !important;
+  font-weight: bolder;
+}
+
+.similar-prod {
+  margin-top: 100px;
+  position: relative;
+}
+
+.previous,
+.nextbutton {
+  position: absolute;
+  /* Position the buttons absolutely */
+  top: 50%;
+  /* Align vertically in the middle */
+  transform: translateY(-50%);
+  /* Adjust vertical alignment */
+}
+
+.previous {
+  left: 10px;
+  /* Align the previous button to the left */
+  background-color: #fff;
+}
+
+.nextbutton {
+  right: 10px;
+  /* Align the next button to the right */
+  background-color: #fff;
+}
+
+.product-desc {
+  position: relative;
+  bottom: 0;
+  /* Align the text to the bottom of the card */
+  width: 100%;
+  right: 1px;
+  color: #000000;
+  /* Text color */
+  padding: 10px;
+  /* Add padding to the text */
+  box-sizing: border-box;
+  /* Ensure padding doesn't affect the width */
+}
+
+.variant {
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #d785b4;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.mrp {
+  color: rgb(155, 154, 154);
+  font-size: 12px;
+}
+
+@media (max-width:768px) {
+  .variant {
+    width: 20%
+  }
+
+  .prod-container {
+    width: 50%
+  }
+
+  .product-name {
+    font-size: 18px;
+    line-height: 1.1;
+  }
+}
+
+@media (min-width:526px) {
+  .variant {
+    width: 10%
+  }
+
+}
+
+@media (max-width:526px) {
+  .variant {
+    width: 20%
+  }
+
+  .prod-container {
+    width: 100%
+  }
+
+  .mrp {
+    color: rgb(155, 154, 154);
+    font-size: 11px;
+  }
+}
+
+.variant:hover {
+  border: 1px solid #a91be9;
+}
+
+/* @media (min-width:1600px){
+  .carousel{
+    height: 925px;
+    width: 700px;
+  }
+  
+} */
+
+.disabled-card {
+  background-color: #cbdcbf57;
+  /* Set the background color for disabled cards */
+  color: #999898;
+  /* Set the text color for disabled cards */
+}
+
+.active-button {
+  background-color: #a91be9;
+  /* Blue background color */
+  color: #fff;
+  /* White text color */
+  border-color: #a91be9;
+  /* Blue border color */
+  cursor: pointer;
+  /* Change cursor to pointer */
+}
+
+/* product.component.css */
+
+.star-rating {
+  font-size: 18px;
+}
+
+.star {
+  cursor: pointer;
+  color: #ccc;
+  border: none;
+  /* Remove the border */
+  margin-bottom: 5px;
+}
+
+.star.active {
+  color: gold;
+}
+
+.colors {
+  width: 50px;
+}
+
+.sizes {
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.variant-size {
+  margin-top: 10px;
+}
+
+.selected {
+  border: 2px solid #8d0c56;
+}
+
+.clickable-rating {
+  cursor: pointer;
+  font-size: 25px;
+  color: yellow;
+}
+
+.wishlist-icon {
+  /* position: absolute; */
+  /* top: 10px;
+  right: 10px; */
+  background-color: #fff;
+  /* Background color to make it stand out */
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
+  z-index: 10;
+  /* Ensure it appears above other elements */
+}
+
+.wishlist-icon mat-icon {
+  font-size: 24px;
+  /* Adjust size as needed */
+}
+
+.wishlist-icon:hover mat-icon {
+  color: #a91be9;
+  /* Change color on hover for visual feedback */
+}
+
+.not-in-wishlist mat-icon {
+  color: #2c2424;
+  /* White color when not in wishlist */
+}
+
+.in-wishlist mat-icon {
+  color: #a91be9;
+  /* Red color when in wishlist */
+}
+
+/* .rating-item {
+  transition: background-color 0.3s ease;
+}
+
+.rating-item:hover {
+  background-color: #635959;
+  cursor: pointer;
+} */
+.underline-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.underline {
+  width: 80px;
+  height: 3px;
+  background-color: #8A084B;
+  /* Maroon color */
+}
+
+.diamond {
+  width: 10px;
+  height: 10px;
+  background-color: #8A084B;
+  /* Maroon color */
+  transform: rotate(45deg);
+  /* Rotate to form a diamond */
+  margin: 0 10px;
+}

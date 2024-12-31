@@ -1,0 +1,288 @@
+<app-header></app-header>> <br /><br />
+<div class="py-4 my-3" style="background-color: #fafafa">
+  <p class="text-center mb-0">
+    <!-- <span>Home < </span><span style="color: #a91be9">Contact Us</span> -->
+  </p>
+</div>
+<div class="fluid">
+  <div class="card" style="border: none">
+    <div class="card-body">
+      <div class="row col-sm-12 col-md-12 col-lg-12">
+        <!-- Prt1 -->
+        <div class="col-sm-6 col-md-6 col-lg-6 cardOne">
+          <form [formGroup]="contactForm" (ngSubmit)="formSubmit()" autocomplete="off">
+            <div class="rounded-2 m-2 p-4" style="border: 1px solid #dddddd80">
+              <h1 class="">Leave a Comment</h1>
+              <div class="row col-sm-12 col-md-12 col-lg-12">
+                <!-- First name -->
+                <div class="col-sm-6 col-md-6 col-lg-6 py-2">
+                  <label class="form-label required">First Name</label>
+                  <input type="text" class="form-control" style="border-radius: 20px" formControlName="firstname"
+                    [ngClass]="{
+                      'is-invalid':
+                        (isSubmit && formControls['firstname'].errors) ||
+                        (formControls['firstname'].invalid &&
+                          (formControls['firstname'].dirty ||
+                            formControls['firstname'].touched))
+                    }" />
+                  <div *ngIf="
+                      (isSubmit && formControls['firstname']?.errors) ||
+                      (formControls['firstname']?.invalid &&
+                        (formControls['firstname']?.dirty ||
+                          formControls['firstname']?.touched))
+                    " class="invalid-feedback input-error">
+                    <span *ngIf="formControls['firstname'].errors?.['required']">First Name Is Required</span>
+                    <span *ngIf="formControls['firstname'].errors?.['minlength']">Minimum Length 3 digits.</span><span
+                      *ngIf="formControls['firstname'].errors?.['maxlength']">Maximum Length 15 digits.</span>
+                  </div>
+                </div>
+                <!-- Last name -->
+                <div class="col-sm-6 col-md-6 col-lg-6 py-2">
+                  <label class="form-label required">Last Name</label>
+                  <input type="text" class="form-control" style="border-radius: 20px" formControlName="lastname"
+                    [ngClass]="{
+                      'is-invalid':
+                        (isSubmit && formControls['lastname'].errors) ||
+                        (formControls['lastname'].invalid &&
+                          (formControls['lastname'].dirty ||
+                            formControls['lastname'].touched))
+                    }" />
+                  <div *ngIf="
+                      (isSubmit && formControls['lastname']?.errors) ||
+                      (formControls['lastname']?.invalid &&
+                        (formControls['lastname']?.dirty ||
+                          formControls['lastname']?.touched))
+                    " class="invalid-feedback input-error">
+                    <span *ngIf="formControls['lastname'].errors?.['required']">Last Name Is Required</span>
+                    <span *ngIf="formControls['lastname'].errors?.['minlength']">Minimum Length 3 digits.</span><span
+                      *ngIf="formControls['lastname'].errors?.['maxlength']">Maximum Length 15 digits.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row col-sm-12 col-md-12 col-lg-12">
+                <!-- Email -->
+                <div class="col-sm-6 col-md-6 col-lg-6 py-2">
+                  <label class="form-label required">Email Address</label>
+                  <input type="text" class="form-control" style="border-radius: 20px" formControlName="email" [ngClass]="{
+                      'is-invalid':
+                        (isSubmit && formControls['email'].errors) ||
+                        (formControls['email'].invalid &&
+                          (formControls['email'].dirty ||
+                            formControls['email'].touched))
+                    }" />
+                  <div *ngIf="
+                      (isSubmit && formControls['email']?.errors) ||
+                      (formControls['email']?.invalid &&
+                        (formControls['email']?.dirty ||
+                          formControls['email']?.touched))
+                    " class="invalid-feedback input-error">
+                    <span *ngIf="formControls['email'].errors?.['required']">Email Is Required</span>
+
+
+                    <span *ngIf="formControls['email'].errors?.['pattern']">Valid Email Id</span>
+                  </div>
+                </div>
+                <!-- Phone -->
+                <div class="col-sm-6 col-md-6 col-lg-6 py-2">
+                  <label class="form-label required">Phone Number</label>
+                  <input type="text" class="form-control" style="border-radius: 20px" maxlength="10"
+                    formControlName="phone" [ngClass]="{
+                      'is-invalid':
+                        (isSubmit && formControls['phone'].errors) ||
+                        (formControls['phone'].invalid &&
+                          (formControls['phone'].dirty ||
+                            formControls['phone'].touched))
+                    }" />
+                  <div *ngIf="
+                      (isSubmit && formControls['phone']?.errors) ||
+                      (formControls['phone']?.invalid &&
+                        (formControls['phone']?.dirty ||
+                          formControls['phone']?.touched))
+                    " class="invalid-feedback input-error">
+                    <span *ngIf="formControls['phone'].errors?.['required']">Mobile Number Is Required</span>
+                    <span *ngIf="formControls['phone'].errors?.['minlength']">Minimum Length 10 digits.</span>
+                    <span *ngIf="formControls['phone'].errors?.['maxlength']">Maximum Length 10 Digits.</span>
+                    <span *ngIf="formControls['phone'].errors?.['pattern']">Number only allowed</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Comments -->
+              <div class="col-sm-12 col-md-12 col-lg-12 py-2">
+                <label class="form-label">Comments</label>
+                <textarea class="form-control w-100" style="border-radius: 20px" formControlName="comments"></textarea>
+              </div>
+
+              <div class="col text-end mt-4">
+                <button class="btn tbn-sm text-white px-4" style="background-color: #a91be9" type="submit">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Part2 -->
+        <div class="col-sm-6 col-md-6 col-lg-6 cardTwo">
+          <div class="rounded-2 m-2 p-4" style="border: 1px solid #dddddd80">
+            <h1 class="">Let's Get In Touch</h1>
+            <!-- Address -->
+            <div class="row col-sm-12 col-lg-12 col-md-12 address">
+              <div class="row" style="
+                  align-items: center;
+                  background-color: #fafafa;
+                  padding: 15px 10px;
+                  margin: 15px 10px;
+                ">
+                <div class="col-1 addressIcon">
+                  <span class="text-center"><i class="fa-solid fa-location-dot" style="
+                        background-color: #a91be9;
+                        padding: 15px;
+                        border-radius: 5px;
+                        align-items: center;
+                        color: white;
+                      "></i></span>
+                </div>
+                <div class="col-11 addressText">
+                  <div class="ms-3">
+                    <h4 class="mb-2" style="
+                        color: #262834;
+                        font-size: 15px;
+                        font-weight: 500;
+                        line-height: 18px;
+                      ">
+                      Address
+                    </h4>
+                    <p class="mb-0" style="color: #767676; line-height: 20px; font-size: 14px">
+                      GF, H NO.8-2-293/82/A/682, BABHUKHAN RASHEED PLAZA, ROAD
+                      NO.36, JUBILEEHILLS, Hyderabad, Telangana, 500033
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Number,Email -->
+            <div class="row col-sm-12 col-lg-12 col-md-12">
+              <!-- Number -->
+              <div class="col-sm-6 col-md-6 col-lg-6 m-0 p-0 number">
+                <div class="row" style="
+                    align-items: center;
+                    background-color: #fafafa;
+                    padding: 15px 10px;
+                    margin: 15px 10px;
+                  ">
+                  <div class="col-2 numberIcon">
+                    <span class="text-center"><i class="fa-solid fa-phone" style="
+                          background-color: #a91be9;
+                          padding: 15px;
+                          border-radius: 5px;
+                          align-items: center;
+                          color: white;
+                        "></i></span>
+                  </div>
+                  <div class="col-10 numberText">
+                    <div class="ms-3">
+                      <h4 class="mb-2" style="
+                          color: #262834;
+                          font-size: 15px;
+                          font-weight: 500;
+                          line-height: 18px;
+                        ">
+                        Contact Number
+                      </h4>
+                      <p class="mb-0" style="
+                          color: #767676;
+                          line-height: 20px;
+                          font-size: 14px;
+                        ">
+                        +91 7993710111
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Email -->
+              <div class="col-sm-6 col-md-6 col-lg-6 m-0 p-0 email">
+                <div class="row" style="
+                    align-items: center;
+                    background-color: #fafafa;
+                    padding: 15px 10px;
+                    margin: 15px 10px;
+                  ">
+                  <div class="col-2 emailIcon">
+                    <span class="text-center"><i class="fa-solid fa-envelope" style="
+                          background-color: #a91be9;
+                          padding: 15px;
+                          border-radius: 5px;
+                          align-items: center;
+                          color: white;
+                        "></i></span>
+                  </div>
+                  <div class="col-10 emailText">
+                    <div class="ms-3">
+                      <h4 class="mb-2" style="
+                          color: #262834;
+                          font-size: 15px;
+                          font-weight: 500;
+                          line-height: 18px;
+                        ">
+                        Email Address
+                      </h4>
+                      <p class="mb-0" style="
+                          color: #767676;
+                          line-height: 20px;
+                          font-size: 14px;
+                        ">
+                        {{email}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="row col-sm-12 col-lg-12 col-md-12 other">
+              <div class="row" style="
+                  align-items: center;
+                  background-color: #fafafa;
+                  padding: 15px 10px;
+                  margin: 15px 10px;
+                ">
+                <div class="col-1 otherIcon">
+                  <span class="text-center"><i class="fa-solid fa-location-dot" style="
+                        background-color: #a91be9;
+                        padding: 15px;
+                        border-radius: 5px;
+                        align-items: center;
+                        color: white;
+                      "></i></span>
+                </div>
+                <div class="col-11 otherText">
+                  <div class="ms-3">
+                    <h4 class="mb-2" style="
+                        color: #262834;
+                        font-size: 15px;
+                        font-weight: 500;
+                        line-height: 18px;
+                      ">
+                      Other Address
+                    </h4>
+                    <p class="mb-0" style="color: #767676; line-height: 20px; font-size: 14px">
+                      8-2-609-/1/1/A, Arafath Complex, Road No. 10, Banjara
+                      Hills, Hyderabad, Telangana
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+//<app-overlay></app-overlay>
+<app-footer></app-footer>

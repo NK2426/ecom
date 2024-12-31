@@ -1,0 +1,247 @@
+<app-header></app-header>
+<br><br>
+<h3 class="text-center fs-3 fw-bold pt-3">Cart Items</h3>
+<div class="container mobile-device">
+  <div class="row">
+    <div class="col">
+      <!-- <h2 class="text-center">Cart Items</h2> -->
+      <div *ngIf="cartItems.length > 0;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <table class="table price-detail-card">
+                <thead>
+                  <tr>
+                    <th scope="col" class="table-tr" style="width: 30%">
+                      Item
+                    </th>
+                    <th scope="col" class="table-tr" style="width: 50%">
+                      Detail
+                    </th>
+                    <th scope="col" class="table-tr" style="width: 20%">
+                      Total
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of cartItems">
+                    <td>
+                      <img [src]="item.path" alt="Product Image" [routerLink]="['/product/' + item.item_uuid]"
+                        class="img-fluid cart-image" width="100px" height="120px" />
+                      <br />
+
+                    </td>
+                    <td>
+
+                      <div style="margin-top: 5px; margin-bottom: 5px">
+                        <p style="font-size: 16px;">{{ item.name }}</p>
+                        <i class="fa-solid fa-indian-rupee-sign mrp"></i>
+                        <s class="mrp">{{ item.mrp }}</s> &nbsp;
+                        <span style="font-size: 14px;"><i class="fa-solid fa-indian-rupee-sign price-simble"></i>{{
+                          item.amount }}</span>
+                      </div>
+
+                      <div *ngIf="item.qty > 0; else outOfStockTemplate">
+                        <span class="inc-but" (click)="decreaseQuantity(item)"><i class="fa-solid fa-minus"></i></span>
+                        &nbsp; {{ item.qty }} &nbsp;
+                        <span class="inc-but" (click)="increaseQuantity(item)"><i class="fa-solid fa-plus"></i></span>
+                      </div>
+
+                      <ng-template #outOfStockTemplate>
+                        <p class="text-danger">Out of Stock</p>
+                      </ng-template>
+                      <br />
+                      <p class="text-danger fw-bold" style="cursor: pointer"
+                        (click)="deleteCartItem(item.itemslist_uuid)">
+                        Remove
+                      </p>
+                    </td>
+                    <td style="vertical-align: middle">
+                      <b><i class="fa-solid fa-indian-rupee-sign price-simble"></i>
+                        <span style="font-size: 14px;">{{ item.qty * item.amount }}</span></b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- <div class="col-md-4">
+              <div class="price-detail-card">
+                <h3>Price Details</h3>
+                <hr />
+                <p>
+                  <span>Price</span
+                  ><span style="float: right"
+                    ><i class="fa-solid fa-indian-rupee-sign"></i>
+                    {{ getTotalMrp() }}</span
+                  >
+                  <br /><br />
+                  <span>Discount</span
+                  ><span style="float: right; color: green"
+                    ><i class="fa-solid fa-indian-rupee-sign"></i> -{{
+                      getDiscount()
+                    }}</span
+                  >
+                  <br /><br />
+                  <span style="font-size: 16px; font-weight: 600"
+                    >Total Amount</span
+                  ><span style="float: right; font-weight: 600"
+                    ><i class="fa-solid fa-indian-rupee-sign"></i>
+                    {{ getTotalPrice() }}
+                  </span>
+                </p>
+              </div>
+              <br />
+              <div class="d-flex justify-content-end proceed-btn">
+                <button
+                  mat-raised-button
+                  style="background-color: #7bd000bf; color: #fff"
+                  (click)="orderSummary()"
+                >
+                  Proceed to Checkout
+                </button>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+      </div>
+      <ng-template #emptyCart>
+        <div class="m-auto d-flex justify-content-center">
+          <img src="../../../assets/image/emptyCart.gif" style="width: 400px;" alt="">
+        </div>
+        
+        <button mat-raised-button style="
+            display: flex;
+            margin: auto;
+            width: 50%;
+            background-color: #a91be9;
+            color: #fff;
+          " routerLink="/">
+          Shop
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<br />
+<!-- new one -->
+<div class="container mb-5">
+  <div class="row">
+    <div *ngIf="cartItems.length > 0; else emptyCart" class="col-12 col-sm-12">
+      <div class="row">
+        <div class="col-md-8 summa web-device">
+          <!-- <h2 class="text-center">Cart Items</h2> -->
+          <div class="m-0 p-0" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px">
+            <div class="table-responsive">
+              <table class="table align-middle table-nowrap">
+                <thead>
+                  <tr>
+                    <th class="text-center p-2" style="width: 50px">SL.NO</th>
+                    <th class="text-center p-2">IMAGE</th>
+                    <th class="text-start p-2">PRODUCT</th>
+                    <!-- <th class="text-start p-2">MRP</th> -->
+                    <th class="text-start p-2">PRICE</th>
+                    <th class="text-center p-2" style="width: 150px">
+                      QUANTITY
+                    </th>
+                    <th class="text-start p-2">TOTAL</th>
+                    <th class="text-center p-2">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of cartItems; let i = index">
+                    <!-- Sl.No -->
+                    <td class="text-center p-2">{{ i + 1 }}</td>
+                    <!-- Image -->
+                    <td class="text-center p-2">
+                      <img src="{{ item?.path }}" alt="Product Image" [routerLink]="['/product/' + item.slug]"
+                        class="img-fluid cart-image" width="100px" height="120px" />
+                    </td>
+                    <!-- Product name -->
+                    <td class="text-start p-2 fw-bold" style="color: #a91be9">
+                      {{ item?.name }}
+                    </td>
+                    <!-- MRP -->
+                    <!-- <td class="text-start p-2">
+                      <i class="fa-solid fa-indian-rupee-sign"></i
+                      >{{ item?.mrp }}
+                    </td> -->
+                    <!-- Amount -->
+                    <td class="text-start p-2" style="color: #7a7876">
+                      <i class="fa-solid fa-indian-rupee-sign"></i>{{ item?.amount }}
+                    </td>
+                    <!-- Qty -->
+                    <td class="text-center p-2" style="width: 150px">
+                      <div *ngIf="item.qty > 0; else outOfStockTemplate">
+                      <!-- Decrement -->
+                      <span  style="cursor: pointer"
+                        class="rounded-circle p-2 mx-2 decrement circle" (click)="decreaseQuantity(item)"><i class="fa-solid fa-minus"></i></span>
+                      <!-- Quantity -->
+                      <span class="p-2" style="color: #a91be9">{{
+                        item?.qty
+                        }}</span>
+                      <!-- Increment -->
+                      <span
+                        class="rounded-circle p-2 mx-2 increment circle" style="cursor: pointer"
+                        (click)="increaseQuantity(item)"><i class="fa-solid fa-plus"></i></span>
+                      <!-- Else part -->
+                    </div>
+                      <ng-template #outOfStockTemplate>
+                        <p class="text-danger">Out of Stock</p>
+                      </ng-template>
+                    </td>
+                    <!-- Total -->
+                    <td class="text-start p-2 fw-bold" style="color: #a91be9">
+                      <span *ngIf="item.qty !== 0">
+                        <i class="fa-solid fa-indian-rupee-sign"></i>{{ item?.qty * item?.amount }}
+                      </span>
+                    </td>
+                    <!-- Delete -->
+                    <td class="text-center p-2">
+                      <i class="fa-solid fa-trash fs-3" style="color: #a91be9; cursor: pointer"
+                        (click)="deleteCartItem(item.itemslist_uuid)"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 p-0 price-details">
+          <div >
+            <button class="btn checkoutPage" (click)="orderSummary()" *ngIf="showCheckoutButton">
+              Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+          <div>
+            <button class="btn backpage" routerLink="/">Back To Shop</button>
+          </div>
+          <div class="py-3 priceDetails">
+            <div class="p-3">
+              <h3 style="color: #a91be9" class="fw-bold">PRICE DETAILS</h3>
+              <hr />
+              <p>
+                <span>Price</span><span style="float: right"><i class="fa-solid fa-indian-rupee-sign"></i>
+                  {{ getTotalMrp() }}</span>
+                <br /><br />
+                <!-- <span>Shipping Delivery Charges</span>
+                <span style="float: right"> 0 </span> -->
+                <span>Discount</span><span style="float: right"><i class="fa-solid fa-indian-rupee-sign"></i> -{{
+                  getDiscount()
+                  }}</span>
+                <br /><br />
+              </p>
+              <hr />
+              <span style="font-size: 16px; font-weight: 600">Total Amount</span><span
+                style="float: right; font-weight: 600"><i class="fa-solid fa-indian-rupee-sign"></i>
+                {{ getTotalPrice() }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+//<app-overlay></app-overlay>
+<app-footer></app-footer>

@@ -1,0 +1,165 @@
+.footer-col-head{
+    font-size: 18px;
+    font-weight: 500;
+    margin: 5px;
+    padding-left: 32px;
+    padding-bottom: 5px;
+    }
+    
+    .footer-links li{
+        font-size: 14px;
+        list-style-type: none;
+        padding: 5px;
+        padding-top: 10px;
+    
+        }
+    
+        .fa-brands{
+            font-size: 22px;
+            padding: 5px;
+            padding-right: 10px;
+        }
+    
+        .fa-instagram{
+            color: #ba5e03;
+        }
+        .fa-facebook{
+            color: #3b5998;
+        }
+        .fa-twitter{
+            color: #55acee;
+        }
+        .fa-linkedin{
+            color: #0A66C2;
+        }
+
+
+
+
+
+
+       .mobile-nav {
+  background: #ffffff;
+  position: fixed;
+  bottom: 0;
+  height: 65px;
+  z-index: 999;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  transition: transform 0.3s ease;
+}
+
+.nav-button:hover {
+  transform: translateY(-5px);
+}
+
+.nav-button.active {
+    font-size: 24px;
+    transform: translateY(-5px);
+  }
+
+.nav-button:hover .image-icon {
+  color: #85d508;
+}
+
+
+  
+  .nav-button.clicked:hover {
+    transform: translateY(-5px);
+  }
+
+.nav-button-text {
+  font-size: 12px;
+  color: #3a3a3a;
+  margin-top: 5px;
+}
+
+/* .tab-content {
+  padding: 20px;
+  margin-bottom: 65px;
+} */
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+.results{
+    margin: 10px;
+}
+
+.footer-para{
+  font-size: 14px;
+}
+
+@media (min-width:769px){
+    .mobile-nav{
+        display: none;
+    }
+    
+}
+
+@media (max-width:769px){
+  .copyright{
+    margin-bottom: 50px;
+  }
+  .copyright-text{
+    text-align: center;
+  }
+  .column-4{
+    width: 50%;
+  }
+  .footer-col-head{
+    padding-left:0;
+    font-size: 16px;
+  }
+  .footer-links{
+    padding-left:0;
+   
+  }
+  .footer-links li {
+    font-size: 12px;
+  }
+  .footer-para{
+    font-size: 12px;
+  }
+}
+
+.footer-bg {
+  background-color: #ffffff;
+  color: black;
+  /* background-image: url('https://borobazar.vercel.app/assets/images/app-bg.png'); */
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the container */
+}
+
+.footer-cont {
+  width: 100%;
+  /* max-width: 1140px; */
+   /* Bootstrap container max-width */
+  padding: 20px; /* Optional: Add padding as needed */
+}
+
+.getHelp:hover{
+  color: #a91be9 !important;
+}
+
+

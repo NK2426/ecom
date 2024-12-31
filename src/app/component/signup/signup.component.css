@@ -1,0 +1,276 @@
+.custom-dropdown {
+  max-height: 200px; /* Set the max height of the dropdown */
+  overflow-y: auto;  /* Enable vertical scrolling */
+}
+.btn{
+  border-color: #dee2e6;
+  border-radius: 0px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.btn:hover {
+  /* color: var(--bs-btn-hover-color); */
+  background-color:#8d0c56;
+  border-color: grey;
+}
+
+.input-group {
+  display: flex;
+  align-items: center; /* Ensure items stay aligned */
+  width: 80%;
+}
+
+.input-group-prepend {
+  margin-right: 0px; /* Space between dropdown and input */
+}
+
+.country-btn {
+  width: auto; /* Adjust button width as needed */
+  white-space: nowrap; /* Prevent text wrapping inside the button */
+}
+
+.mobile-input {
+  flex: 1; /* Ensure input takes up remaining space */
+  min-width: 0; /* Prevents input from shrinking too much */
+}
+
+.mobile-input{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    padding: 10px;
+}
+.mobile-input-lable{
+    margin-left: 10%;
+    margin-bottom: 5px;
+}
+.input-error{
+    margin-left: 10%;
+}
+.signup-submit:disabled{
+    background-color: #d8d5d5 !important;
+    color: #fff !important;
+    padding: 25px;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 20px;
+}
+.signup-submit{
+    background-color: #a91be9 !important;
+    color: #fff !important;
+    padding: 25px;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 20px;
+}
+
+.logo{
+    display: flex;
+    margin: auto;
+}
+.signup-heading{
+    font-weight: 500;
+}
+.otp-field{
+    margin: auto;
+    justify-content: center;
+    display: flex;
+}
+
+.login-link{
+    color: #a91be9;
+    cursor: pointer;
+}
+@media (max-width:768px){
+    .mobile-banner{
+        display: none;
+    }
+  }
+
+  .order-1 {
+    width: 100%;
+  }
+  @media (min-width: 576px) {
+    .order-1 {
+      width: 100%;
+      order: 1 !important;
+    }
+    .order-2 {
+      order: 2 !important;
+    }
+    
+  }
+  @media (min-width: 768px) {
+    .order-1 {
+      width: 75%;
+    }
+    
+  }
+  @media (min-width: 992px) {
+    .order-1 {
+      width: 75%;
+    }
+  }
+  @media (min-width: 1200px) {
+    .order-1 {
+      width: 75%;
+    }
+  }
+
+  
+  .mobile-input-label{
+    margin-left: 10%;
+  }
+
+  .radio-switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+  }
+  
+  .radio-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .radio-container input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .checkmark {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin-right: 10px; /* Space between radio button and text */
+  }
+  
+  .radio-container input:checked ~ .checkmark {
+    background-color: #a91be9;
+    border-color: #a91be9;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .radio-container input:checked ~ .checkmark:after {
+    display: block;
+    left: 7px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+  .radio-container:hover .checkmark {
+    background-color: #ccc;
+  }
+  
+  @media (min-width: 769px) and (max-width: 992px) {
+    .form-container,
+    .mobile-banner {
+      width: 50%;
+    }
+  }
+
+  .otp-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  
+  .timer-container {
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  .resendbtn{
+    border-radius: 35px;
+    background-color: #a91be9;
+    color: white;
+  }
+
+  #google-login-button {
+    
+    height: 50px;
+    width: 250px;
+    background-size: 250px 50px;
+    background-repeat: no-repeat;
+    display: inline-block;
+  }
+  
+  .login-button {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding: 16px;
+  }
+  
+
+  .google-btn {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #4285f4;
+    color: #010711;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.google-btn:hover {
+    background-color: #f7f7f7;
+}
+
+.google-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 2px;
+    height: 18px;
+    width: 18px;
+    margin-right: 10px;
+}
+
+.google-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.button-text {
+    display: inline-block;
+    vertical-align: middle;
+}

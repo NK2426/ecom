@@ -1,0 +1,153 @@
+<div class="footer-bg">
+  <div class="container footer-cont">
+    <div class="row pt-5 pb-3">
+      <div class="col-md-6 column-4">
+        <img src="../../../assets/image/logo-8.png" class="img-fluid" width="150px" alt=""
+          style="margin-top: 10px" />
+        <p style="margin-top: 15px" class="footer-para">
+          Brand Mugdha with over 25 physical store locations spanning in four
+          states in India. It is a reputed Boutique & Bridal Shop in Hyderabad,
+          Bengaluru, Chennai & Andhra Pradesh. Timeless elegance with Mugdha's
+          exquisite Ethnic Saree Wear Collection: <br />1. Traditional Pattu
+          Sarees <br />2. Fancy-Designer Sarees <br />3. Kanjivaram Silk Sarees
+          <br />4. Bridal Wedding Collection etc.
+        </p>
+        <a href="https://www.instagram.com/mugdhaartstudio/" target="_blank"> <i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/mugdhaartstudio" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.linkedin.com/company/mugdha-art-studio/mycompany/verification/?viewAsMember=true" target="_blank"><i
+            class="fa-brands fa-linkedin"></i></a>
+        <a href="https://www.youtube.com/@MugdhaArtStudio/videos" target="_blank"> <i class="fa-brands fa-youtube"
+            style="color: red;"></i></a>
+            <a href="https://wa.me/+917993710111" target="_blank"> <i class="fa-brands fa-whatsapp" target="_blank"
+              style="color: rgb(24, 211, 18);"></i></a>
+      </div>
+      <div class="col-md-3 column-4">
+        <h3 class="footer-col-head">Get Help</h3>
+        <ul class="footer-links">
+          <li style="cursor: pointer" class="getHelp" routerLink="/shop">Shop</li>
+          <li style="cursor: pointer" class="getHelp" routerLink="/account">Your Account</li>
+          <li [routerLink]="['/termsconditions']">
+            <span style="cursor: pointer" class="getHelp">Terms and Conditions</span>
+          </li>
+          <li [routerLink]="['/privacypolicy']">
+            <span style="cursor: pointer" class="getHelp">Privacy Policy</span>
+          </li>
+          <li routerLink="/returnpolicy">
+            <span style="cursor: pointer" class="getHelp">Return Policy</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact Us -->
+      <div class="col-md-3 column-4">
+        <h3 class="footer-col-head">Contact Us</h3>
+        <ul class="footer-links">
+          <li style="display: flex">
+            <i class="fa-solid fa-location-dot me-3 pt-1 fs-5" style="width: 10%"></i>
+            <span style="display: inline; width: 90%">
+              GF, H NO.8-2-293/82/A/682, BABHUKHAN RASHEED PLAZA, ROAD NO.36,
+              JUBILEEHILLS, Hyderabad, Telangana, 500033
+            </span>
+          </li>
+          <li style="display: flex">
+            <i class="fa-solid fa-phone me-3 pt-1 fs-5" style="width: 10%"></i>
+            <a href="tel:7993710111" style="
+                display: inline;
+                width: 90%;
+                cursor: pointer;
+                color: rgb(0, 0, 0);
+                text-decoration: none;
+              " class="getHelp">+91 7993710111
+            </a>
+          </li>
+          <li style="display: flex">
+            <i class="fa-solid fa-envelope me-3 pt-1 fs-5" style="width: 10%"></i>
+            <a href="mailto:info#mugdha.co" class="getHelp" style="
+                display: inline;
+                width: 90%;
+                cursor: pointer;
+                text-decoration: none;
+                color: rgb(5, 5, 5);
+              ">info@mugdha.co</a>
+          </li>
+        </ul>
+      </div>
+
+      <hr />
+      <div class="container copyright">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="copyright-text text-center">
+              © Copyright 2024 Mugdha | All rights reserved
+            </p>
+          </div>
+          <!-- <div class="col-md-6"></div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="mobile-nav">
+  <span class="nav-button" data-tab-target="#tab1" data-toggle="modal" data-target="#exampleModal3">
+    <img class="image-icon" src="../../../assets/image/search.svg" alt="" width="30px" height="30px" />
+    <span class="nav-button-text">Search</span>
+  </span>
+  <!-- <span
+    data-tab-target="#tab2"
+    routerLink="/product-list"
+    class="nav-button"
+    routerLinkActive="active"
+  >
+    <img
+      src="../../../assets/image/shoping.svg"
+      alt=""
+      width="30px"
+      height="30px"
+    />
+
+    <span class="nav-button-text">Collection</span>
+  </span> -->
+  <span routerLink="/" class="nav-button" data-tab-target="#tab3" [class.active]="isActive('/')" (click)="refresh()">
+    <img src="../../../assets/image/home.svg" alt="" width="30px" height="30px" />
+
+    <span class="nav-button-text">Home</span>
+  </span>
+  <span routerLink="/orderstatus" class="nav-button" data-tab-target="#tab4" routerLinkActive="active">
+    <img src="../../../assets/image/cart bag.svg" alt="" width="30px" height="30px" />
+
+    <span class="nav-button-text">Orders</span>
+  </span>
+</nav>
+
+<div class="tab-content">
+  <div class="tab-pane" id="tab1">Search Content</div>
+  <div class="tab-pane" id="tab2">Cart Content</div>
+  <div class="tab-pane" id="tab3">Home Content</div>
+  <div class="tab-pane" id="tab4">Orders Content</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div>
+        <input type="text" class="form-control" [(ngModel)]="searchProduct" placeholder="Search Product.."
+          (ngModelChange)="onSearchChange($event)"  (keydown.enter)="onEnterPressed()" />
+
+        <div class="search-results">
+          <div class="result-item" *ngFor="let item of searchProducts" (click)="onResultSelected(item)">
+            <div class="results">
+              <img [src]="item.image" class="img-fluid" width="50px" height="50px" alt="" />
+              <span style="margin-left: 20px">{{ item.name }}</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="modalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal"
+          style="display: none"></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,255 @@
+.orders-table{
+    font-weight: 400;
+}
+.order-table-container th{
+    background-color: #85d508;
+}
+
+.detail-table tr{
+    height: 70px;
+}
+
+.ordercancelbtn{
+    /* display: flex; */
+    /* margin: auto; */
+}
+
+
+@media (max-width:576px){
+    .tablehead{
+        font-size: 12px;
+    }
+    .rupee{
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 767px) {
+    
+    .order-table-body tr {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .order-table-body tr td {
+      width: 50%;
+    }
+    .ordercancelbtn{
+        width: 100% ;
+    }
+  }
+  
+
+  .image-container img {
+    transition: transform 0.3s ease;
+}
+
+.image-container:hover img {
+    transform: scale(0.9);
+    /* border: 1px solid red; */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.orderID{
+    font-size: 11px;
+}
+
+.price{
+    font-size: 12px;
+}
+
+@media (max-width:576px){
+    .web-order-view{
+        display: none;
+    }
+}
+@media (min-width:576px){
+    .mob-order-view{
+        display: none;
+    }
+}
+
+@media only screen and (max-width:576px){
+    .mob-order-view{
+        display: block;
+    }
+}
+
+
+.text-green {
+    color: rgb(0, 215, 0);
+}
+
+.text-red {
+    color: red;
+}
+
+.text-orange{
+    color: orange;
+}
+
+.fa-indian-rupee-sign {
+    font-size: 12px;
+}
+
+.table-background{
+background-color: #f8cae069;
+}
+
+.total-price-left{
+border-bottom-left-radius: 5px;
+border-bottom: none;
+}
+.total-price-right{
+    border-bottom-right-radius: 5px;
+    border-bottom: none;
+}
+
+.subtotal-left{
+    border-top-left-radius: 5px;
+}
+.subtotal-right{
+    border-top-right-radius: 5px;
+}
+
+
+
+
+/* traking */
+
+.tracking-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .tracking-step {
+    text-align: center;
+    position: relative;
+    flex: 1;
+  }
+  
+  .step-indicator {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    z-index: 1;
+  }
+  
+  .step-label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .step-date {
+    margin-top: 5px;
+    font-size: 0.7em;
+    color: gray;
+  }
+  
+  .tracking-step.completed .step-indicator {
+    background-color: #a91be9;
+    color: white;
+  }
+  
+  .tracking-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    right: -50%;
+    width: 100%;
+    height: 4px;
+    background-color: lightgray;
+    z-index: 0;
+  }
+  
+  .tracking-step.completed:not(:last-child)::after {
+    background-color: #a91be9;
+  }
+  
+  .tracking-step:first-child::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    /* left: -50%; */
+    width: 100%;
+    height: 4px;
+    background-color: lightgray;
+    z-index: 0;
+  }
+  
+  .tracking-step.completed:first-child::before {
+    background-color: #a91be9;
+  }
+  
+  @media (max-width:768px){
+    .pad{
+      margin-top: 4px;
+    }
+  }
+  @media (max-width:768px){
+    .step-label{
+        font-size: 10px;
+    }
+    .step-date{
+        font-size: 8px;
+    }
+    .step-indicator {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: lightgray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        z-index: 1;
+      }
+      .tracking-step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 9px;
+        right: -50%;
+        width: 100%;
+        height: 4px;
+        background-color: lightgray;
+        z-index: 0;
+      }
+
+      .tracking-step:first-child::before {
+        content: '';
+        position: absolute;
+        top: 9px;
+        /* left: -50%; */
+        width: 100%;
+        height: 4px;
+        background-color: lightgray;
+        z-index: 0;
+      }
+  }
+
+  .rating-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .rating-container .fa {
+    margin: 5px;
+    transition: color 0.3s ease;
+  }
+  
+  .rating-container .fa-star,
+  .rating-container .fa-star-o {
+    cursor: pointer;
+    font-size: 30px;
+    color: gold;
+  }
+  

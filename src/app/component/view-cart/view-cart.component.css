@@ -1,0 +1,216 @@
+/* cart-items.component.css */
+
+h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.cart-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+
+.cart-item img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-right: 10px;
+}
+
+.cart-item-details {
+  display: flex;
+  align-items: center;
+}
+
+.cart-item-name {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+}
+
+.cart-empty {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}
+
+/* .inc-dec-button {
+  background-color: #7bd000bf;
+  box-shadow: none;
+  padding: 4px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+} */
+
+.inc-but {
+  color: #ffffff;
+  background-color: #a91be9;
+  padding: 7px;
+  padding-right: 10px;
+    padding-left: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.table {
+  table-layout: fixed;
+  /* Set the table layout to fixed */
+  width: 100%;
+  /* Set the table width to 100% */
+}
+
+.table-th,
+.table-td {
+  width: 20%;
+  /* Set a fixed width for each table header and table cell */
+  white-space: nowrap;
+  /* Prevent text wrapping */
+}
+
+.img-fluid {
+  max-width: 100%;
+  /* Ensure images don't exceed the table cell width */
+}
+
+.inc-dec-button {
+  cursor: pointer;
+}
+
+.delete-button {
+  background-color: red;
+  width: 25px;
+  height: 25px;
+}
+
+
+@media (max-width: 768px) {
+  .inc-dec-button {
+    padding: 1px;
+    border-radius: 5px;
+    color: #fff;
+  }
+
+  .table-tr {
+    font-size: 12px;
+  }
+
+  td {
+    font-size: 10px;
+  }
+
+  th {
+    font-size: 12px;
+  }
+
+  .fa-indian-rupee-sign {
+    font-size: 10px;
+  }
+
+
+}
+
+@media (max-width:996px) {
+  .price-details {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px !important;
+  }
+}
+
+.cart-image {
+  cursor: pointer;
+}
+
+.mrp {
+  color: rgb(155, 154, 154);
+  font-size: 12px;
+}
+.price-simble{
+  font-size: 14px;
+}
+
+.price-detail-card {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 10px;
+}
+
+.circle {
+  border: 1px solid #a91be9;
+  padding-right: 12px !important;
+    padding-left: 12px !important;
+  color: #a91be9;
+}
+
+.priceDetails {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.checkoutPage {
+  background-color: #a91be9;
+  width: 100%;
+  border: none;
+  border-radius: 0px;
+  padding: 10px 0px;
+  margin-top: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.backpage {
+  color: #a91be9;
+  border: 1px solid #a91be9;
+  border-radius: 0px;
+  width: 100%;
+  background-color: white;
+  padding: 10px 0px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+@media only screen and (max-width:996px) {
+  .summa {
+    /* background-color: red; */
+    width: 100%;
+    display: flex;
+  }
+}
+
+@media only screen and (max-width:770px) {
+  .summa {
+    /* background-color: red; */
+    width: 100%;
+    display: flex;
+    padding: 12px;
+  }
+}
+
+@media only screen and (max-width:560px) {
+  .summa {
+    /* background-color: greenyellow; */
+    width: 100%;
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+@media (min-width:580px) {
+  .mobile-device {
+    display: none;
+  }
+}
+
+
+@media (max-width:579px) {
+  .web-device {
+    display: none;
+  }
+}
+
+.fa-plus,.fa-minus{
+  font-size: 10px;
+}

@@ -1,0 +1,805 @@
+<app-header></app-header>
+
+<div class="container my-5">
+  <!-- <div class="container mt-5"> -->
+  <div id="content">
+    <div id="main-content">
+      <mat-tab-group>
+        <mat-tab label="Profile">
+          <div
+            class="resume-card-body personal-informations"
+            style="overflow: hidden"
+          >
+            <div class="row resume-card-body-container second-font">
+              <div class="container" style="margin-top: 20px">
+                <div class="row">
+                  <form
+                    [formGroup]="accountForm"
+                    (ngSubmit)="accountFormSubmit()"
+                  >
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="name">Name: </label>
+                          <input
+                            class="form-control"
+                            id="name"
+                            type="text"
+                            (keypress)="onKeyPress($event)"
+                            formControlName="name"
+                            minlength="3"
+                            maxlength="30"
+                            [ngClass]="{
+                              'is-invalid':
+                                (isSubmit &&
+                                  accountFormControl['name'].errors) ||
+                                (accountFormControl['name'].invalid &&
+                                  (accountFormControl['name'].dirty ||
+                                    accountFormControl['name'].touched))
+                            }"
+                          />
+                          <div
+                            *ngIf="
+                              (isSubmit &&
+                                accountFormControl['name']?.errors) ||
+                              (accountFormControl['name']?.invalid &&
+                                (accountFormControl['name']?.dirty ||
+                                  accountFormControl['name']?.touched))
+                            "
+                            class="invalid-feedback"
+                          >
+                            <span
+                              *ngIf="accountFormControl['name'].errors?.['required']"
+                              >Name is Required</span
+                            >
+                            <span
+                              *ngIf="accountFormControl['name'].errors?.['minlength']"
+                              >Minimum Length 3 Characters.</span
+                            >
+                            <span
+                              *ngIf="accountFormControl['name'].errors?.['maxlength']"
+                              >Maximum length 30 characters.</span
+                            >
+                            <span
+                              *ngIf="accountFormControl['name'].errors?.['pattern']"
+                              >Enter Alphabit Only</span
+                            >
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="email">E-mail ID: </label>
+
+                          <input
+                            class="form-control"
+                            id="email"
+                            type="email"
+                            formControlName="email"
+                            [ngClass]="{
+                              'is-invalid':
+                                (isSubmit &&
+                                  accountFormControl['email'].errors) ||
+                                (accountFormControl['email'].invalid &&
+                                  (accountFormControl['email'].dirty ||
+                                    accountFormControl['email'].touched))
+                            }"
+                          />
+
+                          <div
+                            *ngIf="
+                              (isSubmit &&
+                                accountFormControl['email']?.errors) ||
+                              (accountFormControl['email']?.invalid &&
+                                (accountFormControl['email']?.dirty ||
+                                  accountFormControl['email']?.touched))
+                            "
+                            class="invalid-feedback"
+                          >
+                            <span
+                              *ngIf="accountFormControl['email'].errors?.['required']"
+                              >Email is Required</span
+                            >
+                            <span
+                              *ngIf="accountFormControl['email'].errors?.['minlength']"
+                              >Give Valid Email Id</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <br />
+
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="mobile">Mobile Number: </label>
+
+                          <input
+                            class="form-control"
+                            id="mobile"
+                            type="text"
+                            (input)="onInputChange($event)"
+                            formControlName="mobile"
+                            (keydown)="onKeyDown($event)"
+                            [ngClass]="{
+                              'is-invalid':
+                                (isSubmit &&
+                                  accountFormControl['mobile'].errors) ||
+                                (accountFormControl['mobile'].invalid &&
+                                  (accountFormControl['mobile'].dirty ||
+                                    accountFormControl['mobile'].touched))
+                            }"
+                          />
+
+                          <div
+                            *ngIf="
+                              (isSubmit &&
+                                accountFormControl['mobile']?.errors) ||
+                              (accountFormControl['mobile']?.invalid &&
+                                (accountFormControl['mobile']?.dirty ||
+                                  accountFormControl['mobile']?.touched))
+                            "
+                            class="invalid-feedback"
+                          >
+                            <span
+                              *ngIf="accountFormControl['mobile'].errors?.['required']"
+                              >Mobile Number is Required</span
+                            >
+                            <span
+                              *ngIf="accountFormControl['mobile'].errors?.['minlength']"
+                              >Give Valid Mobile Number</span
+                            >
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <button
+                            mat-flat-button
+                            style="
+                              background-color: #a91be9;
+                              color: #fff;
+                              margin-top: 20px;
+                            "
+                          >
+                            Save Details
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <!-- <mat-tab label="Orders" style="color: #a91be9">
+                <div class="resume-card resume-card-1" data-index="1">
+                  <div class="resume-card-body experience">
+                    <div class="container" *ngIf="orderItems !== null" style="margin-top: 30px;">
+                      <div class="row">
+                        <div *ngFor="let item of orderItems?.datas" class="col-md-4">
+                          <mat-card class="example-card order-card" [routerLink]="['/orderstatus/' + item?.uuid]">
+                            <mat-card-header>
+                              <mat-card-title-group>
+                                <mat-card-title>
+                                  <img
+                                    src="{{ item?.orderitems && item.orderitems.length > 0 && item.orderitems[0].product?.path }}"
+                                    alt="" width="100px" srcset="">
+                                </mat-card-title>
+                                <mat-card-subtitle class="status">{{
+                                  item?.orderID
+                                  }}</mat-card-subtitle>
+                                
+                                <span>{{ item?.createdAt | date }}</span>
+                              </mat-card-title-group>
+                            </mat-card-header>
+                            <mat-card-content>
+                              <p>
+                                <b>Price:</b> &nbsp;<i class="fa-solid fa-indian-rupee-sign"
+                                  style="font-size: 12px"></i>
+                                <b>{{ item?.amount }}</b>
+                              </p>
+
+                              <p class="cstatus" *ngIf="item.status=='Canceled'">Canceled</p>
+                              <p class="status" *ngIf="item.status!=='Canceled'">{{ item?.status === 'Confirmed' ?
+                                'Placed' : item?.status }}</p>
+
+                            </mat-card-content>
+                          </mat-card>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="orderItems.totalItems ==0" class="text-center" style="margin-top: 30px;">
+                      <span style="text-align: center;" class="stock">No orders</span>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab> -->
+
+        <mat-tab label="Address">
+          <div class="resume-card-body skills">
+            <div class="resume-card-body-container second-font">
+              <div class="container" style="margin-top: 30px">
+                <div class="row">
+                  <div
+                    class="card"
+                    style="
+                      margin-bottom: 10px;
+                      cursor: pointer;
+                      display: inline-block;
+                      margin-right: 10px;
+                    "
+                    data-toggle="modal"
+                    data-target="#exampleModal4"
+                    (click)="resetForm()"
+                  >
+                    <div
+                      class="card-body"
+                      style="padding: 35px; text-align: center"
+                    >
+                      <h4 style="margin-bottom: 0px">Delivery Address</h4>
+
+                      <h4
+                        class="add-address"
+                        style="margin-bottom: 0px; color: #a91be9"
+                      >
+                        + Add Address
+                      </h4>
+                    </div>
+                  </div>
+
+                  <div
+                    class="card address-card mb-2"
+                    *ngFor="let address of address; let i = index"
+                  >
+                    <span
+                      style="
+                        text-align: right;
+                        color: #a91be9;
+                        padding-top: 10px;
+                      "
+                      *ngIf="address?.isdefault == 1"
+                      >Default Address</span
+                    >
+                    <span
+                      style="
+                        text-align: right;
+                        color: #a91be9;
+                        padding-top: 30px;
+                      "
+                      *ngIf="address?.isdefault == 0"
+                    ></span>
+
+                    <div class="card-body" style="padding-bottom: 10px">
+                      <!-- (click)="editAddress(address.uuid)" -->
+                      <div class="col-md-12 row">
+                        <div class="text-start py-2 col-md-6 col-sm-6">
+                          <i
+                            data-toggle="modal"
+                            data-target="#exampleModal4"
+                            class="fa-solid fa-pen-to-square fs-5"
+                            style="color: #a91be9; cursor: pointer"
+                            (click)="editAddress(address.uuid)"
+                          ></i>
+                        </div>
+                        <div class="col-md-6 col-sm-12 text-end">
+                          <span
+                            class="text-danger fs-5"
+                            style="cursor: pointer"
+                            *ngIf="address?.isdefault != 1"
+                            (click)="deleteAddress(address.uuid)"
+                            ><i class="fa-solid fa-trash"></i
+                          ></span>
+                        </div>
+                      </div>
+                      <h4
+                        class="fw-bold"
+                        style="margin-bottom: 0px; color: #a91be9"
+                      >
+                        {{ address.type }}
+                      </h4>
+                      <h4 class="m-0 py-2">{{ address?.name }}</h4>
+                      <p class="add-address">
+                        {{ address?.address }}, {{ address?.city }},
+                        {{ address?.state }} -{{ address.zipcode }}
+                      </p>
+                      <p>
+                        <span style="color: #a91be9">Email</span> :
+                        {{ address?.email }}
+                      </p>
+                      <p>
+                        <span style="color: #a91be9">Mobile</span> :
+                        {{ address?.mobile }}
+                      </p>
+                    </div>
+
+                    <!-- <button mat-flat-button class="deliver-button" (click)="selectDeliveryAddress(address?.uuid);disableAddress(i)" [disabled]="buttonDisabledStates[i]"
+                       >Deliver here</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <!-- <mat-tab label="Terms & Conditions">
+                <div class="resume-card-body skills">
+                  <div class="resume-card-body-container second-font"></div>
+                </div>
+              </mat-tab> -->
+        <mat-tab label="FAQ">
+          <div style="width: 80%; margin: auto">
+            <div class="pt-5">
+              <h1
+                style="
+                  color: red;
+                  font-size: 24px;
+                  text-align: center;
+                  font-weight: bold;
+                "
+              >
+                Customer Questions - Frequently Asked Questions
+              </h1>
+              <h3 style="font-weight: bold">1.What is Mugdha Silks ?</h3>
+              <p>
+                Brand Mugdha Silks (Mugdha Ecommerce LLP) is a premium Women
+                Clothing Brand with wide range of Ethnic & Traditional Wear
+                Collection.
+              </p>
+
+              <h3 style="font-weight: bold">
+                2.Product Range Of Mugdha ? (Product Categories)
+              </h3>
+              <p>
+                Exclusive Collection of Silk-Pattu Sarees, Designer & Fancy
+                Sarees, Bridal Wear (Wedding Collection), Lehengas etc.
+              </p>
+
+              <h3 style="font-weight: bold">
+                3.How many Store Locations does the Brand Mugdha have ?
+              </h3>
+              <p>
+                Brand Mugdha has 23 Stores all over located in 4 different
+                states: Andhra Pradesh, Telangana, Tamil Nadu, Karnataka.
+              </p>
+
+              <h3 style="font-weight: bold">
+                4.Does Mugdha offers Online Sales ?
+              </h3>
+              <p>
+                Yes, can opt for online sales through its e-commerce website:
+              </p>
+              <p>www.mugdha.co</p>
+
+              <h3 style="font-weight: bold">
+                5.If ordered, how many days will it take to deliver Saree ?
+                (Within India & Abroad)
+              </h3>
+              <p>After Online Payment & Order Confirmation,</p>
+              <p>
+                Product will be dispatched in 24hrs; will be delivered in 3 to 4
+                working days, In India.
+              </p>
+              <p>
+                For abroad, it would take 5 to 6 working days for Saree
+                Delivery.
+              </p>
+
+              <h3 style="font-weight: bold">
+                6.Does online purchase has Delivery Charges ? (if so, how much
+                ?)
+              </h3>
+              <p>No Shipping Charges (FREE) for Deliveries within India.</p>
+              <p>
+                For abroad, there will be charges of Rs 2500/- per Transaction.
+              </p>
+
+              <h3 style="font-weight: bold">
+                7.How do we receive Online Payment Confirmation ?
+              </h3>
+              <p>
+                Once online payment is done, Online Mail confirmation & Whatsapp
+                confirmation will be received.
+              </p>
+
+              <h3 style="font-weight: bold">
+                8.Does Login Signup is compulsory ?
+              </h3>
+              <h3 style="font-weight: bold">Not compulsary.</h3>
+              <p>Customer can purchase the product from website, without</p>
+              <p style="font-weight: bold">
+                Login / Signup. Can go to Buy Now Option & can Checkout for
+                Payment.
+              </p>
+            </div>
+          </div>
+        </mat-tab>
+        <!-- <mat-tab label="Customer care">
+          <div class="container row my-5 col-md-12">
+            <div class="col-md-6 col-sm-12">
+              <div
+                class="row rounded-3 p-2 m-2"
+                style="border: 1px solid #a91be9"
+              >
+                <div class="" style="width: 90%">
+                  <h3 class="fw-bold">Email To</h3>
+                  <h4 class="m-0 p-0" style="color: #a91be9">
+                    Response within 24 Hrs
+                  </h4>
+                </div>
+                <div style="width: 10%; align-content: center; font-size: 22px">
+                  <a href="mailto:info@mugdha.co"
+                    ><i class="fa-solid fa-envelope" style="color: #a91be9"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div
+                class="row rounded-3 p-2 m-2"
+                style="border: 1px solid #a91be9"
+              >
+                <div class="" style="width: 90%">
+                  <h3 class="fw-bold">Call Us</h3>
+                  <h4 class="m-0 p-0" style="color: #a91be9">
+                    09:00 am to 06:00 pm (Mon-Sat)
+                  </h4>
+                </div>
+                <div style="width: 10%; align-content: center; font-size: 22px">
+                  <a href="tel:799371011"
+                    ><i class="fa-solid fa-phone" style="color: #a91be9"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab> -->
+      </mat-tab-group>
+    </div>
+  </div>
+  <!-- </div> -->
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal4"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Add Your Delivery Address
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addressForm" (ngSubmit)="formSubmit()">
+          <div class="container">
+            <div class="row">
+              <!-- Create Name -->
+              <!-- (keypress)="onKeyPress($event)" -->
+              <div class="col-md-6">
+                <label for="name" class="required">Name: </label>
+                <input
+                  class="form-control"
+                  id="name"
+                  type="text"
+                  formControlName="name"
+                  minlength="3"
+                  maxlength="30"
+                  [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControl['name'].errors) ||
+                      (formControl['name'].invalid &&
+                        (formControl['name'].dirty ||
+                          formControl['name'].touched))
+                  }"
+                />
+                <div
+                  *ngIf="
+                    (isSubmit && formControl['name']?.errors) ||
+                    (formControl['name']?.invalid &&
+                      (formControl['name']?.dirty ||
+                        formControl['name']?.touched))
+                  "
+                  class="invalid-feedback"
+                >
+                  <span *ngIf="formControl['name'].errors?.['required']"
+                    >Name is Required</span
+                  >
+                  <span *ngIf="formControl['name'].errors?.['minlength']"
+                    >Minimum Length 3 Characters.</span
+                  >
+                  <span *ngIf="formControl['name'].errors?.['maxlength']"
+                    >Maximum Length 30 Characters.</span
+                  >
+                  <span *ngIf="formControl['name'].errors?.['pattern']"
+                    >Enter Alphabit Only</span
+                  >
+                </div>
+              </div>
+              <!-- Create Email -->
+              <div class="col-md-6">
+                <label for="email" class="required">E-mail ID: </label>
+
+                <input
+                  class="form-control"
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControl['email'].errors) ||
+                      (formControl['email'].invalid &&
+                        (formControl['email'].dirty ||
+                          formControl['email'].touched))
+                  }"
+                />
+
+                <div
+                  *ngIf="
+                    (isSubmit && formControl['email']?.errors) ||
+                    (formControl['email']?.invalid &&
+                      (formControl['email']?.dirty ||
+                        formControl['email']?.touched))
+                  "
+                  class="invalid-feedback"
+                >
+                  <span *ngIf="formControl['email'].errors?.['required']"
+                    >Email is Required</span
+                  >
+                  <span *ngIf="formControl['email'].errors?.['email']"
+                    >Give Valid Email Id</span
+                  >
+                  <span *ngIf="formControl['email'].errors?.['pattern']"
+                    >Enter correct email ID</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br />
+
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="mobile" class="required">Mobile Number: </label>
+
+                <input
+                  class="form-control"
+                  id="mobile"
+                  type="text"
+                  minlength="7"
+                  maxlength="15"
+                  (input)="onInputChange($event)"
+                  formControlName="mobile"
+                  (keydown)="onKeyDown($event)"
+                  [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControl['mobile'].errors) ||
+                      (formControl['mobile'].invalid &&
+                        (formControl['mobile'].dirty ||
+                          formControl['mobile'].touched))
+                  }"
+                />
+
+                <div
+                  *ngIf="
+                    (isSubmit && formControl['mobile']?.errors) ||
+                    (formControl['mobile']?.invalid &&
+                      (formControl['mobile']?.dirty ||
+                        formControl['mobile']?.touched))
+                  "
+                  class="invalid-feedback"
+                >
+                  <span *ngIf="formControl['mobile'].errors?.['required']"
+                    >Mobile Number is required</span
+                  >
+                  <span *ngIf="formControl['mobile'].errors?.['minlength']"
+                    >Minimum Length 7 Digits</span
+                  >
+                  <span *ngIf="formControl['mobile'].errors?.['maxlength']"
+                    >Maximum Length 15 Digits</span
+                  >
+                  <!-- <span *ngIf="formControl['mobile'].errors?.['pattern']"
+                    >Only numeric values are allowed</span
+                  > -->
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="zipcode" class="required">Zip Code: </label>
+
+                <input
+                  class="form-control"
+                  id="zipcode"
+                  type="text"
+                  (input)="limitInputLength($event, 6)"
+                  formControlName="zipcode"
+                  [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControl['zipcode'].errors) ||
+                      (formControl['zipcode'].invalid &&
+                        (formControl['zipcode'].dirty ||
+                          formControl['zipcode'].touched))
+                  }"
+                  (keypress)="validateNumber($event)"
+                  (keyup)="postelcode($event)"
+                />
+
+                <div
+                  *ngIf="
+                    (isSubmit && formControl['zipcode']?.errors) ||
+                    (formControl['zipcode']?.invalid &&
+                      (formControl['zipcode']?.dirty ||
+                        formControl['zipcode']?.touched))
+                  "
+                  class="invalid-feedback"
+                >
+                  <span *ngIf="formControl['zipcode'].errors?.['required']"
+                    >Zip Code is required</span
+                  >
+                  <span *ngIf="formControl['zipcode'].errors?.['minlength']"
+                    >Zip Code must be exactly 6 digits</span
+                  >
+                  <span *ngIf="formControl['zipcode'].errors?.['maxlength']"
+                    >Zip Code must be exactly 6 digits</span
+                  >
+                  <span *ngIf="formControl['zipcode'].errors?.['pattern']"
+                    >Only numeric values are allowed</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br />
+          <div *ngIf="!isNotAvail" style="color: red" class="text-center">
+            Currently Not Deliver to this Area
+          </div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="city" class="required">City: </label>
+
+                <input
+                  class="form-control"
+                  id="city"
+                  type="text"
+                  formControlName="city"
+                  [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControl['city'].errors) ||
+                      (formControl['city'].invalid &&
+                        (formControl['city'].dirty ||
+                          formControl['city'].touched))
+                  }"
+                  readonly
+                />
+
+                <div
+                  *ngIf="
+                    (isSubmit && formControl['city']?.errors) ||
+                    (formControl['city']?.invalid &&
+                      (formControl['city']?.dirty ||
+                        formControl['city']?.touched))
+                  "
+                  class="invalid-feedback"
+                >
+                  <span *ngIf="formControl['city'].errors?.['required']"
+                    >City is Required</span
+                  >
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="state" class="required">State: </label>
+
+                <input
+                  class="form-control"
+                  id="state"
+                  type="text"
+                  formControlName="state"
+                  [ngClass]="{
+                    'is-invalid':
+                      (isSubmit && formControl['state'].errors) ||
+                      (formControl['state'].invalid &&
+                        (formControl['state'].dirty ||
+                          formControl['state'].touched))
+                  }"
+                  readonly
+                />
+
+                <div
+                  *ngIf="
+                    (isSubmit && formControl['state']?.errors) ||
+                    (formControl['state']?.invalid &&
+                      (formControl['state']?.dirty ||
+                        formControl['state']?.touched))
+                  "
+                  class="invalid-feedback"
+                >
+                  <span *ngIf="formControl['state'].errors?.['required']"
+                    >State is Required</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <div class="container">
+            <div class="row">
+              <label for="address" class="required">Address: </label>
+
+              <textarea
+                class="form-control"
+                id="address"
+                type="text"
+                formControlName="address"
+                [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControl['address'].errors) ||
+                    (formControl['address'].invalid &&
+                      (formControl['address'].dirty ||
+                        formControl['address'].touched))
+                }"
+              ></textarea>
+
+              <div
+                *ngIf="
+                  (isSubmit && formControl['address']?.errors) ||
+                  (formControl['address']?.invalid &&
+                    (formControl['address']?.dirty ||
+                      formControl['address']?.touched))
+                "
+                class="invalid-feedback"
+              >
+                <span *ngIf="formControl['address'].errors?.['required']"
+                  >Address is Required</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <br />
+
+          <mat-radio-group formControlName="type" class="required">
+            <mat-radio-button
+              *ngFor="let option of options"
+              [value]="option.value"
+              >{{ option.label }}</mat-radio-button
+            >
+          </mat-radio-group>
+
+          <br />
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              id="closeModalBtn"
+              (click)="resetMyForm()"
+            >
+              Close
+            </button>
+            <button
+              mat-raised-button
+              matStepperNext
+              style="background-color: #a91be9; color: #fff"
+              type="submit"
+            >
+              Save Address
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

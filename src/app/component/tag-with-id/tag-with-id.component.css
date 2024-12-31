@@ -1,0 +1,28 @@
+.wishlist-icon {
+    position: absolute;
+    /* top: 10px;
+    right: 10px; */
+    background-color: #fff; /* Background color to make it stand out */
+    border-radius: 50%;
+    padding: 5px;
+  
+    cursor: pointer;
+    /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
+    z-index: 10; /* Ensure it appears above other elements */
+  }
+  
+  .wishlist-icon mat-icon {
+    font-size: 24px; /* Adjust size as needed */
+  }
+  
+  .not-in-wishlist mat-icon {
+    color: #2c2424; /* White color when not in wishlist */
+  }
+  
+  .in-wishlist mat-icon {
+    color: #a91be9; /* Red color when in wishlist */
+  }
+  
+  .wishlist-icon:hover mat-icon {
+    color: #a91be9; /* Change color on hover for visual feedback */
+  }

@@ -1,0 +1,57 @@
+<app-header></app-header>
+
+<div class="container">
+    <div class="row">
+        <div class="wishlist">
+            
+
+
+            <table class="table" *ngIf="wishlistItems.length > 0">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-tr" style="width: 30%;">Item</th>
+                        <th scope="col" class="table-tr" style="width: 50%;">Name</th>                           
+                        <th scope="col" class="table-tr" style="width: 20%;">Total</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of wishlistItems" >
+                        <td><img [src]="item.item.path" alt="Product Image"
+                                [routerLink]="['/product/'+item.item.slug]" class="img-fluid" width="100px"
+                                height="120px"></td>
+                        <td class="wishlist-item-details">
+                            
+                            <b>{{item?.item?.name}}</b>
+                            <br>
+                            <div style="margin-top:5px;margin-bottom: 5px;">
+                              <i class="fa-solid fa-indian-rupee-sign"></i> {{item?.item?.price}}
+                            </div>
+                            
+                            <div >
+                                <span (click)="addToCart(item?.item_uuid,item?.item?.itemslist_uuid, 1)" style="cursor: pointer;" *ngIf="item?.item?.qty > 0">
+                                    
+                                        <span style="color: #a91be9 ;">Move to Cart</span>
+                                </span>
+                                <span  *ngIf="item?.item?.qty == 0" style="color: red;">Out Of Stock</span>
+                              </div>
+                              
+                           
+                            
+                        </td>
+                        
+
+                        <td style="vertical-align: middle;"><p class="text-danger" style="cursor: pointer;" (click)="removeWishlist(item?.item_uuid)">Remove</p></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="wishlistItems.length === 0" class="wishlist-empty">
+            <h2 class="text-center">Your Favorites is Empty</h2>
+            <button class="text-center m-auto d-flex" mat-raised-button routerLink="/" style="cursor: pointer;">Shop</button>
+        </div>
+    </div>
+</div>
+//<app-overlay></app-overlay>
+<app-footer></app-footer>

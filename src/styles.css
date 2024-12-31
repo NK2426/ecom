@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body,
+* {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.fa-indian-rupee-sign {
+  font-size: 14px;
+}
+.mat-pseudo-checkbox {
+  display: none !important;
+}
+.mat-mdc-paginator-page-size {
+  display: none !important;
+}
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: #a91be9 !important;
+}
+
+.mat-mdc-tab .mdc-tab-indicator__content--underline {
+  border-color: #a91be9 !important;
+}
+
+.cdk-overlay-container {
+  z-index: 100000 !important;
+}  
+
+input:focus, textarea:focus, select:focus {
+  border-color: #a91be9 !important;
+  box-shadow: 0 0 5px #a91be97a !important;
+  outline: none !important;
+}
+.dropdown-item:active{
+  background-color: #a91be9 !important;
+  color: #fff;
+}
+
+.mat-mdc-paginator-range-label {
+  display: none !important;
+}

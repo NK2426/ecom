@@ -1,0 +1,20 @@
+<app-header></app-header> <br /><br />
+<div class="container">
+  <div class="row">
+    <div>
+      <div class="d-flex justify-content-center">
+        <img
+          src="{{ singleBlog?.image }}"
+          class="blog-img"
+          alt=""
+          width="350px"
+        />
+      </div>
+      <p class="mt-1">{{ singleBlog?.createdAt | date }}</p>
+      <div [innerHTML]="singleBlog?.content"></div>
+    </div>
+  </div>
+</div>
+
+//<app-overlay></app-overlay>
+<app-footer></app-footer>

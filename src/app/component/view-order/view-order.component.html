@@ -1,0 +1,360 @@
+<app-header></app-header>
+<br><br><br>
+<!-- web order view -->
+<div class="container card" style="padding: 1px;padding-top: 3px; border: 1px solid #a91be9;">
+  <div class="container web-order-view">
+    <div class="row" style=" padding: 5px; border-radius: 5px;">
+      <div class="col-md-3 col-sm-3 d-flex flex-column justify-content-center">
+        <img src="{{viewOrderItems?.path}}" width="50px" class="img-fluid" alt=""
+          [routerLink]="['/product/' + viewOrderItems?.slug]">
+      </div>
+      <div class="col-md-3 col-sm-3 d-flex flex-column justify-content-center">
+        <p class="orderID">Order Id: {{viewOrderItems?.orderID}} </p>
+        <p class="fw-bold">{{viewOrderItems?.name}}</p>
+      </div>
+      <!-- <div class="div" *ngIf="viewOrderItems?.status === 'Delivered'"> 
+      <button mat-raised-button (click)="downloadinvoice()">Download invoice</button>
+    </div> -->
+      <div class="col-md-3 col-sm-3 d-flex flex-column justify-content-center">
+        <p><i class="fa-solid fa-indian-rupee-sign price"></i>{{viewOrderItems?.price}}</p>
+      </div>
+      <div class="col-md-3 col-sm-3 d-flex flex-column justify-content-center">
+
+        <p [ngClass]="{
+        'text-green': viewOrderItems?.status === 'Placed' || viewOrderItems?.status === 'Invoice' || viewOrderItems?.status === 'Complete',
+        'text-red': viewOrderItems?.status === 'Cancel' || viewOrderItems?.status === 'Cancel Request' || viewOrderItems?.status === 'Refund' || viewOrderItems?.status === 'Replace' || viewOrderItems?.status === 'Not Placed',
+        'text-orange': viewOrderItems?.status === 'Return' || viewOrderItems?.status === 'Return Request'
+    }">
+          {{
+          viewOrderItems?.status === 'Placed' || viewOrderItems?.status === 'Invoice' ?
+          'Expected Delivery on' :
+          viewOrderItems?.status === 'Cancel' ?
+          'Cancelled on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Cancel Request' ?
+          'Cancel Requested on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Refund' ?
+          'Refunded on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Return' ?
+          'Returned on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Replace' ?
+          'Replaced on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Complete' ?
+          'Completed on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Not Placed' ?
+          'Awaiting confirmation' :
+          viewOrderItems?.status
+          }}
+          {{
+          (viewOrderItems?.status !== 'Cancel' && viewOrderItems?.status !== 'Cancel Request' && viewOrderItems?.status
+          !==
+          'Refund' && viewOrderItems?.status !== 'Return' && viewOrderItems?.status !== 'Replace' &&
+          viewOrderItems?.status
+          !== 'Complete' && viewOrderItems?.status !== 'Not Placed') ?
+          (viewOrderItems?.deliverdate | date) : ''
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- mobileorder view -->
+  <div class="container mob-order-view">
+    <div class="row" style=" padding: 5px; border-radius: 5px;">
+      <div class="col-md-6 col-4">
+        <img src="{{viewOrderItems?.path}}" width="50px" class="img-fluid" alt=""
+          [routerLink]="['/product/' + viewOrderItems?.slug]">
+      </div>
+      <div class="col-md-6 col-8">
+        <p class="orderID" style="margin-bottom: 0;">Order Id: {{viewOrderItems?.orderID}} </p>
+        <p class="fw-bold" style="margin-bottom: 0;">{{viewOrderItems?.name}}</p>
+        <p style="margin-bottom: 0;"><i class="fa-solid fa-indian-rupee-sign price"></i>{{viewOrderItems?.price}}</p>
+        <p [ngClass]="{
+        'text-green': viewOrderItems?.status === 'Placed' || viewOrderItems?.status === 'Invoice' || viewOrderItems?.status === 'Complete',
+        'text-red': viewOrderItems?.status === 'Cancel' || viewOrderItems?.status === 'Cancel Request' || viewOrderItems?.status === 'Refund' || viewOrderItems?.status === 'Replace' || viewOrderItems?.status === 'Not Placed',
+        'text-orange': viewOrderItems?.status === 'Return'
+
+    }">
+          {{
+          viewOrderItems?.status === 'Placed' || viewOrderItems?.status === 'Invoice' ?
+          'Expected Delivery on' :
+          viewOrderItems?.status === 'Cancel' ?
+          'Cancelled on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Cancel Request' ?
+          'Cancel Requested on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Refund' ?
+          'Refunded on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Return' ?
+          'Returned on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Replace' ?
+          'Replaced on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Complete' ?
+          'Completed on ' + (viewOrderItems?.deliverdate | date) :
+          viewOrderItems?.status === 'Not Placed' ?
+          'Awaiting confirmation' :
+          viewOrderItems?.status
+          }}
+          {{
+          (viewOrderItems?.status !== 'Cancel' && viewOrderItems?.status !== 'Cancel Request' && viewOrderItems?.status
+          !==
+          'Refund' && viewOrderItems?.status !== 'Return' && viewOrderItems?.status !== 'Replace' &&
+          viewOrderItems?.status
+          !== 'Complete' && viewOrderItems?.status !== 'Not Placed') ?
+          (viewOrderItems?.deliverdate | date) : ''
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <!-- view and cancel order -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 mb-2">
+        <h4 class="fw-bold">Delivery Address</h4>
+        <p style="margin-bottom: 0px;">{{viewOrderItems?.address.name}}</p>
+        <p style="margin-bottom: 0px;">{{viewOrderItems?.address.mobile}}</p>
+        <p style="margin-bottom: 0px;">{{viewOrderItems?.address.address}}, {{viewOrderItems?.address.state}},
+          {{viewOrderItems?.address.city}}, {{viewOrderItems?.address.zipcode}}</p>
+      </div>
+      <div class="col-md-6 col-sm-6" style="display: flex;justify-content: end;">
+        <!-- <button *ngIf="!showCancelBtn" mat-raised-button style="background-color: #a91be9;color: #fff;" class="ordercancelbtn" (click)="openCancelReasonDialog()">Cancel Order</button> -->
+        <div *ngIf="showCancelBtn">
+          <p style="color: rgb(5, 227, 134);margin-bottom: 0;">{{refunddata[0]?.title}}</p>
+          <p>{{refunddata[0]?.message}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<br>
+
+<!-- tracking placed and complete order -->
+
+<div class="container" *ngIf="viewOrderItems?.status == 'Placed' || viewOrderItems?.status == 'Invoice'">
+  <!-- {{orderDetails | json}} -->
+  <h3 class="fw-bold text-center">Tracking Details</h3>
+  <div class="tracking-container container" *ngIf="orderDetails">
+    <div class="tracking-step" [class.completed]="orderDetails.Placed">
+      <div class="step-indicator"></div>
+      <i class="fa-solid fa-building" style="font-size: 20px;padding-top: 5px;"></i>
+      <div class="step-label">Placed</div>
+      <div class="step-date">{{ orderDetails.Placed }}</div>
+    </div>
+    <div class="tracking-step" [class.completed]="orderDetails.Shipped">
+
+      <div class="step-indicator"></div>
+      <i class="fa-duotone fa-solid fa-truck" style="font-size: 20px;padding-top: 5px;"></i>
+      <div class="step-label">Shipped</div>
+      <div class="step-date">{{ orderDetails.Shipped }}</div>
+    </div>
+    <div class="tracking-step" [class.completed]="orderDetails.Deliver">
+      <div class="step-indicator"></div>
+      <i class="fa-duotone fa-solid fa-box-check" style="font-size: 20px;padding-top: 5px;"></i>
+      <div class="step-label">Delivered</div>
+      <div class="step-date">{{ orderDetails.Deliver }}</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- tracking details retured and refund-->
+
+<div class="container" *ngIf=" viewOrderItems?.status == 'Return' || viewOrderItems?.status == 'Return Request'  ">
+  <!-- {{orderDetails | json}} -->
+  <h3 class="fw-bold text-center">Tracking Details</h3>
+  <div class="tracking-container container" *ngIf="orderDetails">
+    <div class="tracking-step" [class.completed]="orderDetails.Placed">
+      <div class="step-indicator"></div>
+      <i class="fa-solid fa-building" style="font-size: 20px;padding-top: 5px;"></i>
+      <div class="step-label">Placed</div>
+      <div class="step-date">{{ orderDetails.Placed }}</div>
+    </div>
+    <div class="tracking-step" [class.completed]="orderDetails.Shipped">
+      <div class="step-indicator"></div>
+      <i class="fa-duotone fa-solid fa-truck" style="font-size: 20px;padding-top: 5px;"></i>
+      <div class="step-label">Shipped</div>
+      <div class="step-date">{{ orderDetails.Shipped }}</div>
+    </div>
+    <div class="tracking-step" [class.completed]="orderDetails.Delivery">
+      <div class="step-indicator"></div>
+      <i class=" fa-solid fa-shop" style="font-size: 20px;padding-top: 5px;"></i>
+
+      <div class="step-label">Delivered</div>
+      <div class="step-date">{{ orderDetails.Delivery }}</div>
+    </div>
+    <div class="tracking-step" [class.completed]="orderDetails.Return">
+      <div class="step-indicator"></div>
+      <i class="fa-solid fa-rotate-left" style="font-size: 20px;padding-top: 5px;"></i>
+
+      <div class="step-label">Returned</div>
+      <div class="step-date">{{ orderDetails.Return }}</div>
+    </div>
+    <div class="tracking-step" [class.completed]="orderDetails.Refund">
+      <div class="step-indicator"></div>
+      <i class="fa-solid fa-money-bill" style="font-size: 20px;padding-top: 5px;"></i>
+      <div class="step-label">Refund</div>
+      <div class="step-date">{{ orderDetails.Refund }}</div>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="viewOrderItems?.status == 'Delivered' || viewOrderItems?.status == 'Complete'">
+  <h4 class="fw-bold text-center">Rate Your Experience</h4>
+  <div class="rating-container">
+    <ng-container *ngFor="let star of stars; let i = index">
+      <i class="fa" [ngClass]="{'fa-star': i < rating, 'fa-star-o': i >= rating}" 
+         (click)="rateOrder(i + 1)" style="cursor: pointer; font-size: 30px; color: gold;"></i>
+    </ng-container>
+  </div>
+  
+</div>
+
+
+
+<div class="container" *ngIf="viewOrderItems?.status === 'Delivered' || viewOrderItems?.status ==='Complete' ">
+  <!-- {{orderDetails | json}} -->
+  <h3 class="fw-bold text-center">Tracking Details</h3>
+  <div class="tracking-container container" *ngIf="orderDetails">
+    <div class="tracking-step" [class.completed]="orderDetails.Placed">
+      <div class="step-indicator"></div>
+      <i class="fa-solid fa-building" style="font-size: 20px;padding-top: 5px;"></i>
+      <div class="step-label">Placed</div>
+      <div class="step-date">{{ orderDetails.Placed }}</div>
+    </div>
+    <div class="tracking-step" [class.completed]="orderDetails.Shipped">
+      <div class="step-indicator"></div>
+      <i class="fa-duotone fa-solid fa-truck" style="font-size: 20px;padding-top: 5px;"></i>
+      <div class="step-label">Shipped</div>
+      <div class="step-date">{{ orderDetails.Shipped }}</div>
+    </div>
+    <div class="tracking-step" [class.completed]="orderDetails.Delivery">
+      <div class="step-indicator"></div>
+      <i class=" fa-solid fa-shop" style="font-size: 20px;padding-top: 5px;"></i>
+
+      <div class="step-label">Delivered</div>
+      <div class="step-date">{{ orderDetails.Delivery }}</div>
+    </div>
+
+  </div>
+</div>
+<!-- tracking details for cancel and cancel request -->
+<div class="container" *ngIf="viewOrderItems?.status == 'Cancel' || viewOrderItems?.status == 'Cancel Request'">
+  <!-- {{orderDetails | json}} -->
+  <h3 class="fw-bold text-center">Tracking Details</h3>
+  <div class="tracking-container container" *ngIf="orderDetails">
+    <div class="tracking-step" [class.completed]="orderDetails.Placed">
+      <div class="step-indicator"></div>
+      <i class="fa-solid fa-building" style="font-size: 20px;padding-top: 5px;"></i>
+      <div class="step-label">Placed</div>
+      <div class="step-date">{{ orderDetails.Placed }}</div>
+    </div>
+    <div class="tracking-step"
+      [class.completed]="viewOrderItems?.status == 'Cancel' || viewOrderItems?.status == 'Cancel Request'">
+      <div class="step-indicator"></div>
+      <i class="fa-solid fa-ban" style="font-size: 20px;padding-top: 5px;"></i>
+      <div class="step-label">{{viewOrderItems?.status == 'Cancel' ? "Cancelled" : "Cancel Requested"}}</div>
+      <div class="step-date">{{ viewOrderItems?.deliverdate | date:'dd/MM/yyyy, hh:mm a' }}</div>
+    </div>
+  </div>
+</div>
+
+
+<br><br>
+<!-- delivery address -->
+
+
+<!-- payment order details -->
+<div class="container card" style="padding: 1px;padding-top: 3px; border: 1px solid #a91be9;">
+  <div class="container">
+    <div class="row">
+      <h4 class="fw-bold">Order Payment Details</h4>
+      <table class="table detail-table rounded-table">
+        <tbody>
+          <tr>
+            <th scope="row" class="table-background subtotal-left">Sub Total</th>
+            <td scope="row" class="table-background"></td>
+            <td scope="row" class="table-background"></td>
+            <td scope="row" class="table-background subtotal-right">
+              <b><i class="fa-solid fa-indian-rupee-sign"></i> {{ viewOrderItems?.totalmrp }}</b>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-background">Discount</th>
+            <td scope="row" class="table-background"></td>
+            <td scope="row" class="table-background"></td>
+            <td scope="row" class="table-background">
+              -<b><i class="fa-solid fa-indian-rupee-sign"></i> {{ viewOrderItems?.discount }}</b>
+            </td>
+          </tr>
+          <tr *ngIf="viewOrderItems?.shipcharge >'0'">
+            <th scope="row" class="table-background">Delivery charge</th>
+            <td scope="row" class="table-background"></td>
+            <td scope="row" class="table-background"></td>
+            <td scope="row" class="table-background">
+              <b><i class="fa-solid fa-indian-rupee-sign"></i> {{ viewOrderItems?.shipcharge }}</b>
+            </td>
+          </tr>
+          <tr *ngIf="viewOrderItems?.couponAvailable =='1'">
+            <th scope="row" class="table-background">Coupon Value</th>
+            <td scope="row" class="table-background"></td>
+            <td scope="row" class="table-background"></td>
+            <td scope="row" class="table-background">
+              -<b><i class="fa-solid fa-indian-rupee-sign"></i> {{ viewOrderItems?.coupon_value || 0}}</b>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-background total-price-left">
+              Total Price
+            </th>
+            <td scope="row" class="table-background border-0"></td>
+            <td scope="row" class="table-background border-0"></td>
+            <td scope="row" class="table-background total-price-right">
+              <b><i class="fa-solid fa-indian-rupee-sign"></i> {{ viewOrderItems?.amount - viewOrderItems?.coupon_value }}</b>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row pt-5">
+    <div class="col-md-6 col-sm-6 mb-2">
+      <!-- <h4 class="fw-bold">Delivery Address</h4>
+      <p style="margin-bottom: 0px;">{{viewOrderItems?.address.name}}</p>
+      <p style="margin-bottom: 0px;">{{viewOrderItems?.address.mobile}}</p>
+      <p style="margin-bottom: 0px;">{{viewOrderItems?.address.address}}, {{viewOrderItems?.address.state}}, {{viewOrderItems?.address.city}}, {{viewOrderItems?.address.zipcode}}</p>   -->
+    </div>
+    <div class="col-md-6 col-sm-6" style="display: flex;justify-content: end;">
+      <button *ngIf="!showCancelBtn" mat-raised-button style="background-color: #a91be9;color: #fff;"
+        class="ordercancelbtn" (click)="openCancelReasonDialog()">Cancel Order</button>
+      <!-- <div *ngIf="showCancelBtn">
+        <p style="color: rgb(5, 227, 134);margin-bottom: 0;">{{refunddata[0]?.title}}</p>
+        <p>{{refunddata[0]?.message}}</p>
+      </div> -->
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div *ngIf="viewOrderItems?.status == 'Delivered' || viewOrderItems?.status == 'Return'"
+      class="col-md-4 col-sm-12 pad">
+      <button mat-raised-button style="background-color: #a91be9;color: #fff;width: 100%;"
+        (click)="downloadinvoice()">Download Invoice</button>
+    </div>
+    <div
+      *ngIf="(viewOrderItems?.status == 'Delivered' || viewOrderItems?.status == 'Return' || viewOrderItems?.status == 'Return Request') && viewOrderItems.returnavailable ==='1'"
+      class="col-md-4 col-sm-12 pad">
+      <button mat-raised-button style="background-color: #a91be9;color: #fff;width: 100%;" (click)="getreturn()">Return
+        Order</button>
+      <p style="color: green; text-align: center;margin-top: 5px;" class="pad fw-bold">(Return will close on
+        {{viewOrderItems?.return_close_date |date}} )</p>
+    </div>
+
+  </div>
+</div>
+<br><br>
+//<app-overlay></app-overlay>
+<app-footer></app-footer>

@@ -1,0 +1,200 @@
+.order-detail {
+  border: 1px solid #e1e0e0;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+td {
+  padding: 20px 0px !important;
+  /* Adjust the padding value as needed */
+}
+
+.place-order {
+  margin-top: 20px;
+  width: 100%;
+  padding: 25px;
+  background-color: #a91be9 !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 992px) {
+  #address-checkout {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    /* To mimic col-sm-12 */
+    /* flex: 0 0 100%; */
+    max-width: 100%;
+  }
+}
+
+
+.address-card {
+  width: 45%;
+  cursor: pointer;
+  margin: 10px;
+  padding-bottom: 5px;
+  display: inline-flex;
+  min-height: 35vh;
+  min-height: 350px;
+}
+
+
+
+@media (max-width: 600px) {
+  .address-card {
+    width: 90%;
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px;
+    min-height: 30vh;
+  }
+
+  .second-column {
+    margin-top: 15px;
+  }
+
+  .address-add {
+    width: 80% !important;
+  }
+}
+
+
+.selected-address {
+  /* border: 1px solid #71ca00; */
+  /* Change the border color as per your requirement */
+  /* background-color: #85d50866; */
+  background-color: #a91be98f;
+}
+
+.selected-address p,
+span {
+  color: white;
+}
+
+.card-body.align-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  /* Ensure the container takes up the full height */
+}
+
+.product-img {
+  width: 60px;
+  height: 80px;
+}
+
+.required:after {
+  content: " *";
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .product-img {
+    width: 40px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-heading {
+    font-size: 12px;
+  }
+}
+
+.address-card:hover {
+  /* border: 1px solid #52b800; */
+  /* background-color: #85d50866; */
+  border: 1px solid #a91be9;
+}
+
+.delivery-add {
+  display: flex;
+  align-items: center;
+  /* Vertically center align items */
+  justify-content: center;
+  /* Horizontally center align items */
+  /* height: 50vh;  */
+  /* Set height to 100% of viewport height */
+}
+
+.deliver-button {
+  background-color: #a91be9;
+  /* background-color: #71ca00 !important; */
+  color: #fff !important;
+  text-align: center !important;
+  display: flex !important;
+  margin: auto;
+}
+
+.deliver-button:disabled {
+  background-color: #cdfe8e !important;
+  color: #fff !important;
+  text-align: center !important;
+  display: flex !important;
+  margin: auto;
+}
+
+tr {
+  vertical-align: middle;
+}
+
+.add-address {
+  color: #7a7876;
+}
+
+.checkout-container {
+  /* padding: 10px; */
+  /* margin: 0 auto; */
+  /* max-width: 800px; */
+}
+
+.coupon-section {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.coupon-label {
+  flex: 1;
+  font-weight: bold;
+}
+
+/* .coupon-input-container {
+  display: flex;
+  flex: 2;
+} */
+
+/* .coupon-input {
+  flex: 2;
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+} */
+
+.apply-coupon-button {
+  margin: 10px 0px;
+  /* flex: 1; */
+  /* padding: 8px 15px; */
+  background-color: #a91be9;
+  color: white;
+  /* border: none; */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* .apply-coupon-button:hover {
+  background-color: #a91be9;
+} */
+
+.coupon-message {
+  margin-top: 10px;
+  color: #a91be9;
+  font-size: 0.9em;
+}

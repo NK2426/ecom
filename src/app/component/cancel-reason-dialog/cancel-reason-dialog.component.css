@@ -1,0 +1,19 @@
+.vertical-radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .vertical-radio-group mat-radio-button {
+    margin-bottom: 10px; /* Optional: Add some space between the radio buttons */
+  }
+  .custom-cancel-button {
+    color: #0c0c0c;
+    background-color: #ffffff;
+    border:1px solid black;
+  }
+  
+  .custom-submit-button {
+    color: #ffffff;
+    background-color: #a91be9;
+    border: none;
+  }

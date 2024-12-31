@@ -1,0 +1,22 @@
+.mat-expansion-panel-header.expanded {
+    background-color: #72c90c33 !important; /* Change this to the desired color */
+  }
+
+  .mat-expansion-panel{
+   box-shadow: none !important;
+   border: 0.5px solid #0000001f;
+   border-bottom: none;
+  }
+
+  .sub-category-link{
+    padding:5px;
+    cursor: pointer;
+  }
+
+  .sub-category-link:hover{
+    color:#9add2c
+  }
+  .sub-category-link.active {
+    color: #9add2c;
+    border-bottom: 1px dashed #9add2c;
+  } 

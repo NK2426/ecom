@@ -1,0 +1,68 @@
+<div style="margin-left: 10px;margin-bottom: 0px;margin-top: 5px;color: #1c1c1c;font-size: 20px;" class="all-prod">Categories</div>
+<div class="sticky-wrapper category-container">
+    <div class="sticky-accordion">
+        <div class="mt-3">
+            <mat-accordion class="product" [class.fixed]="isFixed" id="yourFixedElementId">
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                    style="box-shadow: none;border: 0.5px solid #9494944d;" #panel1 style="margin: 0 !important;" *ngFor="let category of listProduct">
+                    <mat-expansion-panel-header [class.expanded]="panel1.expanded" class="panel-header">
+                        <mat-panel-title>
+                           <img src="{{category.imgpath}}" class="img-fluid category-image" width="50px" alt="">&nbsp;&nbsp; {{ category.name }}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <br>
+                    <div *ngFor="let subcategory of category.subCategories">
+                        <p class="sub-category-link" (click)="getSubcatList(subcategory.uuid)">{{ subcategory.name }}</p>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>
+
+<!--Mobile Category List-->
+<br>
+<div class="category-dialog">
+
+<button mat-raised-button style="float:right;color: #85d600;top: -10px;" data-toggle="modal" data-target="#exampleModal1" >Categories</button>
+
+
+<!--Model Popup Mobile-->
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModal1Label"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title text-center" id="exampleModal1Label">Our Products</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div >
+                                <div >
+                                    <div class="mt-3">
+                                        <mat-accordion class="product">
+                                            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                                                style="box-shadow: none;border: 0.5px solid #9494944d;" #panel1 style="margin: 0 !important;" *ngFor="let category of listProduct">
+                                                <mat-expansion-panel-header [class.expanded]="panel1.expanded" class="panel-header">
+                                                    <mat-panel-title>
+                                                        {{ category.name }}
+                                                    </mat-panel-title>
+                                                </mat-expansion-panel-header>
+                                                <br>
+                                                <div *ngFor="let subcategory of category.subCategories">
+                                                    <p class="sub-category-link" (click)="getSubcatList(subcategory.uuid)">{{ subcategory.name }}</p>
+                                                </div>
+                                            </mat-expansion-panel>
+                                        </mat-accordion>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <button id="modalClosedButton" type="button" class="btn btn-secondary" data-dismiss="modal" style="display: none;"></button>
+
+                    </div>
+                </div>
+            </div>
+
+
+</div>

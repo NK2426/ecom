@@ -1,0 +1,57 @@
+<app-header></app-header>
+
+<br><br>
+
+<div class="container">
+    <div class="row">
+        <ng-container>
+            <h2 style="color: #870a51">Showing  Results
+                for "{{searchQuery}}"</h2>
+            <div *ngFor="let item of searchResults"
+                class="col-sm-12 col-xs-12 col-md-4 col-xl-4 product-list justify-content-center">
+                <div class="p-2 my-3 rounded-3" (click)="getProducts(item.slug)" style="
+                  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+                  cursor: pointer;
+                  text-align: center;
+                  height: 90%;
+                ">
+                    <div class="card border-0">
+                        <img src="{{ item?.path }}" alt="No Image" class="w-50 rounded-3 m-auto" />
+                    </div>
+                    <h4 style="color: #767676" class="py-2 m-0">{{ item.name }}</h4>
+                    <h2 class="fw-bold" style="margin-bottom: 0px">
+                        <span style="color: #870a51; font-size: 15px"><i class="fa-solid fa-indian-rupee-sign"
+                                style="font-size: 15px"></i>
+                            {{ item.price }}
+                        </span>
+                        <span style="
+                      color: rgb(87, 84, 84);
+                      font-size: 12px;
+                      text-decoration: line-through;
+                    ">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>{{ item.mrp }}
+                        </span>
+                    </h2>
+                    <p style="color: #870a51; margin-top: 0px" class="fw-bold" *ngIf="item.offer !== 0">
+                        {{ item.offer }}% off
+                    </p>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-end align-items-center">
+            <div class="col-auto">
+                <span>Page: {{ currentPage + 1 }}</span> <!-- Add 1 to display the current page correctly -->
+            </div>
+            <div class="col-auto">
+                <mat-paginator #paginator [length]="count" [pageSize]="pageSize" [pageSizeOptions]="pageSizes"
+                    aria-label="Select page" (page)="handlePageChange($event)" class="custom-paginator">
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

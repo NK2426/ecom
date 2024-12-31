@@ -1,0 +1,10 @@
+.blog-img {
+    transition: transform 0.3s ease, border-radius 0.3s ease; /* Smooth transition for both transform and border-radius */
+  }
+  
+  .blog-img:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    border-radius: 25px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }

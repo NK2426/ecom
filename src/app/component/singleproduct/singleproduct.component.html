@@ -1,0 +1,736 @@
+<app-header></app-header>
+<div class="container single-prod-cont mt-5">
+  <div class="row mt-5">
+    <div class="col-md-1 thumb-container">
+      <div class="">
+        <div class="row">
+          <!-- {{images | json}} -->
+          <div class="col-md-12" *ngFor="let slide of images; let i = index">
+            <div class="product-tumbnail" [class.active]="activeSlide === i">
+              <img
+                [src]="slide"
+                class="img-fluid thumb-img"
+                alt=""
+                (click)="goToSlide(i)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="">
+        <div class="carousel-wrapper" style="overflow: hidden">
+          <ngx-slick-carousel
+            class="carousel"
+            #slickModal="slick-carousel"
+            [config]="slideConfig"
+          >
+            <div ngxSlickItem *ngFor="let slide of images">
+              <div class="slide">
+                <img [src]="slide" alt="" width="100%" class="carousel-image" />
+              </div>
+            </div>
+          </ngx-slick-carousel>
+
+          <button mat-mini-fab class="prev" (click)="goToPrevSlide()">
+            <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+          </button>
+          <button mat-mini-fab class="next" (click)="goToNextSlide()">
+            <i class="fa-solid fa-arrow-right" style="color: #000000"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 prod-container">
+      <div class="single-product-container">
+        <div class="product-info">
+          <span
+            class="product-name fw-bold"
+            style="
+              width: 60%;
+              font-size: 23px;
+              font-weight: 500;
+              line-height: 1;
+            "
+            >{{ listProduct?.name }}
+          </span>
+          <span *ngIf="listProduct?.quantity == '0'" class="text-red">
+            Out of Stock
+          </span>
+          <span
+            *ngIf="listProduct?.quantity > '0' && listProduct?.quantity <= '5'"
+            class="stock"
+          >
+            Only {{ listProduct?.quantity }} left
+          </span>
+
+          <!-- <button
+            mat-icon-button
+            (click)="addToWishlist(listProduct?.uuid)"
+            class="fav-button"
+          >
+            <mat-icon [class.favorite]="wishlistData === 1"
+              >favorite_border</mat-icon
+            >
+          </button> -->
+          <div
+            class="wishlist-icon fav-button"
+            [ngClass]="{
+              'in-wishlist': wishlistData !== 0,
+              'not-in-wishlist': wishlistData === 0
+            }"
+            (click)="addToWishlist(listProduct?.uuid)"
+            title="Add to Wishlist"
+          >
+            <mat-icon>{{
+              wishlistData !== 0 ? "favorite" : "favorite_border"
+            }}</mat-icon>
+          </div>
+        </div>
+        <p style="font-size: 16px; color: #870a51; font-weight: 500">
+          Brand : Mugdha
+        </p>
+        <h4 class="product-price py-2" style="font-size: 20px">
+          <i class="fa-solid fa-indian-rupee-sign" style="font-size: 20px"></i
+          >{{ listProduct?.price }}
+          <i class="fa-solid fa-indian-rupee-sign mrp"></i
+          ><span class="mrp">
+            <s>{{ listProduct?.mrp }}</s></span
+          >
+        </h4>
+        <a (click)="scrollToReview()">
+          <ngb-rating
+            class="clickable-rating cursor-pointer"
+            [(rate)]="currentRate"
+            [max]="max"
+            [readonly]="true"
+            (click)="getRating(2)"
+          ></ngb-rating>
+        </a>
+        <!-- <p>Current Rate: {{ currentRate }}</p> -->
+        <!-- <div class="star-rating">
+          <span
+            class="star"
+            *ngFor="let i of [1, 2, 3, 4, 5]"
+            [class.active]="i <= readonlyRating"
+            >&#9733;</span
+          >
+        </div> -->
+        <p [innerHTML]="listProduct?.description"></p>
+
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+        <!-- <div class="container">
+                    <div style="margin-top: 5vh;" class="">
+                        <div class="row justify-content-center align-items-center">
+                            <ng-container *ngFor="let weight of staticWeights">
+                                <div class="col-md-2  text-center variant"
+                                    [class.disabled-card]="!isWeightMatched(weight.value)"
+                                    [class.active-button]="isActiveWeight(weight.value)">
+                                    <ng-container *ngIf="!isWeightMatched(weight.value)">
+                                        <span>{{ weight.value }}</span>
+                                    </ng-container>
+                                    <ng-container *ngFor="let item of prodWeight">
+                                        <div (click)="getProductAvailable(item.uuid)">
+                                            <span *ngIf="weight.value === item.weight">
+                                                {{ weight.value }}
+                                            </span>
+                                        </div>
+
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div> -->
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+        <!-- <div class="my-2">
+          <span style="font-size: 16px">Quantity</span> &nbsp;
+          <input
+            type="number"
+            class="form-control"
+            [value]="quantity"
+            min="1"
+            name="addtocart"
+            id="addtocart"
+            class="add-input text-center"
+            [(ngModel)]="quantity"
+            readonly
+          />
+        </div> -->
+        <div
+          class="mt-5"
+          *ngIf="listProduct?.quantity > 0"
+          style="margin-top: 5vh"
+        >
+          <div class="text-center add-input-container">
+            <!-- <button mat-mini-fab class="add-sub" (click)="decreaseValue()">
+              -
+            </button> -->
+            <!-- <span style="display: inline-block">
+              <input
+                type="number"
+                class="form-control"
+                [value]="quantity"
+                min="1"
+                name="addtocart"
+                id="addtocart"
+                class="add-input text-center"
+                [(ngModel)]="quantity"
+                readonly
+              />
+            </span> -->
+            <!-- <button mat-mini-fab class="add-sub" (click)="increaseValue()">
+              +
+            </button> -->
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <button
+                  mat-raised-button
+                  class="add-to-cart"
+                  style="width: 90%"
+                  (click)="
+                    addToCart(
+                      listProduct.uuid,
+                      listProduct.itemslist.uuid,
+                      quantity
+                    )
+                  "
+                  *ngIf="!addToCartClicked"
+                >
+                  Add to Cart
+                </button>
+                <button
+                  mat-raised-button
+                  class="add-to-cart"
+                  style="width: 90%"
+                  *ngIf="addToCartClicked"
+                  routerLink="/cart"
+                >
+                  Go to Cart
+                </button>
+              </div>
+              <div class="col-md-6">
+                <button
+                  mat-raised-button
+                  class="add-to-cart"
+                  style="width: 90%; background-color: #ffffff"
+                  (click)="buynow(listProduct.uuid, listProduct.itemslist.uuid)"
+                >
+                  Buy Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="container">
+        <div class="row">
+          <div *ngFor="let variant of productVariants">
+            <div *ngIf="variant.showtype === 'Image'" class="variant-color">
+              <h5>{{ variant.displayname }}</h5>
+              <div class="d-flex">
+                <div *ngFor="let value of variant.productvariantvalues">
+                  <div
+                    class="sizes m-2 p-1"
+                    [ngClass]="{ selected: value.selected }"
+                    (click)="
+                      handleVariantClick(
+                        value.variant_id,
+                        value.variantvalue_id
+                      )
+                    "
+                  >
+                    <p class="text-center" style="margin-bottom: 0">
+                      {{ value.value }}
+                    </p>
+                    <img
+                      [src]="value.icon"
+                      alt="{{ value.value }}"
+                      class="colors m-2 p-2"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="variant.showtype === 'Text'" class="variant-size">
+              <h5>{{ variant.displayname }}</h5>
+              <div class="d-flex">
+                <p
+                  *ngFor="let value of variant.productvariantvalues"
+                  class="sizes m-2 p-2"
+                  [ngClass]="{ selected: value.selected }"
+                  (click)="
+                    handleVariantClick(value.variant_id, value.variantvalue_id)
+                  "
+                >
+                  {{ value.value }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container single-prod-cont2">
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <div class="">
+        <div class="carousel-wrapper" style="overflow: hidden">
+          <ngx-slick-carousel
+            class="carousel"
+            #slickModal3="slick-carousel"
+            [config]="slideConfig3"
+          >
+            <div ngxSlickItem *ngFor="let slide of images">
+              <div class="slide">
+                <img [src]="slide" alt="" width="100%" />
+              </div>
+            </div>
+          </ngx-slick-carousel>
+
+          <button mat-mini-fab class="prev" (click)="goToPrevSlide()">
+            <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+          </button>
+          <button mat-mini-fab class="next" (click)="goToNextSlide()">
+            <i class="fa-solid fa-arrow-right" style="color: #000000"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="single-product-container">
+        <div class="product-info">
+          <span class="product-name">{{ listProduct?.name }} </span>
+          <span *ngIf="listProduct?.quantity == '0'" class="text-red">
+            Out of Stock
+          </span>
+          <span
+            *ngIf="listProduct?.quantity <= 5 && listProduct?.quantity > 0"
+            class="stock"
+          >
+            Only {{ listProduct?.quantity }} left
+          </span>
+          <button
+            mat-icon-button
+            (click)="addToWishlist(listProduct?.uuid)"
+            class="fav-button"
+          >
+            <mat-icon [class.favorite]="wishlistData === 1">favorite</mat-icon>
+          </button>
+        </div>
+        <p style="font-size: 12px; color: rgb(134, 134, 134)">Mugdha</p>
+        <h4 class="product-price">
+          <i class="fa-solid fa-indian-rupee-sign"></i>{{ listProduct?.price }}
+          <i class="fa-solid fa-indian-rupee-sign mrp"></i
+          ><span class="mrp">
+            <s>{{ listProduct?.mrp }}</s></span
+          >
+        </h4>
+        <!-- <div class="star-rating">
+                    <span class="star" *ngFor="let i of [1, 2, 3, 4, 5]"
+                        [class.active]="i <= readonlyRating">&#9733;</span>
+                </div> -->
+        <p [innerHTML]="listProduct?.description"></p>
+
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+        <!-- <div class="container">
+                    <div style="margin-top: 5vh;" class="">
+                        <div class="row justify-content-center align-items-center">
+                            <ng-container *ngFor="let weight of staticWeights">
+                                <div class="col-md-2  text-center variant"
+                                    [class.disabled-card]="!isWeightMatched(weight.value)"
+                                    [class.active-button]="isActiveWeight(weight.value)">
+                                    <ng-container *ngIf="!isWeightMatched(weight.value)">
+                                        <span>{{ weight.value }}</span>
+                                    </ng-container>
+                                    <ng-container *ngFor="let item of prodWeight">
+                                        <div (click)="getProductAvailable(item.uuid)">
+                                            <span *ngIf="weight.value === item.weight">
+                                                {{ weight.value }}
+                                            </span>
+                                        </div>
+
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div> -->
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+        <!-- <span style="font-size: 16px">Quantity</span> &nbsp;
+        <input
+          type="number"
+          class="form-control"
+          [value]="quantity"
+          min="1"
+          name="addtocart"
+          id="addtocart"
+          class="add-input text-center"
+          [(ngModel)]="quantity"
+          readonly
+        /> -->
+        <div *ngIf="listProduct?.quantity > 0" style="margin-top: 5vh">
+          <div class="text-center add-input-container">
+            <!-- <button
+              mat-mini-fab
+              class="add-sub"
+              style="
+                background-color: #00000000;
+                color: #000000;
+                font-size: 24px;
+              "
+              (click)="decreaseValue()"
+            >
+              -
+            </button> -->
+
+            <!-- <span style="display: inline-block">
+              <input type="number" class="form-control" [value]="quantity" min="1" name="addtocart" id="addtocart"
+                class="add-input text-center" [(ngModel)]="quantity" readonly />
+            </span> -->
+            <!-- <button
+              mat-mini-fab
+              class="add-sub"
+              style="
+                background-color: #00000000;
+                color: #000000;
+                font-size: 24px;
+              "
+              (click)="increaseValue()"
+            >
+              +
+            </button> -->
+          </div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <button
+                  mat-raised-button
+                  class="add-to-cart"
+                  style="width: 90%"
+                  (click)="
+                    addToCart(
+                      listProduct.uuid,
+                      listProduct.itemslist.uuid,
+                      quantity
+                    )
+                  "
+                  *ngIf="!addToCartClicked"
+                >
+                  Add to Cart
+                </button>
+                <button
+                  mat-raised-button
+                  class="add-to-cart"
+                  style="width: 90%"
+                  *ngIf="addToCartClicked"
+                  routerLink="/cart"
+                >
+                  Go to Cart
+                </button>
+              </div>
+              <div class="col-md-12">
+                <button
+                  mat-raised-button
+                  class="add-to-cart"
+                  style="width: 90%; background-color: #ffffff"
+                  (click)="buynow(listProduct.uuid, listProduct.itemslist.uuid)"
+                >
+                  Buy Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="container">
+        <div class="row">
+          <div *ngFor="let variant of productVariants">
+            <div *ngIf="variant.showtype === 'Image'" class="variant-color">
+              <h5>{{ variant.displayname }}</h5>
+              <div class="d-flex">
+                <div *ngFor="let value of variant.productvariantvalues">
+                  <div
+                    class="sizes m-2 p-1"
+                    [ngClass]="{ selected: value.selected }"
+                    (click)="
+                      handleVariantClick(
+                        value.variant_id,
+                        value.variantvalue_id
+                      )
+                    "
+                  >
+                    <p class="text-center" style="margin-bottom: 0">
+                      {{ value.value }}
+                    </p>
+                    <img
+                      [src]="value.icon"
+                      alt="{{ value.value }}"
+                      class="colors m-2 p-2"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="variant.showtype === 'Text'" class="variant-size">
+              <h5>{{ variant.displayname }}</h5>
+              <div class="d-flex">
+                <p
+                  *ngFor="let value of variant.productvariantvalues"
+                  class="sizes m-2 p-2"
+                  [ngClass]="{ selected: value.selected }"
+                  (click)="
+                    handleVariantClick(value.variant_id, value.variantvalue_id)
+                  "
+                >
+                  {{ value.value }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" #tabGroup>
+      <mat-tab label="Description" class="mat-tab-view">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div
+                class="mt-5"
+                style="line-height: 33px"
+                [innerHTML]="listProduct?.description"
+              ></div>
+            </div>
+            <!-- <div class="col-md-4">
+              <table
+                class="table table-bordered"
+                style="border-radius: 5px; margin-top: 55px"
+              >
+                <thead>
+                  <tr>
+                    <th colspan="2" scope="col" class="text-center">
+                      Technical Details
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of itemmoredetail | keyvalue">
+                    <th scope="row" style="width: 40%">{{ item.key }}</th>
+                    <td>{{ item.value }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div> -->
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Specifications">
+        <div class="mt-5" style="line-height: 33px">
+          <div class="col-md-12">
+            <table
+              class="table table-bordered"
+              style="border-radius: 5px; margin-top: 55px"
+            >
+              <tbody>
+                <tr *ngFor="let item of itemmoredetail">
+                  <!-- <th scope="row" style="width: 40%">{{ item.key }}</th> -->
+                  <td scope="row" style="width: 50%">{{ item.name }}</td>
+                  <td>{{ item.value }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Review">
+        <div class="mt-5" style="line-height: 33px">
+          <div class="col-md-12">
+            <div *ngFor="let item of userRatingData">
+              <div class="my-4 rating-item">
+                <p class="m-0" style="line-height: normal">
+                  {{ item?.user?.name }}
+                </p>
+                <ngb-rating
+                  style="
+                    color: #de7921;
+                    cursor: pointer;
+                    font-size: 18px;
+                    line-height: normal;
+                  "
+                  class="cursor-pointer"
+                  [(rate)]="currentRate"
+                  [max]="max"
+                  [readonly]="true"
+                ></ngb-rating>
+                <p class="m-0" style="line-height: normal">
+                  {{ item?.reviews || "" }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+<!-- Similar Product -->
+<div class="container similar-prod" *ngIf="listSimilarProduct.length > 0">
+  <div>
+    <div>
+      <h3 class="text-center fs-4 main-headings">Similar Products</h3>
+      <div class="underline-container">
+        <span class="underline"></span>
+        <span class="diamond"></span>
+        <span class="underline"></span>
+      </div>
+    </div>
+    <ngx-slick-carousel
+      class="carousel2"
+      #slickModal2="slick-carousel"
+      [config]="slideConfig2"
+      style="overflow: hidden"
+    >
+      <div ngxSlickItem *ngFor="let item of listSimilarProduct">
+        <div class="slide similar-slide">
+          <div
+            style="text-align: center; padding: 10px"
+            class="image-container"
+          >
+            <img
+              (click)="getProduct(item)"
+              [src]="item.path"
+              alt=""
+              width="50%"
+              style="margin: auto; cursor: pointer"
+              class="desktop-image"
+              fxShow.gt-xs
+              fxShow.gt-sm
+            />
+            <div class="product-desc">
+              <h4 class="product-price">
+                <i class="fa-solid fa-indian-rupee-sign"></i>{{ item?.price }}
+                <i class="fa-solid fa-indian-rupee-sign mrp"></i>
+                <s class="mrp">{{ item?.mrp }}</s>
+              </h4>
+              <p style="color: #870a51">
+                {{ item?.name }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ngx-slick-carousel>
+    <button
+      *ngIf="listSimilarProduct.length >= 3"
+      mat-mini-fab
+      class="previous"
+      (click)="slickModal2.slickPrev()"
+    >
+      <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+    </button>
+    <button
+      *ngIf="listSimilarProduct.length >= 3"
+      mat-mini-fab
+      class="nextbutton"
+      (click)="slickModal2.slickNext()"
+    >
+      <i class="fa-solid fa-arrow-right" style="color: #000000"></i>
+    </button>
+  </div>
+</div>
+<div class="container similar-prod" *ngIf="listrecomdProduct.length > 0">
+  <div>
+    <div>
+      <div class="underline-container">
+        <span class="underline"></span>
+        <span class="diamond"></span>
+        <span class="underline"></span>
+      </div>
+      <h3 class="text-center fs-4 main-headings">Recommended for you</h3>
+    </div>
+    <ngx-slick-carousel
+      class="carousel2"
+      #slickModal2="slick-carousel"
+      [config]="slideConfig2"
+      style="overflow: hidden"
+    >
+      <div ngxSlickItem *ngFor="let item of listrecomdProduct">
+        <div class="slide similar-slide">
+          <div
+            style="text-align: center; padding: 10px"
+            class="image-container"
+          >
+            <img
+              (click)="getProduct(item)"
+              [src]="item.path"
+              alt=""
+              width="50%"
+              style="margin: auto; cursor: pointer"
+              class="desktop-image"
+              fxShow.gt-xs
+              fxShow.gt-sm
+            />
+            <div class="product-desc">
+              <h4 class="product-price">
+                <i class="fa-solid fa-indian-rupee-sign"></i>{{ item?.price }}
+                <i class="fa-solid fa-indian-rupee-sign mrp"></i>
+                <s class="mrp">{{ item?.mrp }}</s>
+              </h4>
+              <p style="color: #870a51">
+                {{ item?.name }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ngx-slick-carousel>
+    <button
+      *ngIf="listSimilarProduct.length >= 3"
+      mat-mini-fab
+      class="previous"
+      (click)="slickModal2.slickPrev()"
+    >
+      <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+    </button>
+    <button
+      *ngIf="listSimilarProduct.length >= 3"
+      mat-mini-fab
+      class="nextbutton"
+      (click)="slickModal2.slickNext()"
+    >
+      <i class="fa-solid fa-arrow-right" style="color: #000000"></i>
+    </button>
+  </div>
+</div>
+<ng-template #noProducts>
+  <div class="no-products">
+    <h3 class="text-center fs-4 main-headings">
+      No recommended products available
+    </h3>
+    <div class="underline-container">
+      <span class="underline"></span>
+      <span class="diamond"></span>
+      <span class="underline"></span>
+    </div>
+  </div>
+</ng-template>
+<br /><br />
+//<app-overlay></app-overlay>
+<app-footer></app-footer>

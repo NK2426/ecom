@@ -1,0 +1,25 @@
+<app-header></app-header>
+<br><br>
+
+<div class="container" *ngIf="storeListByState.length > 0">
+    <div class="row">
+        <div class="col-md-4 col-sm-6" *ngFor="let item of storeListByState">
+            <div class="card m-3">
+                <div class="card-body ">
+                    <img style="height: 350px;" [src]="item.state_image" alt="" class="card-img-top">
+                    <h3 class="card-title">{{item.name}}</h3>
+                    <p class="card-text mt-1" style="color: #a91be9;">{{item.address }}</p>
+                    <button mat-raised-button style="color: #ffffff;background-color: #a91be9;" (click)="viewStoreProducts(item.slug)">See Products</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="storeListByState.length == 0">
+    <div style="margin: 50px 0px;">
+        <h2>No Items</h2>
+    </div>
+</div>
+//<app-overlay></app-overlay>
+<app-footer></app-footer>

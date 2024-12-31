@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Cancel Order</h2>
+<mat-dialog-content>
+  <mat-radio-group [(ngModel)]="selectedReason" class="vertical-radio-group">
+    <mat-radio-button *ngFor="let reason of data.reasons.data" [value]="reason">{{ reason.reason }}</mat-radio-button>
+  </mat-radio-group>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()" class="custom-cancel-button">Cancel</button>
+  <button mat-raised-button (click)="onSubmit()" class="custom-submit-button">Submit</button>
+</mat-dialog-actions>

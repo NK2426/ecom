@@ -1,0 +1,19 @@
+.rounded-image {
+    width: 100px; /* Set the desired width */
+    height: 100px; /* Set the desired height */
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover; /* Ensure the image covers the entire area without distortion */
+    margin: 0 auto; /* Center the image horizontally */
+    display: block; /* Make the image a block element for better alignment */
+    transition: transform 0.3s ease-in-out; /* Add transition for smooth scaling */
+    cursor: pointer;
+  }
+  
+  .rounded-image:hover {
+    transform: scale(1.1); /* Scale the image up by 10% on hover */
+  }
+  
+  .text-center {
+    margin-top: 10px; /* Add some space between the image and the text */
+  }
+  
