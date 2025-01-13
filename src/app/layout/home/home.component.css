@@ -296,6 +296,20 @@
   color: black;
   font-size: 18px;
 }
+.tagImage1 {
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid rgb(163, 250, 206); /* Red border */
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
+
+.testimonial-title {
+  font-size: 14px;
+  text-align: center;
+  padding-top: 8px; /* Adjust spacing as needed */
+}
 
 .prod-name {
   font-weight: 600;
@@ -809,6 +823,9 @@ ngx-slick-carousel .slick-next::before {
   font-weight: 600;
   color: #000;
   padding: 4px;
+}
+.slick-dotted.slick-slider {
+  margin-bottom: 2px; 
 }
 
 .Applicable {

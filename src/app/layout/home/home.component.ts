@@ -39,6 +39,7 @@ export class HomeComponent {
 
   slideConfig4: any;
   slideConfigTag: any;
+  slideConfigTags: any;
   slideConfig5: any;
   slidesToShow: number;
   slidesToShow3: number;
@@ -46,6 +47,7 @@ export class HomeComponent {
   slidesToShow6: number;
   slideConfig6: any;
   slidesToTag: number;
+  slidesToTags: number;
   slidesToShow5: any;
   listTrendingReels: Reels[] = [];
   // listbridalCollection: any;
@@ -91,6 +93,7 @@ export class HomeComponent {
     this.slidesToShow4 = window.innerWidth < 450 ? 1 : window.innerWidth < 769 ? 2 : window.innerWidth < 1023 ? 2 : window.innerWidth < 1350 ? 5 : 6;
     this.slidesToTag = window.innerWidth < 250 ? 1 : window.innerWidth < 320 ? 2 : window.innerWidth < 769 ? 2 : window.innerWidth < 1023 ? 3 : 4;
     this.slideConfig5 = window.innerWidth < 576 ? 3 : 5;
+    this.slidesToTags = window.innerWidth < 250 ? 1 : window.innerWidth < 320 ? 2 : window.innerWidth < 769 ? 2 : window.innerWidth < 1023 ? 6 : 12;
     this.slideConfig2 = {
       slidesToShow: this.slidesToShow,
       slidesToScroll: 1,
@@ -160,23 +163,29 @@ export class HomeComponent {
       speed: 300,
       pauseOnHover: true
     }
+    this.slideConfigTags = {
+      slidesToShow: this.slidesToTags,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000, // Speed in milliseconds (2000ms = 2s)
+      dots: true,
+      infinite: true,
+      speed: 300,
+      pauseOnHover: true
+    }
   }
   navigateTo(route: string, type: string) {
     if (type === 'Tag') {
       this.router.navigate([`/tag/${route}`])
     } else if (type === 'Group') {
       this.router.navigate([`/product-list/${route}`])
-    }else{
+    } else {
       this.router.navigate([`/product/${route}`])
     }
   }
   ngOnInit() {
     // this.homeBanner();
     this.getCategoriesFetch();
-    
-    // // this.getHomePageSubcategories();
-    // this.getBridesOfMugdha();
-    // this.getTestimonials();
 
     this.emailForm = this.fb.group({
       email: ['', [Validators.required, Validators.email, Validators.pattern(this.pattern)]],
@@ -199,10 +208,24 @@ export class HomeComponent {
   get formControls() {
     return this.emailForm.controls;
   }
+  
   homeBanner() {
+    let tagcount = 0
+ 
     this.apiService.getHomeBanner().subscribe((data: any) => {
       // console.log(data.data.rows);
       this.section = data.data;
+      this.section.forEach((section:any,index:any)=>{
+       if(section.type =='Tags'){       
+        tagcount ++
+        debugger
+        if(tagcount > 1) this.section.splice(index,1)
+       } 
+      })
+      
+
+      
+
       // console.log(this.section);
       this.cd.detectChanges();
     });
@@ -228,7 +251,8 @@ export class HomeComponent {
     this.slideConfig5 = { slidesToShow: this.slidesToShow5, slidesToScroll: this.slidesToShow5 };
     this.slidesToTag = (event.target as Window).innerWidth < 576 ? 2 : 4;
     this.slideConfigTag = { slidesToShow: this.slidesToTag, slidesToScroll: this.slidesToTag };
-    this.slidesToShow6 = (event.target as Window).innerWidth < 576 ? 3 : 5;
+    this.slideConfigTags = { slidesToShow: this.slidesToTags, slidesToScroll: this.slidesToTags };
+    this.slidesToShow6 = (event.target as Window).innerWidth < 576 ? 6 : 12;
     this.slideConfig6 = { slidesToShow: this.slidesToShow6, slidesToScroll: this.slidesToShow6 };
   }
 
@@ -271,7 +295,6 @@ export class HomeComponent {
   //     next: (resp) => {
   //       // console.log(resp);
   //       this.listgetHomePageSubcategories = resp;
-
   //     },
   //   });
   // }

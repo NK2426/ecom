@@ -95,7 +95,7 @@ export class ApiserviceService {
 
   // Banner
   getHomeBanner(): Observable<any> {
-    return this.http.get<any>(`${this.apiurl}/webhome`)
+    return this.http.get<any>(`${this.apiurl}/webhome?page=0`)
   }
 
     // testimonials

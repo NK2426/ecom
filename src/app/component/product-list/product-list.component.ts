@@ -43,6 +43,7 @@ export class ProductListComponent implements OnInit {
   subcat!: string;
   listCatgoryFilter: SubcategoryData[] = [];
 
+  totalItems = 0
   selectedVariants: number[] = [];
   selectedPrices: number[] = [];
   selectedDiscounts: number[] = [];
@@ -163,7 +164,14 @@ export class ProductListComponent implements OnInit {
     this.applySorting();
     this.paginator.firstPage();
   }
+  get startItemIndex(): number {
+    return (this.currentPage) * this.pageSize + 1;
+  }
 
+  get endItemIndex(): number {
+    const endIndex = (this.currentPage + 1) * this.pageSize;
+    return endIndex > this.totalItems ? this.totalItems : endIndex;
+  }
   onSortChange(event: any) {
     console.log(event.target.value)
     // Swal.fire({
@@ -456,6 +464,7 @@ export class ProductListComponent implements OnInit {
         next: resp => {
           // console.log(resp);
           this.subcategoryName = resp?.data.name;
+          this.totalItems = resp.data.totalItems
           this.listProduct = resp?.data?.datas;
           if (resp.data.totalItems) {
             this.count = resp.data.totalItems;

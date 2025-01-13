@@ -3,6 +3,57 @@
 <!-- <app-home-slider></app-home-slider> -->
 
 <div *ngFor="let section of section">
+  <div class="container-fluid slider-home mb-0" *ngIf="section.type == 'Tags'">
+    <h1 class="text-left main-headings">{{ section.title }}</h1>
+    
+    <div class="carousel-wrapper">
+      <ngx-slick-carousel
+      #slickModal4="slick-carousel"
+      [config]="slideConfigTags"
+      style="overflow: hidden; margin-top: 2px"
+    >
+      <div
+        ngxSlickItem
+        *ngFor="let item of section.sectionitems"
+        class="col-md-6 col-sm-6 col-lg-4 col-xl-3 my-2 carousel-item"
+      >
+        <div class="testimonial-container m-auto">
+          <div
+            class="testimonial"
+            style="cursor: pointer"
+            (click)="getTagWithUUID(item.link)"
+          >
+            <img
+              src="{{ item?.path }}"
+              alt="No Image"
+              class="saree-type-img tagImage1"
+              style="
+                object-fit: cover;
+                border-radius: 50%;
+                margin: auto;
+                height: 100px; /* Reduced size */
+                width: 100px; /* Make it proportional */
+              "
+            />
+            <h4 style="color:black; font-size: 14px;" class="pt-2 text-center">
+              {{ item.title }}
+            </h4>
+          </div>
+        </div>
+      </div>
+    </ngx-slick-carousel>
+    
+    
+
+      <!-- <button mat-mini-fab class="prev" (click)="slickModal4.slickPrev()">
+        <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+      </button>
+      <button mat-mini-fab class="next" (click)="slickModal4.slickNext()">
+        <i class="fa-solid fa-arrow-right" style="color: #000000"></i>
+      </button> -->
+    </div>
+  </div>
+  
   <!-- Banner -->
   <div class="container-fluid slider-home mb-4" *ngIf="section.type == 'Banner'">
     <div class="carousel-wrapper" style="overflow: hidden">
@@ -112,13 +163,6 @@
       </button> -->
     </div>
   </div>
-
-
-
-
-
-
-
   <!-- Bridal collections  -->
   <div *ngIf="section.type == 'List'">
     <div class="container">
@@ -194,7 +238,6 @@
       </button> -->
     </div>
   </div>
-
   <!-- R Section -->
   <div *ngIf="section.type == 'RSection'">
     <div class="container">
@@ -265,9 +308,6 @@
     </div>
   </div>
 </div>
-
-
-
 <!-- Coupon offer -->
 
 <app-overlay></app-overlay>
