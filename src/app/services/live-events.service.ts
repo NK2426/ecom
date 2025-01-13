@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environments';
 export class LiveEventsService {
 
 
-  apiurl = environment.ApiEndPoint;
+  apiurl = environment.Api;
 
   constructor(private http: HttpClient) { }
 

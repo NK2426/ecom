@@ -11,7 +11,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './component/cart/cart.component';
 import { CategoriesComponent } from './component/categories/categories.component';
 import { LoginComponent } from './component/login/login.component';
@@ -65,8 +65,13 @@ import { ReviewPopupComponent } from './component/review-popup/review-popup.comp
 import { VideoCallComponent } from './component/video-call/video-call.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { GoogleAccountComponent } from './component/google-account/google-account.component';
-import { NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryProductsComponent } from './component/category-products/category-products.component';
+import { LoaderComponent } from './helpers/shared/loader/loader.component';
+import { LoaderInterceptor } from './helpers/loader-interceptor.service';
+import { ChipModule } from 'primeng/chip'; // Import the module
+import { AccordionModule } from 'primeng/accordion';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -111,6 +116,7 @@ import { CategoryProductsComponent } from './component/category-products/categor
     VideoCallComponent,
     GoogleAccountComponent,
     CategoryProductsComponent,
+    LoaderComponent,
 
   ],
   imports: [
@@ -138,9 +144,18 @@ import { CategoryProductsComponent } from './component/category-products/categor
     NgSelectModule,
     NgbRatingModule,
     NgbModule,
+    ChipModule,
+    AccordionModule,
+    CheckboxModule,
+    NgbAccordionModule,
+    NgbModule,
+    ChipModule,
     OAuthModule.forRoot()
   ],
-  providers: [MessageService, authInterceptorProviders],
+  providers: [
+    MessageService, authInterceptorProviders,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,7 +9,7 @@ import { Subcategory, SubcategoryData, SubcategoryList } from '../model/subcateg
 })
 export class SubcategoryService {
   apiUrl = environment.apiUrl;
-  ApiEndPoint = environment.ApiEndPoint;
+  Api = environment.Api;
 
   constructor(private http: HttpClient) { }
 
@@ -20,11 +20,11 @@ export class SubcategoryService {
         httpParams = httpParams.set(key, params[key]);
       }
     }
-    return this.http.get<Subcategory>(`${this.ApiEndPoint}/group/items/${id}`, { params: httpParams });
+    return this.http.get<Subcategory>(`${this.Api}/group/items/${id}`, { params: httpParams });
   }
 
   // mugdha api
   getSubCategory(id: any): Observable<Subcategory> {
-    return this.http.get<any>(`${this.ApiEndPoint}/category/groupall/${id}`)
+    return this.http.get<any>(`${this.Api}/category/groupall/${id}`)
   }
 }

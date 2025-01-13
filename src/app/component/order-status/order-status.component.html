@@ -121,7 +121,8 @@
                           item?.status === 'Refund' ||
                           item?.status === 'Replace' ||
                           item?.status === 'Not Placed',
-                        'text-orange': item?.status === 'Return' || item?.status === 'Return Request'
+                        'text-orange': item?.status === 'Return' || item?.status === 'Return Request',
+                        'colr-status': item?.status === 'Dispatch' 
                       }"
                     >
                       {{
@@ -272,5 +273,5 @@
   </button>
 </div>
 <br /><br />
-//<app-overlay></app-overlay>
+<app-overlay></app-overlay>
 <app-footer></app-footer>

@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environments';
   providedIn: 'root'
 })
 export class AuthService {
-  apiBaseURL =  environment.ApiEndPoint;
+  apiBaseURL =  environment.Api;
   private userSubject = new BehaviorSubject<any>({}); // Pass null when login needs to be shown
   public user: Observable<User> = this.userSubject.asObservable();
   AUTH_USER = 'userID';

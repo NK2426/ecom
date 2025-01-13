@@ -29,6 +29,11 @@
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/font-awesome/css/font-awesome.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/helpers/shared/loader"
+              ]
+            },
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",

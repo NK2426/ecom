@@ -158,7 +158,7 @@
                         class="img-fluid cart-image" width="100px" height="120px" />
                     </td>
                     <!-- Product name -->
-                    <td class="text-start p-2 fw-bold" style="color: #a91be9">
+                    <td class="text-start p-2 fw-bold" style="color: #a91be9" [routerLink]="['/product/' + item.slug]"  style="cursor: pointer;">
                       {{ item?.name }}
                     </td>
                     <!-- MRP -->
@@ -209,9 +209,10 @@
         </div>
         <div class="col-md-4 p-0 price-details">
           <div >
-            <button class="btn checkoutPage" (click)="orderSummary()" *ngIf="showCheckoutButton">
+            <button class="btn checkoutPage" (click)="orderSummary()" *ngIf="!showCheckoutButton" >
               Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
             </button>
+            <p class=" checkoutPageContent text-center" *ngIf="showCheckoutButton">Please Remove Out of Stock Items in your Cart List</p>
           </div>
           <div>
             <button class="btn backpage" routerLink="/">Back To Shop</button>
@@ -243,5 +244,5 @@
     </div>
   </div>
 </div>
-//<app-overlay></app-overlay>
+<app-overlay></app-overlay>
 <app-footer></app-footer>

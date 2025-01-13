@@ -10,6 +10,7 @@ import { OrderTrackingService } from 'src/app/services/order-tracking.service';
 import { ReturnReasonDialogComponent } from '../return-reason-dialog/return-reason-dialog.component';
 import { ApiResponse } from 'src/app/model/orders';
 import { ReviewPopupComponent } from '../review-popup/review-popup.component';
+import { environment } from 'src/environments/environments';
 @Component({
   selector: 'app-view-order',
   templateUrl: './view-order.component.html',
@@ -28,6 +29,7 @@ export class ViewOrderComponent implements OnInit {
   ratingMessage: string = '';
   stars: number[] = [1, 2, 3, 4, 5];
   dateformate: any;
+  showprint: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,7 +52,7 @@ export class ViewOrderComponent implements OnInit {
       this.viewOrderItems = data.data;
       this.rating = this.viewOrderItems.rating
       // console.log(this.viewOrderItems);
-      if (this.viewOrderItems.status === 'Cancel Request' || this.viewOrderItems.status === 'Cancel' || this.viewOrderItems.status === 'Return' || this.viewOrderItems.status === 'Return Request' || this.viewOrderItems.status === 'Delivered' || this.viewOrderItems.status === 'Refund') {
+      if (this.viewOrderItems.status === 'Cancel Request' || this.viewOrderItems.status === 'Cancel' || this.viewOrderItems.status === 'Return' || this.viewOrderItems.status === 'Return Request' || this.viewOrderItems.status === 'Delivered' || this.viewOrderItems.status === 'Refund' || this.viewOrderItems.status === 'Dispatch' || this.viewOrderItems.status === 'Complete') {
         this.showCancelBtn = true;
         this.orderstatus.refundDetails(this.id).subscribe((data: any) => {
           // console.log(data);
@@ -61,23 +63,25 @@ export class ViewOrderComponent implements OnInit {
   }
 
   downloadinvoice() {
+    this.showprint = true;
     this.orderstatus.downloadInvoice(this.viewOrderItems.orderID).subscribe((data: any) => {
-      // console.log(data);
-      if (data.status == 'success') {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: `${data.message}`,
-          showConfirmButton: false,
-          width: '1000px',
-          timer: 1000,
-          customClass: {
-            popup: 'large-sa-popup',
-          },
-        })
+      if (data.message === 'Success') {
+        
+        let link = document.createElement('a');
+        link.setAttribute('type', 'hidden');
+        link.href = environment.pdfApi + this.viewOrderItems.orderID + '.pdf';
+        link.target = 'new';
+        //link.download = path;
+        document.body.appendChild(link);
+        //console.log(link)
+        link.click();
+        this.showprint = true;
+        link.remove();
       }
     });
   }
+  
+  
 
 
   openCancelReasonDialog(): void {

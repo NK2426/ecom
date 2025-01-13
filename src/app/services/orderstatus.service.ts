@@ -8,25 +8,25 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class OrderstatusService {
-  ApiEndPoint = environment.ApiEndPoint;
+  Api = environment.Api;
   constructor(private http: HttpClient) { }
 
   viewOrder(uuid: any) {
-    return this.http.get<any>(`${this.ApiEndPoint}/order/view/` + uuid);
+    return this.http.get<any>(`${this.Api}/order/view/` + uuid);
   }
   cancelOrder(uuid: any) {
     const token = localStorage.getItem('token');
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.put<any>(`${this.ApiEndPoint}/order/cancel/` + uuid, { headers: httpHeaders });
+    return this.http.put<any>(`${this.Api}/order/cancel/` + uuid, { headers: httpHeaders });
   }
   rateitemWithReview(uuid: any,data:any) {
     const token = localStorage.getItem('token');
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.put<any>(`${this.ApiEndPoint}/addreviews/` + uuid, data,{ headers: httpHeaders });
+    return this.http.put<any>(`${this.Api}/addreviews/` + uuid, data,{ headers: httpHeaders });
   }
   rateitem(uuid: any,data:any) {
     const token = localStorage.getItem('token');
@@ -34,11 +34,11 @@ export class OrderstatusService {
       Authorization: `Bearer ${token}`
     });
 
-    return this.http.put<any>(`${this.ApiEndPoint}/addrating/` + uuid, {rating:data},{ headers: httpHeaders });
+    return this.http.put<any>(`${this.Api}/addrating/` + uuid, {rating:data},{ headers: httpHeaders });
   }
 
   refundDetails(uuid: any): Observable<any> {
-    return this.http.post(`${this.ApiEndPoint}order/refunddetail/${uuid}`, {
+    return this.http.post(`${this.Api}order/refunddetail/${uuid}`, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
@@ -67,7 +67,7 @@ export class OrderstatusService {
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.get<any>(`${this.ApiEndPoint}/order/pdf/`+id, { headers: httpHeaders })
+    return this.http.get<any>(`${this.Api}/order/pdf/`+id, { headers: httpHeaders })
   }
 
 }

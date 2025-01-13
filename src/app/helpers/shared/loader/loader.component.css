@@ -1,0 +1,117 @@
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(255, 255, 255, 0.8); /* Adjust the last value for opacity */
+  display: flex;
+  flex-direction: column; /* Stack logo and spinner vertically */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader-logo {
+  margin-bottom: 20px; /* Add spacing between logo and spinner */
+  height: 100px; /* Adjust logo height */
+  width: auto; /* Maintain aspect ratio */
+}
+
+.spinner {
+  font-size: 50px; /* Adjust the size of the spinner */
+  color: #a91be9; /* Adjust the color of the spinner */
+  animation: spin 1s linear infinite; /* Add spinning animation */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.wrapper.one {
+  background-color: transparent;
+}
+.drop-main {
+  display: flex;
+  font-size: 7rem;
+  margin: 1.5rem;
+  justify-content: center;
+  font-family: "Russo One", sans-serif;
+}
+.w {
+  opacity: 0;
+  animation: drop 0.4s linear forwards;
+  color: #00ffff;
+}
+.r {
+  opacity: 0;
+  animation: drop 0.4s linear forwards 0.2s;
+  color: #05f8f8;
+}
+.a {
+  opacity: 0;
+  animation: drop 0.4s linear forwards 0.4s;
+  color: #229999;
+}
+.p {
+  opacity: 0;
+  animation: drop 0.4s linear forwards 0.6s;
+  color: #346868;
+}
+.i {
+  opacity: 0;
+  animation: drop 0.4s linear forwards 0.8s;
+  color: #273636;
+}
+.n {
+  opacity: 0;
+  animation: drop 0.4s linear forwards 0.8s;
+  color: #037474;
+}
+.g {
+  opacity: 0;
+  animation: drop 0.4s linear forwards 0.8s;
+  color: #e57171;
+}
+@keyframes drop {
+  0% {
+      transform: translateY(-200px);
+      opacity: 0;
+  }
+  50% {
+      transform: translateY(0px);
+      opacity: 1;
+  }
+  65% {
+      transform: translateY(-17px);
+      opacity: 1;
+  }
+  75% {
+      transform: translateY(-22px);
+      opacity: 1;
+  }
+  100% {
+      transform: translateY(0px);
+      opacity: 1;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .drop-main {
+    font-size: 3rem; /* Adjust font size for smaller screens */
+    margin: 1rem;   /* Reduce margin for better fit */
+  }
+}
+
+@media (max-width: 480px) {
+  .drop-main {
+    font-size: 2rem; /* Further adjust font size for very small screens */
+    margin: 0.5rem; /* Reduce margin further */
+  }
+}

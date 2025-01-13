@@ -20,7 +20,6 @@
 
 .carousel-wrapper {
   position: relative;
-  margin-top: -30px;
 }
 
 .prev,
@@ -109,7 +108,7 @@
 .overlay {
   position: absolute;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: transparent;
   color: #f1f1f1;
   width: 100%;
   text-align: center;
@@ -119,6 +118,7 @@
 .text {
   font-size: 20px;
   font-weight: bold;
+  color: #000000;
 }
 
 
@@ -134,9 +134,16 @@
 .first-image {
   /* height: 415px; */
   width: 100%;
-  object-fit: cover;
-  object-position: 100% 0%;
-  height: 200px;
+  object-fit: contain;
+  /* object-position: 100% 0%; */
+  object-position: center;
+  height: 203px;
+}
+
+@media(min-width:320px) and (max-width:425px){
+  .first-image{
+    object-position: top;
+  }
 }
 
 .second-img-section {
@@ -148,11 +155,8 @@
 
 .main-headings {
   color: #a91be9;
-  font-weight: 800;
-  font-size: x-large;
-  letter-spacing: 8px; /* Adjust the value as needed */
+  font-weight: 600;
 }
-
 
 .sub-cat-image-container {
   position: relative;
@@ -289,13 +293,17 @@
 }
 
 .actual-price {
-  color: #a91be9;
+  color: black;
   font-size: 18px;
 }
 
 .prod-name {
   font-weight: 600;
   font-size: 18px;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sub-cat-image-container {
@@ -438,6 +446,7 @@
   .testimonial-container {
     height: auto;
     padding: 15px;
+    width: 100%;
   }
 
   .testimonial p,
@@ -550,14 +559,14 @@ ngx-slick-carousel .slick-next::before {
 .underline {
   width: 80px;
   height: 3px;
-  background-color: #a91be9;
+  background-color: #8A084B;
   /* Maroon color */
 }
 
 .diamond {
   width: 10px;
   height: 10px;
-  background-color: #a91be9;
+  background-color: #8A084B;
   /* Maroon color */
   transform: rotate(45deg);
   /* Rotate to form a diamond */
@@ -585,7 +594,7 @@ ngx-slick-carousel .slick-next::before {
 }
 
 .not-in-wishlist mat-icon {
-  color: #f4f0f0;
+  color: #111010;
   /* Color when not in wishlist */
 }
 
@@ -595,12 +604,12 @@ ngx-slick-carousel .slick-next::before {
 }
 
 .in-wishlist mat-icon {
-  color: #a91be9;
+  color: #8A084B;
   /* Red color when in wishlist */
 }
 
 .wishlist-icon:hover mat-icon {
-  color: #a91be9;
+  color: #8A084B;
   /* Change color on hover for visual feedback */
 }
 
@@ -614,20 +623,20 @@ ngx-slick-carousel .slick-next::before {
 
 .btn {
   margin: 5px;
-  border: 1px solid #a91be9;
-  background-color: #a91be9;
+  border: 1px solid #8A084B;
+  background-color: #8A084B;
   color: white;
   border-radius: 5px;
 }
 
 .addtocartbtn {
   /* margin: 5px;
-  border: 1px solid #a91be9;
-  background-color: #a91be9;
+  border: 1px solid #8A084B;
+  background-color: #8A084B;
   color: white;*/
   border-radius: 50%;
-  /* border: 1.5px solid #a91be9; */
-  /* background: #a91be9;
+  /* border: 1.5px solid #8A084B; */
+  /* background: #8A084B;
   color: white; */
   background-color: white;
   color: #a91be9;
@@ -645,10 +654,10 @@ ngx-slick-carousel .slick-next::before {
 
 .goToCart {
   /* color: white;
-  border: 1.5px solid #a91be9;
+  border: 1.5px solid #8A084B;
   background: none */
   /* background-color: white; */
-  /* color: #a91be9; */
+  /* color: #8A084B; */
   background-color: #a91be9;
   color: white;
   border-radius: 50%;
@@ -656,7 +665,7 @@ ngx-slick-carousel .slick-next::before {
 }
 
 .goToCart:hover {
-  /* color: #a91be9; */
+  /* color: #8A084B; */
   font-weight: bold;
 }
 
@@ -668,7 +677,7 @@ ngx-slick-carousel .slick-next::before {
 }
 
 .wishlistBtn:hover {
-  color: #a91be9;
+  color: #8A084B;
 }
 
 @media(min-width:320px) {
@@ -743,7 +752,7 @@ ngx-slick-carousel .slick-next::before {
   /* Position at the middle of the container */
   transform: translateY(-50%);
   /* Adjust to be centered vertically */
-  background-color: #a91be9;
+  background-color: #8B1A5A;
   border: none;
   padding: 10px;
   cursor: pointer;
@@ -959,7 +968,7 @@ img {
 
 /* Responsive styles */
 .testimonial-card {
-  background-color: #a91be9;
+  background-color: #8B1C54;
   /* height: auto; */
   max-width: 100%;
   margin: 0 auto;
@@ -1007,15 +1016,5 @@ img {
 
   .testimonial-author {
     font-size: small;
-  }
-}
-@media (max-width: 768px) {
-  .actual-price {
-    font-size: 14px; /* Adjust to your desired size for mobile */
-  }
-}
-@media (max-width: 768px) {
-  .main-headings {
-    font-size: large; /* Adjust to your desired size for mobile */
   }
 }

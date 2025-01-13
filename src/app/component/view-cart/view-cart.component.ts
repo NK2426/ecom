@@ -44,8 +44,17 @@ export class ViewCartComponent implements OnInit {
     this.cartService.getAll().subscribe((data) => {
       this.cartItems = data;
       this.showCheckout = this.allValuesSame(this.cartItems, 'qty');
-      // console.log(data);
-      this.showCheckoutButton = this.cartItems.some((item: any) => item.maxqty > 0);
+      console.log(this.cartItems);
+      
+      this.showCheckoutButton = this.cartItems.some((item: any) => item.qty == 0);
+
+
+      
+
+      console.log(this.showCheckoutButton);
+      
+
+      
       // console.log('Product fetched >>>>>>>>>>>>>>>>>>>>>>>>>>', this.allValuesSame(this.cartItems, 'qty'));
     });
   }

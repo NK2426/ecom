@@ -1,13 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { data } from 'jquery';
+import { data, event } from 'jquery';
 import { Subscription } from 'rxjs';
 import { CartData, CartProductData, CartProducts } from 'src/app/model/cart-items';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { ExternalLibraryService } from 'src/app/services/utils.service';
+import { Location } from '@angular/common';
 
 import Swal from 'sweetalert2';
 
@@ -63,15 +64,41 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private order: CheckoutService, private fb: FormBuilder, private cartService: CartService,
     private routes: ActivatedRoute, private route: Router, private razorpayService: ExternalLibraryService,
-    private cd: ChangeDetectorRef) {
+    private cd: ChangeDetectorRef,private location: Location) {
     this.RAZORPAY_OPTIONS = {};
   }
+
+  private isReloadConfirmed: boolean = false;
+
+  convertToUpper() {
+    this.couponCode = this.couponCode.toUpperCase();
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  disableF5(event: KeyboardEvent) {
+    if ((event.key === 'F5') || (event.ctrlKey && event.key === 'r')) {
+      event.preventDefault();
+      alert('Page reload is disabled!');
+    }
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+unloadNotification($event: any): void {
+  $event.preventDefault();
+  $event.returnValue = '';  // Shows the confirmation dialog
+  sessionStorage.setItem('reloadFlag', 'true'); // Store a flag to detect page reload
+}
 
   ngOnInit(): void {
     this.orderID = this.routes.snapshot.params['orderID']
     this.getAll();
     this.fetchAddress();
-    this.CheckoutDetails(false)
+    this.CheckoutDetails(false);
+    const reloadFlag = sessionStorage.getItem('reloadFlag');
+    if (reloadFlag === 'true') {
+      sessionStorage.removeItem('reloadFlag');  
+      this.route.navigate(['/']);  
+    }
 
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -93,13 +120,13 @@ export class CheckoutComponent implements OnInit {
       address: ['', Validators.required]
     })
 
-    this.order.createsession(this.orderID).subscribe((data: any) => {
-      // console.log(data.data);
-      this.optionspay = data.data;
-      this.cd.detectChanges();
-    })
+    // this.order.createsession(this.orderID).subscribe((data: any) => {
+    //   // console.log(data.data);
+    //   this.optionspay = data.data;
+    //   this.cd.detectChanges();
+    // })
 
-    this.cd.detectChanges();
+    // this.cd.detectChanges();
   }
 
   options = [
@@ -424,8 +451,8 @@ export class CheckoutComponent implements OnInit {
 
   orderItems: any;
   productTotalAmount: any;
-  CheckoutDetails(coupon:any) {
-    this.order.orderCheckout(this.orderID,coupon).subscribe((data: any) => {
+  CheckoutDetails(coupon: any) {
+    this.order.orderCheckout(this.orderID, coupon).subscribe((data: any) => {
       // console.log(data);
       // console.log(data.amount);
       this.checkout = data
@@ -508,19 +535,39 @@ export class CheckoutComponent implements OnInit {
   }
   payOnline() {
     // console.log("Pay Online");
-    this.razorpayService
-      .lazyLoadLibrary('https://checkout.razorpay.com/v1/checkout.js')
-      .subscribe();
-    // console.log(this.optionspay)
+    this.order.createsession(this.orderID).subscribe((data: any) => {
+      // console.log(data.data);
+      if (data.status == 'success') {
+        this.optionspay = data.data;
+        this.razorpayService
+          .lazyLoadLibrary('https://checkout.razorpay.com/v1/checkout.js')
+          .subscribe();
+        // console.log(this.optionspay)
 
-    this.RAZORPAY_OPTIONS = this.optionspay
-    // console.log(this.RAZORPAY_OPTIONS);
-    this.RAZORPAY_OPTIONS['modal'] = {
-      ondismiss: this.razorPayFailureHandler.bind(this)
-    };
-    this.RAZORPAY_OPTIONS['handler'] = this.razorPaySuccessHandler.bind(this);
-    let razorpay = new Razorpay(this.RAZORPAY_OPTIONS)
-    razorpay.open()
+        this.RAZORPAY_OPTIONS = this.optionspay
+        // console.log(this.RAZORPAY_OPTIONS);
+        this.RAZORPAY_OPTIONS['modal'] = {
+          ondismiss: this.razorPayFailureHandler.bind(this)
+        };
+        this.RAZORPAY_OPTIONS['handler'] = this.razorPaySuccessHandler.bind(this);
+        let razorpay = new Razorpay(this.RAZORPAY_OPTIONS)
+        razorpay.open()
+      }
+      else {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Order not placed',
+          showConfirmButton: false,
+          width: '300px',
+          timer: 1500,
+          customClass: {
+            popup: 'large-sa-popup',
+          },
+        });
+      }
+    })
+
   }
 
 
@@ -605,15 +652,14 @@ export class CheckoutComponent implements OnInit {
         });
         this.couponApllied = true
         this.couponCode = code
-       
+
         this.CheckoutDetails(true)
-        this.order.createsession(this.orderID).subscribe((data: any) => {
-          // console.log(data.data);
-          this.optionspay = data.data;
+        // this.order.createsession(this.orderID).subscribe((data: any) => {
+        //   // console.log(data.data);
+        //   this.optionspay = data.data;
+        // })
 
-        })
 
-        
         this.checkout.couponAvailable = 0
         localStorage.setItem('coupon', '');
 

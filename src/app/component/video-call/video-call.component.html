@@ -1,225 +1,216 @@
 <div class="dialog-content">
   <div id="hide">
-    <div class="">
-      <div class="image-container">
-        <div class="">
-          <img
-            src="../../../assets/image/videocall1.webp"
-            alt="no image"
-            class="vdoImg"
-            style="height: 100%"
-          />
-        </div>
-        <div class="centered-content">
-          <h3 class="h3">The Ultimate In-Store Experience</h3>
-          <h3 class="h3">Via 24x7 Video Shopping</h3>
-          <p class="language">
-            Our Stylists On Call Can Speak: English, Hindi, Gujarati & Marathi
-          </p>
-          <div style="width: 80%; margin: auto">
-            <form
-              [formGroup]="videocallForm"
-              (ngSubmit)="formSubmit()"
-              autocomplete="off"
-            >
-              <div class="inputField">
-                <label
-                  for="phone"
-                  class="form-label required"
-                  style="text-align: start"
-                  >Mobile Number *
-                </label>
-                <div class="input-group mb-3" style="">
-                  <div class="input-group-prepend">
-                    <button
-                      class="btn countryBtn text-white"
-                      type="button"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
+    <div class="image-container">
+      <div class="centered-content">
+        <h3 class="h3">The Ultimate In-Store Experience</h3>
+        <h3 class="h3">Via 24x7 Video Shopping</h3>
+        <p class="language">
+          Our Stylists On Call Can Speak: English, Hindi, Gujarati & Marathi
+        </p>
+        <div class="formDiv">
+          <form
+            [formGroup]="videocallForm"
+            (ngSubmit)="formSubmit()"
+            autocomplete="off"
+          >
+            <!-- Mobile Number -->
+            <div class="inputField">
+              <label
+                for="phone"
+                class="form-label required"
+                style="text-align: start"
+                >Mobile Number *
+              </label>
+              <div class="input-group mb-3" style="">
+                <div class="input-group-prepend">
+                  <button
+                    class="btn countryBtn text-white"
+                    type="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    {{ selectedDialingCode }}
+                  </button>
+                  <div class="dropdown-menu custom-dropdown">
+                    <a
+                      class="dropdown-item"
+                      *ngFor="let item of country"
+                      (click)="selectDialingCode(item.dialingCode)"
                     >
-                      {{ selectedDialingCode }}
-                    </button>
-                    <div class="dropdown-menu custom-dropdown">
-                      <a
-                        class="dropdown-item"
-                        *ngFor="let item of country"
-                        (click)="selectDialingCode(item.dialingCode)"
-                      >
-                        <img
-                          [src]="item.flagUrl"
-                          class="img-fluid"
-                          width="20px"
-                          alt=""
-                        />
-                        &nbsp; {{ item.dialingCode }}
-                      </a>
-                    </div>
+                      <img
+                        [src]="item.flagUrl"
+                        class="img-fluid"
+                        width="20px"
+                        alt=""
+                      />
+                      &nbsp; {{ item.dialingCode }}
+                    </a>
                   </div>
-                  <ng-container *ngIf="selectedDialingCode == '+91'">
-                    <input
-                      class="form-control mobile-input"
-                      id="mobile"
-                      type="text"
-                      formControlName="phone"
-                      style="border-radius: 0"
-                      (keypress)="
-                        ($event.charCode >= 48 && $event.charCode < 58)
-                      "
-                      (keydown)="onKeyDown($event)"
-                      minlength="10"
-                      maxlength="10"
-                      (input)="onInputChange($event)"
-                      [ngClass]="{
-                        'is-invalid':
-                          (isSubmit && formControls['phone'].errors) ||
-                          (formControls['phone'].invalid &&
-                            (formControls['phone'].dirty ||
-                              formControls['phone'].touched))
-                      }"
-                    />
-                    <div
-                      *ngIf="
-                        (isSubmit && formControls['phone']?.errors) ||
-                        (formControls['phone']?.invalid &&
-                          (formControls['phone']?.dirty ||
-                            formControls['phone']?.touched))
-                      "
-                      class="invalid-feedback input-error"
+                </div>
+                <ng-container *ngIf="selectedDialingCode == '+91'">
+                  <input
+                    class="form-control mobile-input"
+                    id="mobile"
+                    type="text"
+                    formControlName="phone"
+                    style="border-radius: 0"
+                    (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+                    (keydown)="onKeyDown($event)"
+                    minlength="10"
+                    maxlength="10"
+                    (input)="onInputChange($event)"
+                    [ngClass]="{
+                      'is-invalid':
+                        (isSubmit && formControls['phone'].errors) ||
+                        (formControls['phone'].invalid &&
+                          (formControls['phone'].dirty ||
+                            formControls['phone'].touched))
+                    }"
+                  />
+                  <div
+                    *ngIf="
+                      (isSubmit && formControls['phone']?.errors) ||
+                      (formControls['phone']?.invalid &&
+                        (formControls['phone']?.dirty ||
+                          formControls['phone']?.touched))
+                    "
+                    class="invalid-feedback input-error"
+                  >
+                    <span
+                      *ngIf="formControls['phone']?.errors?.['required']"
+                      class="fw-bold"
+                      >Mobile Number Is Required</span
                     >
-                      <span
-                        *ngIf="formControls['phone']?.errors?.['required']"
-                        class="fw-bold"
-                        >Mobile Number Is Required</span
-                      >
-                    </div>
-                  </ng-container>
-                  <ng-container *ngIf="selectedDialingCode !== '+91'">
-                    <input
-                      class="form-control mobile-input"
-                      id="mobile"
-                      type="text"
-                      formControlName="phone"
-                      style="border-radius: 0"
-                      (keypress)="
-                        ($event.charCode >= 48 && $event.charCode < 58)
-                      "
-                      (keydown)="onKeyDown($event)"
-                      minlength="7"
-                      maxlength="15"
-                      (input)="onInputChange($event)"
-                      [ngClass]="{
-                        'is-invalid':
-                          (isSubmit && formControls['phone'].errors) ||
-                          (formControls['phone'].invalid &&
-                            (formControls['phone'].dirty ||
-                              formControls['phone'].touched))
-                      }"
-                    />
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="selectedDialingCode !== '+91'">
+                  <input
+                    class="form-control mobile-input"
+                    id="mobile"
+                    type="text"
+                    formControlName="phone"
+                    style="border-radius: 0"
+                    (keypress)="($event.charCode >= 48 && $event.charCode < 58)"
+                    (keydown)="onKeyDown($event)"
+                    minlength="7"
+                    maxlength="15"
+                    (input)="onInputChange($event)"
+                    [ngClass]="{
+                      'is-invalid':
+                        (isSubmit && formControls['phone'].errors) ||
+                        (formControls['phone'].invalid &&
+                          (formControls['phone'].dirty ||
+                            formControls['phone'].touched))
+                    }"
+                  />
 
-                    <div
-                      *ngIf="
-                        (isSubmit && formControls['phone']?.errors) ||
-                        (formControls['phone']?.invalid &&
-                          (formControls['phone']?.dirty ||
-                            formControls['phone']?.touched))
-                      "
-                      class="invalid-feedback input-error"
+                  <div
+                    *ngIf="
+                      (isSubmit && formControls['phone']?.errors) ||
+                      (formControls['phone']?.invalid &&
+                        (formControls['phone']?.dirty ||
+                          formControls['phone']?.touched))
+                    "
+                    class="invalid-feedback input-error"
+                  >
+                    <span
+                      *ngIf="formControls['mobile']?.errors?.['required']"
+                      class="fw-bold"
+                      >Mobile Number Is Required</span
                     >
-                      <span
-                        *ngIf="formControls['mobile']?.errors?.['required']"
-                        class="fw-bold"
-                        >Mobile Number Is Required</span
-                      >
-                    </div>
-                  </ng-container>
-                </div>
+                  </div>
+                </ng-container>
               </div>
-              <!-- Date -->
-              <div class="inputField">
-                <label for="date" class="form-label pb-2 label required"
-                  >Date
-                </label>
-                <input
-                  type="date"
-                  id="txtDate"
-                  [min]="minDate"
-                  class="form-control"
-                  formControlName="date"
-                  (change)="selectedDate($event)"
-                  [ngClass]="{
-                    'is-invalid':
-                      (isSubmit && formControls['date'].errors) ||
-                      (formControls['date'].invalid &&
-                        (formControls['date'].dirty ||
-                          formControls['date'].touched))
-                  }"
-                />
-                <div
-                  *ngIf="
-                    (isSubmit && formControls['date']?.errors) ||
-                    (formControls['date']?.invalid &&
-                      (formControls['date']?.dirty ||
-                        formControls['date']?.touched))
-                  "
-                  class="invalid-feedback input-error"
-                >
-                  <span
-                    *ngIf="formControls['date']?.errors?.['required']"
-                    class="fw-bold"
-                    >Date Is Required</span
-                  >
-                </div>
-              </div>
-              <!-- Slot -->
-              <div class="inputField">
-                <label class="form-label label required">Slot</label>
-                <select
-                  class="form-select form-select-sm p-2"
-                  formControlName="slot"
-                  (change)="selectSlot($event)"
-                  [ngClass]="{
-                    'is-invalid':
-                      (isSubmit && formControls['slot'].errors) ||
-                      (formControls['slot'].invalid &&
-                        (formControls['slot'].dirty ||
-                          formControls['slot'].touched))
-                  }"
-                >
-                  <option selected disabled>Select Your Slot</option>
-                  <option *ngFor="let item of slotTime" [value]="item?.id">
-                    {{ item?.value }}
-                  </option>
-                </select>
-                <div
-                  *ngIf="
-                    (isSubmit && formControls['slot']?.errors) ||
-                    (formControls['slot']?.invalid &&
-                      (formControls['slot']?.dirty ||
-                        formControls['slot']?.touched))
-                  "
-                  class="invalid-feedback input-error"
-                >
-                  <span
-                    *ngIf="formControls['slot']?.errors?.['required']"
-                    class="fw-bold"
-                    >Slot Is Required</span
-                  >
-                </div>
-              </div>
-              <button class="btn btn-sm py-2 callNow" type="submit" *ngIf="slotavailable === 1">
-                 SCHEDULE NOW
-              </button>
-            </form>
-            <!-- Popup Box -->
-            <div *ngIf="showPopup" class="popup-box">
-              <h3 class="m-0 py-2 availabel" *ngIf="slotavailable === 1">
-                SLOT AVAILABLE !
-              </h3>
-              <h3 class="m-0 py-2 notAvailable" *ngIf="slotavailable === 0">
-                Slot Not Available
-              </h3>
             </div>
+            <!-- Date -->
+            <div class="inputField">
+              <label for="date" class="form-label pb-2 label required"
+                >Date *
+              </label>
+              <input
+                type="date"
+                id="txtDate"
+                [min]="minDate"
+                class="form-control"
+                formControlName="date"
+                (change)="selectedDate($event)"
+                [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['date'].errors) ||
+                    (formControls['date'].invalid &&
+                      (formControls['date'].dirty ||
+                        formControls['date'].touched))
+                }"
+              />
+              <div
+                *ngIf="
+                  (isSubmit && formControls['date']?.errors) ||
+                  (formControls['date']?.invalid &&
+                    (formControls['date']?.dirty ||
+                      formControls['date']?.touched))
+                "
+                class="invalid-feedback input-error"
+              >
+                <span
+                  *ngIf="formControls['date']?.errors?.['required']"
+                  class="fw-bold"
+                  >Date Is Required</span
+                >
+              </div>
+            </div>
+            <!-- Slot -->
+            <div class="inputField">
+              <label class="form-label label required">Slot *</label>
+              <select
+                class="form-select form-select-sm p-2"
+                formControlName="slot"
+                (change)="selectSlot($event)"
+                [ngClass]="{
+                  'is-invalid':
+                    (isSubmit && formControls['slot'].errors) ||
+                    (formControls['slot'].invalid &&
+                      (formControls['slot'].dirty ||
+                        formControls['slot'].touched))
+                }"
+              >
+                <option selected disabled>Select Your Slot</option>
+                <option *ngFor="let item of slotTime" [value]="item?.id">
+                  {{ item?.value }}
+                </option>
+              </select>
+              <div
+                *ngIf="
+                  (isSubmit && formControls['slot']?.errors) ||
+                  (formControls['slot']?.invalid &&
+                    (formControls['slot']?.dirty ||
+                      formControls['slot']?.touched))
+                "
+                class="invalid-feedback input-error"
+              >
+                <span
+                  *ngIf="formControls['slot']?.errors?.['required']"
+                  class="fw-bold"
+                  >Slot Is Required</span
+                >
+              </div>
+            </div>
+            <button
+              class="btn btn-sm py-2 callNow"
+              type="submit"
+              *ngIf="slotavailable === 1"
+            >
+              SCHEDULE NOW
+            </button>
+          </form>
+          <!-- Popup Box -->
+          <div *ngIf="showPopup" class="popup-box">
+            <h4 class="m-0 availabel" *ngIf="slotavailable === 1">
+              SLOT AVAILABLE !
+            </h4>
+            <h4 class="m-0 py-2 notAvailable" *ngIf="slotavailable === 0">
+              Slot Not Available
+            </h4>
           </div>
         </div>
       </div>

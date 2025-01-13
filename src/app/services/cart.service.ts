@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class CartService {
 
-  ApiEndPoint = environment.ApiEndPoint;
+  Api = environment.Api;
   private cartSubject = new Subject<any>();
 
   cartEvent$ = this.cartSubject.asObservable();
@@ -199,7 +199,7 @@ export class CartService {
       Authorization: `Bearer ${token}`
     });
 
-    return this.http.post<any>(`${this.ApiEndPoint}/cart/update`, { item_uuid, itemslist_uuid, qty }, { headers: httpHeaders }).pipe(
+    return this.http.post<any>(`${this.Api}/cart/update`, { item_uuid, itemslist_uuid, qty }, { headers: httpHeaders }).pipe(
       tap(() => {
         // Emit the quantity after adding to the cart
         this.emitQuantity(qty);
@@ -224,7 +224,7 @@ export class CartService {
   //get product from cart
 
   getAll() {
-    return this.http.get<CartProductHttpResponse>(`${this.ApiEndPoint}/cart`, {
+    return this.http.get<CartProductHttpResponse>(`${this.Api}/cart`, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       params: {}
     })
@@ -237,7 +237,7 @@ export class CartService {
 
   deleteCartItem(item_uuid: string) {
     this.deletedItemIdSubject.next(item_uuid);
-    return this.http.delete<CommonHttpResponse>(this.ApiEndPoint + 'cart/' + item_uuid, {
+    return this.http.delete<CommonHttpResponse>(this.Api + 'cart/' + item_uuid, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       params: {}
   })

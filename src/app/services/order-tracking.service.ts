@@ -8,13 +8,13 @@ import { environment } from 'src/environments/environments';
 })
 export class OrderTrackingService {
 
-  ApiEndPoint = environment.ApiEndPoint;
+  Api = environment.Api;
 
   constructor(private http: HttpClient) { }
 
   getOrderTraking(uuid:any): Observable<any[]> {
-    // console.log(this.ApiEndPoint);
-    return this.http.get<any[]>(`${this.ApiEndPoint}order/trackorder/${uuid}`)
+    // console.log(this.Api);
+    return this.http.get<any[]>(`${this.Api}order/trackorder/${uuid}`)
   }
 
 }

@@ -132,7 +132,7 @@
 
 <!-- tracking placed and complete order -->
 
-<div class="container" *ngIf="viewOrderItems?.status == 'Placed' || viewOrderItems?.status == 'Invoice'">
+<div class="container" *ngIf="viewOrderItems?.status == 'Placed' || viewOrderItems?.status == 'Invoice' || viewOrderItems?.status == 'Dispatch'">
   <!-- {{orderDetails | json}} -->
   <h3 class="fw-bold text-center">Tracking Details</h3>
   <div class="tracking-container container" *ngIf="orderDetails">
@@ -356,5 +356,5 @@
   </div>
 </div>
 <br><br>
-//<app-overlay></app-overlay>
+<app-overlay></app-overlay>
 <app-footer></app-footer>

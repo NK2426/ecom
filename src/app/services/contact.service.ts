@@ -7,13 +7,13 @@ import { environment } from 'src/environments/environments';
   providedIn: 'root'
 })
 export class ContactService {
-  ApiEndPoint = environment.ApiEndPoint;
+  Api = environment.Api;
 
   constructor(private http: HttpClient) {
   }
 
   sentContactFormData(data: any): Observable<any> {
-    const postapiurl = `${this.ApiEndPoint}/contact`
+    const postapiurl = `${this.Api}/contact`
     // console.log(data)
     return this.http.post(postapiurl, data);
   }

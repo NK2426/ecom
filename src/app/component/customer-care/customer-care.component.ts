@@ -14,7 +14,7 @@ export class CustomerCareComponent implements OnInit {
   isSubmit: boolean = false;
   pattern: any = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
-  email :string = '  info@mugdha.co'
+  email: string = '  info@mugdha.co'
   constructor(private fb: FormBuilder, private router: Router, private contactService: ContactService) { }
 
   get formControls() {
@@ -23,8 +23,8 @@ export class CustomerCareComponent implements OnInit {
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
-      firstname: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(15)]],
-      lastname: ['', [Validators.required, Validators.minLength(1),,Validators.maxLength(15)]],
+      firstname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+      lastname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
       email: ['', [Validators.required, Validators.email, Validators.pattern(this.pattern)]],
       phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("[0-9]{1}[0-9]{9}")]],
       comments: ['']

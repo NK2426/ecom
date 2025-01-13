@@ -141,8 +141,8 @@
 }
 
 .footer-bg {
-  background-color: #ffffff;
-  color: black;
+  background-color: #d9d9d9;
+  color: #000000;
   /* background-image: url('https://borobazar.vercel.app/assets/images/app-bg.png'); */
   background-size: cover;
   background-position: center;

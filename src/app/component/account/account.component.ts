@@ -152,13 +152,8 @@ export class AccountComponent implements OnInit {
 
       console.log(data.data.mobile.length);
 
-      if ((data.data.mobile.length == 10) 
-        || (data.data.mobile.length == 11) 
-        ||(data.data.mobile.length == 12)
-        || (data.data.mobile.length == 13)
-        || (data.data.mobile.length == 14) 
-        || 
-        (data.data.mobile.length == 15 || 7 || 8 || 9))
+      if (
+        (data.data.mobile.length >= 7 && data.data.mobile.length <= 15))
         this.accountForm.get('mobile')?.disable()
     })
   }

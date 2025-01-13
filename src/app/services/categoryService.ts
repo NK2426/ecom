@@ -8,25 +8,25 @@ import { Tag } from '../model/tags';
     providedIn: 'root'
 })
 export class CategoryService {
-    ApiEndPoint = environment.ApiEndPoint;
+    Api = environment.Api;
 
     constructor(private http: HttpClient) { }
 
     getCategoryWithUUID(uuid: any): Observable<Tag> {
-        return this.http.get<Tag>(`${this.ApiEndPoint}category/items/` + uuid);
+        return this.http.get<Tag>(`${this.Api}category/items/` + uuid);
     }
 
     getSubcatProducts(options: any): Observable<any> {
         // console.log(options);
-        const url = `${this.ApiEndPoint}category/items/${options}`;
+        const url = `${this.Api}category/items/${options}`;
         return this.http.get<any>(url);
       }
 
       getColorsVariants(uuid: any) {
-        return this.http.get<any>(`${this.ApiEndPoint}category/filter/${uuid}`)
+        return this.http.get<any>(`${this.Api}category/filter/${uuid}`)
       }
       getFilteredProducts(uuid: any, params: any) {
-        return this.http.get<any>(`${this.ApiEndPoint}category/items/${uuid}?${params}`)
+        return this.http.get<any>(`${this.Api}category/items/${uuid}?${params}`)
       }
 
       getSubSortCategories(id: any, params: any): Observable<any> {
@@ -36,9 +36,9 @@ export class CategoryService {
             httpParams = httpParams.set(key, params[key]);
           }
         }
-        return this.http.get<any>(`${this.ApiEndPoint}/category/items/${id}`, { params: httpParams });
+        return this.http.get<any>(`${this.Api}/category/items/${id}`, { params: httpParams });
       }
       getPaginationProducts(id: any, params: any): Observable<any> {
-        return this.http.get<any>(`${this.ApiEndPoint}/category/items/${id}`, { params: params });
+        return this.http.get<any>(`${this.Api}/category/items/${id}`, { params: params });
       }
 }

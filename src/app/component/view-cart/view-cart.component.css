@@ -159,6 +159,18 @@ h1 {
   font-weight: bold;
   color: white;
 }
+.checkoutPageContent {
+ 
+  width: 100%;
+ 
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: 10px 0px;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #a91be9;
+}
+
 
 .backpage {
   color: #a91be9;

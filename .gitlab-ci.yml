@@ -15,7 +15,7 @@ dev_deploy:
   only:
     - dev
   tags:
-    - smart
+    - vprc-server
 
 prod_deploy:
   stage: deploy
@@ -30,6 +30,6 @@ prod_deploy:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - ssh ubuntu@10.4.8.190 "cd /var/www/mugdha-master-ui/mugdha-ecomsite && git checkout master && git pull origin master"
   only:
-    - master
+    - maste
   tags:
-    - smart
+    - vprc-server

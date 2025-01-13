@@ -41,7 +41,7 @@ export class CategoryProductsComponent implements OnInit {
   selectedParameters: number[] = [];
   selectedFilter: number[] = [];
 
-  totalItems  = 0
+  totalItems = 0
 
   private eventSubscription!: Subscription;
   filterClicked: boolean = false;
@@ -54,7 +54,7 @@ export class CategoryProductsComponent implements OnInit {
 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  title:any
+  title: any
   products?: any;
 
   constructor(private apiService: ApiserviceService, private offer: OffersService, private wishlist: WishlistService,
@@ -116,7 +116,32 @@ export class CategoryProductsComponent implements OnInit {
       }
     });
   }
+  clearFilter() {
+    // this.variants.forEach((variant: { productvariantvalues: any[]; }) => {
+    //   variant.productvariantvalues.forEach((value: { selected: boolean; }) => value.selected = false);
+    // });
+    // this.parameter.forEach((param: { parametervalues: any[]; }) => {
+    //   param.parametervalues.forEach((value: { selected: boolean; }) => value.selected = false);
+    // });
 
+    this.pricefilter.forEach((price: { selected: boolean; }) => price.selected = false);
+
+    this.discount.forEach((discount: { selected: boolean; }) => discount.selected = false);
+
+    // this.brands.forEach((brand: { selected: boolean; }) => brand.selected = false);
+    this.defaultSortOption = 'pop'
+
+    // this.rating.forEach((rate: { selected: boolean; }) => rate.selected = false);
+
+    // Call update function to reflect changes
+    this.updateSelectedValues();
+  }
+
+  isFilterApplied(): boolean {
+    return this.pricefilter.some((price: { selected: any; }) => price.selected) ||
+           this.discount.some((discount: { selected: any; }) => discount.selected) 
+  }
+  
   subcategoryName: string = '';
   getProductListUUID(uuid: any) {
     this.filterClicked = false;
@@ -125,7 +150,7 @@ export class CategoryProductsComponent implements OnInit {
       next: resp => {
         // console.log(resp);
 
-        this.products  =  resp.data
+        this.products = resp.data
         this.totalItems = resp.data.totalItems
         this.subcategoryName = resp?.data.name;
         // console.log(this.subcategoryName)
@@ -161,7 +186,7 @@ export class CategoryProductsComponent implements OnInit {
 
   }
 
-  defaultSortOption: string | null = 'selected';
+  defaultSortOption: string | null = 'pop';
   // defaultSortOption: string = ''; 
   sortProducts(event: MatSelectChange): void {
     this.defaultSortOption = event.value;
@@ -271,7 +296,7 @@ export class CategoryProductsComponent implements OnInit {
       next: data => {
         // console.log(data);
         this.allFilters = data.data
-        
+
 
         this.pricefilter = data.data.pricefilter.map((item: any) => ({
           ...item,
@@ -304,7 +329,7 @@ export class CategoryProductsComponent implements OnInit {
 
     let params = new URLSearchParams();
 
-  
+
 
     if (this.selectedPrices.length) {
       params.set('price', this.selectedPrices.join(','));
@@ -344,7 +369,7 @@ export class CategoryProductsComponent implements OnInit {
     });
   }
 
-  variant_id :any =[]
+  variant_id: any = []
   getSelectedValues(filterArray: any[], valueKey?: string, isPriceOrDiscount: boolean = false): number[] {
     let selectedValues: number[] = [];
 
@@ -356,10 +381,10 @@ export class CategoryProductsComponent implements OnInit {
         }
       } else {
         // Handle variants and parameters
-      
-          if (filter.selected) {
-            selectedValues.push(filter.id || filter.value); // Adjust according to your data structure
-          
+
+        if (filter.selected) {
+          selectedValues.push(filter.id || filter.value); // Adjust according to your data structure
+
         }
       }
     });
@@ -403,7 +428,7 @@ export class CategoryProductsComponent implements OnInit {
       this.subcategory.getSubcatProducts(id).subscribe({
         next: resp => {
           // console.log(resp);
-          this.products  =  resp.data
+          this.products = resp.data
           this.totalItems = resp.data.totalItems
           this.subcategoryName = resp?.data.name;
           this.listProduct = resp?.data?.datas;

@@ -94,7 +94,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.cartCount();
     }
     this.onlineShop();
-    this.getStore();
+    // this.getStore();
     // console.log("hi this is a new popup");
     var data = null;
   }

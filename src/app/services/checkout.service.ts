@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class CheckoutService {
 
   apiUrl = environment.apiUrl;
-  ApiEndPoint = environment.ApiEndPoint;
+  Api = environment.Api;
 
   constructor(private http: HttpClient, private toasterService: ToasterService,private router:Router) { }
   private handleError<T>(operation = 'operation', result?: T) {
@@ -49,7 +49,7 @@ export class CheckoutService {
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.post<any>(`${this.ApiEndPoint}/order/placeorder`, { headers: httpHeaders })
+    return this.http.post<any>(`${this.Api}/order/placeorder`, { headers: httpHeaders })
   }
 
   buyNow(params:any): Observable<any[]> {
@@ -73,7 +73,7 @@ export class CheckoutService {
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.post<any>(`${this.ApiEndPoint}/order/buynow`, params, { headers: httpHeaders })
+    return this.http.post<any>(`${this.Api}/order/buynow`, params, { headers: httpHeaders })
   }
 
   createsession(orderID: any): Observable<any[]> {
@@ -95,7 +95,7 @@ export class CheckoutService {
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.post<any>(`${this.ApiEndPoint}/payment/createsession`, { orderID }, { headers: httpHeaders })
+    return this.http.post<any>(`${this.Api}/payment/createsession`, { orderID }, { headers: httpHeaders })
   }
 
   postelcode(code: any) {
@@ -118,11 +118,11 @@ export class CheckoutService {
       Authorization: `Bearer ${token}`
     });
 
-    return this.http.get<any>(`${this.ApiEndPoint}postalcode/` + code, { headers: httpHeaders })
+    return this.http.get<any>(`${this.Api}postalcode/` + code, { headers: httpHeaders })
   }
 
   state() {
-    return this.http.get<any>(`${this.ApiEndPoint}states`)
+    return this.http.get<any>(`${this.Api}states`)
   }
 
 
@@ -145,7 +145,7 @@ export class CheckoutService {
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.post<any>(`${this.ApiEndPoint}/address`, data, { headers: httpHeaders })
+    return this.http.post<any>(`${this.Api}/address`, data, { headers: httpHeaders })
   }
 
   fetchAddress() {
@@ -167,7 +167,7 @@ export class CheckoutService {
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.get<any>(`${this.ApiEndPoint}/address`, { headers: httpHeaders })
+    return this.http.get<any>(`${this.Api}/address`, { headers: httpHeaders })
   }
   
 
@@ -191,7 +191,7 @@ export class CheckoutService {
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.get<any>(`${this.ApiEndPoint}/address/` + uuid, { headers: httpHeaders })
+    return this.http.get<any>(`${this.Api}/address/` + uuid, { headers: httpHeaders })
   }
 
   editedAddress(data: any, uuid: string) {
@@ -213,15 +213,15 @@ export class CheckoutService {
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.put<any>(`${this.ApiEndPoint}/address/` + uuid, data, { headers: httpHeaders })
+    return this.http.put<any>(`${this.Api}/address/` + uuid, data, { headers: httpHeaders })
   }
 
   deleteAddress(uuid: string) {
-    return this.http.delete<any>(`${this.ApiEndPoint}/address/` + uuid)
+    return this.http.delete<any>(`${this.Api}/address/` + uuid)
   }
 
   selectDeliveryAddress(data: any) {
-    return this.http.post<any>(`${this.ApiEndPoint}order/selectaddress/`, data, {
+    return this.http.post<any>(`${this.Api}order/selectaddress/`, data, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       params: {}
 
@@ -232,7 +232,7 @@ export class CheckoutService {
 
   
   orderCheckout(data:any,coupon:any){
-    return this.http.post<any>(`${this.ApiEndPoint}order/checkout`,{ 
+    return this.http.post<any>(`${this.Api}order/checkout`,{ 
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       orderID:data,
       coupon:coupon
@@ -243,10 +243,10 @@ export class CheckoutService {
 
 
   getPaginationProducts(id: any, params: any): Observable<any> {
-    return this.http.get<any>(`${this.ApiEndPoint}/category/items/${id}`, { params: params });
+    return this.http.get<any>(`${this.Api}/category/items/${id}`, { params: params });
   }
   orderConfirm(data: any) {
-    return this.http.post<any>(`${this.ApiEndPoint}order/orderconfirm/`, { OrderID: data }, {
+    return this.http.post<any>(`${this.Api}order/orderconfirm/`, { OrderID: data }, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       params: {}
 
@@ -254,7 +254,7 @@ export class CheckoutService {
       .pipe(map((arr) => arr.data), catchError(this.handleError<any>(`persistOrderConfirm`)));
   }
   orderConfirmOnline(data: any) {
-    return this.http.post<any>(`${this.ApiEndPoint}order/orderconfirm/online`, data, {
+    return this.http.post<any>(`${this.Api}order/orderconfirm/online`, data, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       params: {}
 
@@ -263,20 +263,20 @@ export class CheckoutService {
   }
 
   orderStatusCod(orderid: any) {
-    return this.http.get<any>(`${this.ApiEndPoint}order/orderstatus/cod/` + orderid)
+    return this.http.get<any>(`${this.Api}order/orderstatus/cod/` + orderid)
   }
 
 
   orderStatusOnline(orderid: any) {
-    return this.http.get<any>(`${this.ApiEndPoint}/payment/orderstatus/` + orderid)
+    return this.http.get<any>(`${this.Api}/payment/orderstatus/` + orderid)
   }
 
   allOrders() {
-    return this.http.get<any>(`${this.ApiEndPoint}/orders`)
+    return this.http.get<any>(`${this.Api}/orders`)
   }
 
   fetchOrders(orderstatus: string) {
-    return this.http.get<any>(`${this.ApiEndPoint}/orders?status=${orderstatus}`)
+    return this.http.get<any>(`${this.Api}/orders?status=${orderstatus}`)
   }
   getcoupons(order:any,uuid: any) {
     const token = localStorage.getItem('token');
@@ -298,7 +298,7 @@ export class CheckoutService {
       Authorization: `Bearer ${token}`
 
     });
-    return this.http.put<any>(`${this.ApiEndPoint}coupon/` + uuid,order, { headers: httpHeaders })
+    return this.http.put<any>(`${this.Api}coupon/` + uuid,order, { headers: httpHeaders })
   }
 
 }

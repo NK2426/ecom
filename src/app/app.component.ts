@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { delay } from 'rxjs';
+import { LoaderService } from './helpers/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,12 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class AppComponent implements OnInit{
   title = 'Mugdha';
-  constructor(private router: Router) { }
+  constructor(private router: Router,   private loaderService: LoaderService,) { }
 
+  ngAfterViewInit() {
+    this.loaderService.show()
+     
+  }
   ngOnInit(): void {
     // Subscribe to the NavigationEnd event of the Router
 

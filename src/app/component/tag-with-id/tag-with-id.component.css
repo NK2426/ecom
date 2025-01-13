@@ -1,28 +1,631 @@
+.parentWishlist {
+  position: relative;
+}
+
 .wishlist-icon {
-    position: absolute;
-    /* top: 10px;
-    right: 10px; */
-    background-color: #fff; /* Background color to make it stand out */
-    border-radius: 50%;
-    padding: 5px;
-  
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 10;
+  left: 83%;
+}
+
+.wishlist-icon mat-icon {
+  font-size: 24px;
+  /* Adjust size as needed */
+}
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+.not-in-wishlist mat-icon {
+  color: #2c2424;
+  /* White color when not in wishlist */
+}
+
+.in-wishlist mat-icon {
+  color: #ef0c2e;
+  /* Red color when in wishlist */
+}
+
+.wishlist-icon:hover mat-icon {
+  color: #a91be9;
+  /* Change color on hover for visual feedback */
+}
+
+.clear-btn {
+  background-color: #a91be9;
+}
+
+/* ------------------------------------------------------------------------------------------------- */
+/* .childList:hover {
+    border: 1px solid #85d508 !important;
     cursor: pointer;
-    /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
-    z-index: 10; /* Ensure it appears above other elements */
+} */
+.childList {
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.childList:hover {
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+}
+
+.image-container {
+  width: 100%;
+  height: 200px;
+  /* Set fixed height for the image container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.product-card {
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  margin: 15px;
+  justify-content: center;
+  text-align: center;
+}
+
+.product-card:hover {
+  transform: scale(1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.mat-mdc-card-header {
+  justify-content: center;
+}
+
+.prod-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin: auto;
+}
+
+@media (min-width:920px) {
+  .prod-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin: auto;
   }
-  
-  .wishlist-icon mat-icon {
-    font-size: 24px; /* Adjust size as needed */
+}
+
+.fa-indian-rupee-sign {
+  font-size: 12px;
+}
+
+.image-container:hover {
+  border-radius: 5px;
+}
+
+.image-container img {
+  transition: transform 0.3s ease;
+}
+
+.mrp {
+  color: rgb(155, 154, 154);
+  font-size: 12px;
+}
+
+.product {
+  height: 250px;
+  /* Set a fixed height for the product card */
+  overflow: hidden;
+  /* Hide any content that overflows the fixed height */
+  position: relative;
+  /* Ensure proper positioning for child elements */
+}
+
+
+
+.image-container:hover img {
+  transform: scale(0.9);
+  /* border: 1px solid red; */
+  border-radius: 5px;
+}
+
+.product-detail {
+  height: 340px;
+}
+
+@media (max-width: 576px) {
+  .product-detail {
+    height: 458px;
   }
-  
-  .not-in-wishlist mat-icon {
-    color: #2c2424; /* White color when not in wishlist */
+}
+
+@media screen and (min-width: 572px) and (max-width: 761px) {
+
+  /* Select the image by its class or ID */
+  .prod-img {
+    width: 100%;
+    height: 300px;
   }
-  
-  .in-wishlist mat-icon {
-    color: #a91be9; /* Red color when in wishlist */
+}
+
+@media screen and (min-width: 792px) and (max-width: 992px) {
+
+  /* Select the image by its class or ID */
+  .product-detail {
+    /* Optionally, you can set the height to auto to maintain aspect ratio */
+    height: 290px;
   }
-  
-  .wishlist-icon:hover mat-icon {
-    color: #a91be9; /* Change color on hover for visual feedback */
+
+}
+
+.product-name {
+  font-size: 15px;
+  line-height: 1;
+}
+
+@media screen and (min-width: 426px) and (max-width: 767px) {
+  .product-list {
+    width: 50%;
   }
+
+  .product-name {
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+
+
+@media (max-width: 426px) {
+  .product-list {
+    /* width: 50%; */
+    width: 100%;
+  }
+
+  .product {
+    height: 200px;
+  }
+
+  .product-name {
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  .product-detail {
+    height: 200px;
+  }
+
+  .fa-indian-rupee-sign {
+    font-size: 11px;
+  }
+
+  .prod-name {
+    font-size: 12px;
+  }
+
+  .amount {
+    font-size: 11px;
+    margin-bottom: 0;
+  }
+
+  .mrp {
+    font-size: 11px;
+  }
+
+  .mat-mdc-card-header {
+    display: flex;
+    padding: 16px 0px 0;
+  }
+}
+
+.placeholder-option {
+  font-size: smaller;
+}
+
+.product-desc {
+  position: absolute;
+  bottom: 0;
+  /* Align the text to the bottom of the card */
+  width: 100%;
+  right: 1px;
+  color: #000000;
+  /* Text color */
+  padding: 10px;
+  /* Add padding to the text */
+  box-sizing: border-box;
+  /* Ensure padding doesn't affect the width */
+}
+
+.all-prod {
+  font-size: 20px;
+  padding-left: 25px;
+  margin-top: -35px;
+}
+
+.category-cont {
+  margin-top: -40px;
+}
+
+.filter {
+  border: 0.5px solid rgb(163, 162, 162);
+  padding: 10px;
+  border-radius: 35px;
+}
+
+.filter-select {
+  width: 30%;
+}
+
+@media (max-width: 1024px) {
+  .filter-select {
+    width: 30%;
+  }
+
+  .filter {
+    padding: 4px;
+  }
+}
+
+@media (max-width: 792px) {
+  .filter-select {
+    width: 40%;
+  }
+
+  .filter {
+    padding: 4px;
+  }
+
+  .category-cont {
+    margin-top: 0px;
+  }
+}
+
+@media (max-width: 426px) {
+  .filter-select {
+    width: 100%;
+  }
+
+  .filter {
+    padding: 4px;
+  }
+
+  .sort-prod-cont {
+    width: 50%;
+  }
+
+  .prod-web-banner {
+    display: none;
+  }
+}
+
+@media (min-width: 426px) {
+  .prod-mob-banner {
+    display: none;
+  }
+}
+
+.sort-prod-name {
+  color: #85d508;
+}
+
+.no-items {
+  font-size: 20px;
+  text-align: center;
+
+  /* position: absolute; */
+  margin: auto;
+  margin-top: 150px;
+  margin-bottom: 200px;
+  width: 100%;
+
+}
+
+.nofound-img {
+  width: 500px;
+}
+
+@media (max-width:992px) {
+  .no-items {
+    position: absolute;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 200px;
+    width: 100%;
+  }
+
+  .nofound-img {
+    width: 300px;
+  }
+}
+
+
+
+.prod-list-cont {
+  margin-bottom: 50px;
+}
+
+.checkbox-container {
+  /* display: flex; */
+  flex-wrap: wrap;
+}
+
+.checkbox-item {
+  width: 100%;
+  /* 50% for two columns */
+  box-sizing: border-box;
+  /* Ensure padding and border are included in the width */
+  padding: 5px;
+  /* Optional: Add some padding for spacing */
+}
+
+.checkbox-lable {
+  width: 80%;
+  margin-left: 2px;
+}
+
+@media (max-width: 992px) {
+  .prod-list-cont {
+    max-width: 991px !important;
+  }
+
+  .checkbox-container {
+    display: block;
+  }
+
+  .checkbox-item {
+    width: 100%;
+  }
+
+  .checkbox-lable {
+    width: 80%;
+    margin-left: 5px;
+  }
+}
+
+
+
+
+
+
+
+/* sort options radio */
+
+/* General styles */
+.sorting-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.sorting-options label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.sorting-options label:hover {
+  color: #a91be9;
+}
+
+.sorting-options input[type="radio"] {
+  display: none;
+}
+
+.sorting-options .custom-radio {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+  transition: border-color 0.3s ease;
+}
+
+.sorting-options input[type="radio"]:checked+.custom-radio {
+  border-color: #a91be9;
+}
+
+.sorting-options .custom-radio::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: #a91be9;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease;
+}
+
+.sorting-options input[type="radio"]:checked+.custom-radio::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Media queries for larger screens */
+@media (max-width: 767px) {
+  .sorting-options {
+    flex-direction: row;
+
+  }
+
+  .sorting-options label {
+    margin-right: 5px;
+    font-size: 12px;
+  }
+}
+
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+}
+
+.custom-checkbox:checked {
+  background-color: #a91be9;
+  border-color: #ffffff;
+}
+
+.custom-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 1px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-label {
+  margin-left: 8px;
+  /* Adjust as needed */
+}
+
+@media (min-width:992px) {
+  .categories-mobile {
+    display: none;
+  }
+}
+
+@media (max-width:992px) {
+  .categories {
+    display: none;
+  }
+
+  .category-products {
+    width: 100% !important;
+  }
+
+  .categories-mobile {
+    display: block;
+  }
+}
+
+.fixed-filters-button {
+  /* position: fixed; */
+  bottom: 100px;
+  /* Adjust as needed */
+  right: 50px;
+  /* Adjust as needed */
+  z-index: 1000;
+  /* Ensure it appears above other elements */
+  /* top: 25%; */
+}
+
+@media(max-width:360px) {
+  .fixed-filters-button {
+    top: 25%;
+  }
+}
+
+@media(min-width:361px)and (max-width:450px) {
+  .fixed-filters-button {
+    top: 20%;
+  }
+}
+
+@media(min-width:451px) and (max-width:992px) {
+  .fixed-filters-button {
+    top: 20%;
+  }
+}
+
+.noitemsfooter {
+  margin-top: 600px;
+  position: absolute;
+  width: 100%;
+}
+
+
+.product-list {
+  position: relative;
+  /* Ensure the card is the positioning context */
+}
+
+
+.bg-btn-success {
+  color: white;
+  background-color: #a91be9;
+}
+
+.bg-btn-fail {
+  color: #000000;
+  border: 1px solid #a91be9;
+  background-color: white;
+}
+
+::ng-deep #filtersAccordion .accordion-button {
+  background-color: #a91be9;
+  /* Your desired background color */
+  color: white;
+  /* Your desired text color */
+  border: none;
+  /* Remove border if needed */
+}
+
+/* Change color when the panel is expanded */
+::ng-deep #filtersAccordion .accordion-button:not(.collapsed) {
+  background-color: #a91be9;
+  /* Background color when expanded */
+  color: white;
+}
+
+/* Optional: Change the background and text color when hovered */
+::ng-deep #filtersAccordion .accordion-button:hover {
+  background-color: #a91be9;
+  /* Background on hover */
+  color: white;
+}
+
+/* Change the color of the collapsed button */
+::ng-deep #filtersAccordion .accordion-button.collapsed {
+  background-color: #f8f9fa;
+  /* Background color when collapsed */
+  color: #333;
+  /* Text color when collapsed */
+}
+
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.filterBtn {
+  width: 150px;
+}
+
+@media (max-width:992px) {
+  .filterIcon {
+    display: block;
+  }
+}
+
+@media (min-width:993px) {
+  .filterIcon {
+    display: none;
+  }
+}

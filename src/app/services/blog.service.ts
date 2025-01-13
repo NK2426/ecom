@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environments';
 })
 export class BlogService {
 
-  apiurl = environment.ApiEndPoint;
+  apiurl = environment.Api;
 
   constructor(private http: HttpClient) { }
 

@@ -12,8 +12,13 @@
 
     <div class="container" *ngIf="isShown">
       <div>
-        <button mat-raised-button (click)="resetForm()" data-toggle="modal" data-target="#exampleModal2"
-          style="background-color: #a91be9; color: #fff; margin-left: 10px">
+        <button
+          mat-raised-button
+          (click)="resetForm()"
+          data-toggle="modal"
+          data-target="#exampleModal2"
+          style="background-color: #a91be9; color: #fff; margin-left: 10px"
+        >
           + Add Address
         </button>
       </div>
@@ -23,15 +28,25 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="container delivery-add w-100" *ngIf="!isShown">
-            <div class="card address-add" style="
+            <div
+              class="card address-add"
+              style="
                 width: 100%;
                 cursor: pointer;
                 display: inline-block;
                 margin-right: 10px;
-              ">
-              <div class="card-body align-center" style="padding: 35px" data-toggle="modal"
-                data-target="#exampleModal2">
-                <h4 class="add-address" style="margin-bottom: 0px; color: #a91be9">
+              "
+            >
+              <div
+                class="card-body align-center"
+                style="padding: 35px"
+                data-toggle="modal"
+                data-target="#exampleModal2"
+              >
+                <h4
+                  class="add-address"
+                  style="margin-bottom: 0px; color: #a91be9"
+                >
                   + Add New Address
                 </h4>
               </div>
@@ -41,23 +56,45 @@
 
         <div class="col-sm-12">
           <div *ngIf="isShown">
-            <div class="card address-card" [ngClass]="{ 'selected-address': i === selectedAddressIndex }"
-              *ngFor="let address of address; let i = index">
-              <div class="card-body" style="padding: 20px; padding-bottom: 10px" (click)="
+            <div
+              class="card address-card"
+              [ngClass]="{ 'selected-address': i === selectedAddressIndex }"
+              *ngFor="let address of address; let i = index"
+            >
+              <div
+                class="card-body"
+                style="padding: 20px; padding-bottom: 10px"
+                (click)="
                   selectDeliveryAddress(address?.uuid, i); disableAddress(i)
-                ">
-                <span class="pb-2" style="
+                "
+              >
+                <span
+                  class="pb-2"
+                  style="
                     float: right;
 
                     color: #a91be9;
                     margin-top: 2px;
-                  " *ngIf="address?.isdefault == 1">Default</span>
+                  "
+                  *ngIf="address?.isdefault == 1"
+                  >Default</span
+                >
                 <div class="row">
-                  <h5 class="col-6 pb-2 fw-bold" style="margin-bottom: 0px; color: #a91be9">
+                  <h5
+                    class="col-6 pb-2 fw-bold"
+                    style="margin-bottom: 0px; color: #a91be9"
+                  >
                     {{ address.type }}
                   </h5>
-                  <span class="col-6 text-end fs-5"><i class="fa-solid fa-pen-to-square" style="color: #a91be9"
-                      (click)="editAddress(address.uuid)" data-toggle="modal" data-target="#exampleModal2"></i></span>
+                  <span class="col-6 text-end fs-5"
+                    ><i
+                      class="fa-solid fa-pen-to-square"
+                      style="color: #a91be9"
+                      (click)="editAddress(address.uuid)"
+                      data-toggle="modal"
+                      data-target="#exampleModal2"
+                    ></i
+                  ></span>
                 </div>
 
                 <p class="add-address">
@@ -88,19 +125,31 @@
                 Product will deliver to this address
               </p>
             </div>
-            <!-- <div class="m-3">
-              <input type="checkbox" id="billingAddressCheckbox" name="billingAddress"> &nbsp;
-              <label for="billingAddressCheckbox">Same as Billing Address</label>
-            </div> -->
-           
-
+            <div class="m-3">
+              <input
+                type="checkbox"
+                id="billingAddressCheckbox"
+                name="billingAddress"
+              />
+              &nbsp;
+              <label for="billingAddressCheckbox"
+                >Same as Billing Address</label
+              >
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true" data-backdrop="static">
+      <div
+        class="modal fade"
+        id="exampleModal2"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+        data-backdrop="static"
+      >
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -116,45 +165,73 @@
                     <div class="col-md-6">
                       <label for="name" class="required">Name: </label>
 
-                      <input class="form-control" id="name" type="text" formControlName="name"
-                        (keypress)="onKeyPress($event)" [ngClass]="{
+                      <input
+                        class="form-control"
+                        id="name"
+                        type="text"
+                        formControlName="name"
+                        (keypress)="onKeyPress($event)"
+                        [ngClass]="{
                           'is-invalid':
                             (isSubmit && formControl['name'].errors) ||
                             (formControl['name'].invalid &&
                               (formControl['name'].dirty ||
                                 formControl['name'].touched))
-                        }" />
-                      <div *ngIf="
+                        }"
+                      />
+                      <div
+                        *ngIf="
                           (isSubmit && formControl['name']?.errors) ||
                           (formControl['name']?.invalid &&
                             (formControl['name']?.dirty ||
                               formControl['name']?.touched))
-                        " class="invalid-feedback">
-                        <span *ngIf="formControl['name'].errors?.['required']">Name is Required</span>
-                        <span *ngIf="formControl['name'].errors?.['minlength']">Minimum Length 3 Characters.</span>
-                        <span *ngIf="formControl['name'].errors?.['pattern']">Enter Alphabit Only</span>
+                        "
+                        class="invalid-feedback"
+                      >
+                        <span *ngIf="formControl['name'].errors?.['required']"
+                          >Name is Required</span
+                        >
+                        <span *ngIf="formControl['name'].errors?.['minlength']"
+                          >Minimum Length 3 Characters.</span
+                        >
+                        <span *ngIf="formControl['name'].errors?.['pattern']"
+                          >Enter Alphabit Only</span
+                        >
                       </div>
                     </div>
                     <!-- Email -->
                     <div class="col-md-6">
                       <label for="email" class="required">E-mail ID: </label>
 
-                      <input class="form-control" id="email" type="email" formControlName="email" [ngClass]="{
+                      <input
+                        class="form-control"
+                        id="email"
+                        type="email"
+                        formControlName="email"
+                        [ngClass]="{
                           'is-invalid':
                             (isSubmit && formControl['email'].errors) ||
                             (formControl['email'].invalid &&
                               (formControl['email'].dirty ||
                                 formControl['email'].touched))
-                        }" />
+                        }"
+                      />
 
-                      <div *ngIf="
+                      <div
+                        *ngIf="
                           (isSubmit && formControl['email']?.errors) ||
                           (formControl['email']?.invalid &&
                             (formControl['email']?.dirty ||
                               formControl['email']?.touched))
-                        " class="invalid-feedback">
-                        <span *ngIf="formControl['email'].errors?.['required']">Email is Required</span>
-                        <span *ngIf="formControl['email'].errors?.['minlength']">Give Valid Email Id</span>
+                        "
+                        class="invalid-feedback"
+                      >
+                        <span *ngIf="formControl['email'].errors?.['required']"
+                          >Email is Required</span
+                        >
+                        <span *ngIf="formControl['email'].errors?.['minlength']"
+                          >Give Valid Email Id</span
+                        >
                       </div>
                     </div>
                   </div>
@@ -164,62 +241,108 @@
                   <div class="row">
                     <!-- Mobile -->
                     <div class="col-md-6">
-                      <label for="mobile" class="required">Mobile Number:
+                      <label for="mobile" class="required"
+                        >Mobile Number:
                       </label>
 
-                      <input class="form-control" id="mobile" type="text" minlength="7" maxlength="15"
-                        (input)="mobileNumberValidator($event)" formControlName="mobile"
-                        (keypress)="validateNumber($event)" [ngClass]="{
+                      <input
+                        class="form-control"
+                        id="mobile"
+                        type="text"
+                        minlength="7"
+                        maxlength="15"
+                        (input)="mobileNumberValidator($event)"
+                        formControlName="mobile"
+                        (keypress)="validateNumber($event)"
+                        [ngClass]="{
                           'is-invalid':
                             (isSubmit && formControl['mobile'].errors) ||
                             (formControl['mobile'].invalid &&
                               (formControl['mobile'].dirty ||
                                 formControl['mobile'].touched))
-                        }" />
+                        }"
+                      />
 
-                      <div *ngIf="
+                      <div
+                        *ngIf="
                           (isSubmit && formControl['mobile']?.errors) ||
                           (formControl['mobile']?.invalid &&
                             (formControl['mobile']?.dirty ||
                               formControl['mobile']?.touched))
-                        " class="invalid-feedback">
-                        <span *ngIf="formControl['mobile'].errors?.['required']">Mobile Number is required</span>
-                        <span *ngIf="formControl['mobile'].errors?.['minlength']">Minimum Length 7 Digits</span>
-                        <span *ngIf="formControl['mobile'].errors?.['maxlength']">Maximum Length 15 Digits</span>
-                        <span *ngIf="formControl['mobile'].errors?.['pattern']">Only numeric values are allowed</span>
+                        "
+                        class="invalid-feedback"
+                      >
+                        <span *ngIf="formControl['mobile'].errors?.['required']"
+                          >Mobile Number is required</span
+                        >
+                        <span
+                          *ngIf="formControl['mobile'].errors?.['minlength']"
+                          >Minimum Length 7 Digits</span
+                        >
+                        <span
+                          *ngIf="formControl['mobile'].errors?.['maxlength']"
+                          >Maximum Length 15 Digits</span
+                        >
+                        <span *ngIf="formControl['mobile'].errors?.['pattern']"
+                          >Only numeric values are allowed</span
+                        >
                       </div>
                     </div>
                     <!-- Zipcode -->
                     <div class="col-md-6">
                       <label for="zipcode" class="required">Zip Code: </label>
 
-                      <input class="form-control" id="zipcode" type="text" (input)="limitInputLength($event, 6)"
-                        formControlName="zipcode" [ngClass]="{
+                      <input
+                        class="form-control"
+                        id="zipcode"
+                        type="text"
+                        (input)="limitInputLength($event, 6)"
+                        formControlName="zipcode"
+                        [ngClass]="{
                           'is-invalid':
                             (isSubmit && formControl['zipcode'].errors) ||
                             (formControl['zipcode'].invalid &&
                               (formControl['zipcode'].dirty ||
                                 formControl['zipcode'].touched))
-                        }" (keypress)="validateNumber($event)" (keyup)="postelcode($event)" />
+                        }"
+                        (keypress)="validateNumber($event)"
+                        (keyup)="postelcode($event)"
+                      />
 
-                      <div *ngIf="
+                      <div
+                        *ngIf="
                           (isSubmit && formControl['zipcode']?.errors) ||
                           (formControl['zipcode']?.invalid &&
                             (formControl['zipcode']?.dirty ||
                               formControl['zipcode']?.touched))
-                        " class="invalid-feedback">
-                        <span *ngIf="formControl['zipcode'].errors?.['required']">Zip Code is required</span>
-                        <span *ngIf="formControl['zipcode'].errors?.['minlength']">Zip Code must be exactly 6
-                          digits</span>
-                        <span *ngIf="formControl['zipcode'].errors?.['maxlength']">Zip Code must be exactly 6
-                          digits</span>
-                        <span *ngIf="formControl['zipcode'].errors?.['pattern']">Only numeric values are allowed</span>
+                        "
+                        class="invalid-feedback"
+                      >
+                        <span
+                          *ngIf="formControl['zipcode'].errors?.['required']"
+                          >Zip Code is required</span
+                        >
+                        <span
+                          *ngIf="formControl['zipcode'].errors?.['minlength']"
+                          >Zip Code must be exactly 6 digits</span
+                        >
+                        <span
+                          *ngIf="formControl['zipcode'].errors?.['maxlength']"
+                          >Zip Code must be exactly 6 digits</span
+                        >
+                        <span *ngIf="formControl['zipcode'].errors?.['pattern']"
+                          >Only numeric values are allowed</span
+                        >
                       </div>
                     </div>
                   </div>
                   <!-- </div> -->
                   <br />
-                  <div *ngIf="!isNotAvail" style="color: red" class="text-center">
+                  <div
+                    *ngIf="!isNotAvail"
+                    style="color: red"
+                    class="text-center"
+                  >
                     Currently Not Deliver to this Area
                   </div>
 
@@ -229,42 +352,66 @@
                     <div class="col-md-6">
                       <label for="city" class="required">City: </label>
 
-                      <input class="form-control" id="city" type="text" formControlName="city" [ngClass]="{
+                      <input
+                        class="form-control"
+                        id="city"
+                        type="text"
+                        formControlName="city"
+                        [ngClass]="{
                           'is-invalid':
                             (isSubmit && formControl['city'].errors) ||
                             (formControl['city'].invalid &&
                               (formControl['city'].dirty ||
                                 formControl['city'].touched))
-                        }" readonly />
+                        }"
+                        readonly
+                      />
 
-                      <div *ngIf="
+                      <div
+                        *ngIf="
                           (isSubmit && formControl['city']?.errors) ||
                           (formControl['city']?.invalid &&
                             (formControl['city']?.dirty ||
                               formControl['city']?.touched))
-                        " class="invalid-feedback">
-                        <span *ngIf="formControl['city'].errors?.['required']">City is Required</span>
+                        "
+                        class="invalid-feedback"
+                      >
+                        <span *ngIf="formControl['city'].errors?.['required']"
+                          >City is Required</span
+                        >
                       </div>
                     </div>
                     <!-- State -->
                     <div class="col-md-6">
                       <label for="state" class="required">State: </label>
 
-                      <input class="form-control" id="state" type="text" formControlName="state" [ngClass]="{
+                      <input
+                        class="form-control"
+                        id="state"
+                        type="text"
+                        formControlName="state"
+                        [ngClass]="{
                           'is-invalid':
                             (isSubmit && formControl['state'].errors) ||
                             (formControl['state'].invalid &&
                               (formControl['state'].dirty ||
                                 formControl['state'].touched))
-                        }" readonly />
+                        }"
+                        readonly
+                      />
 
-                      <div *ngIf="
+                      <div
+                        *ngIf="
                           (isSubmit && formControl['state']?.errors) ||
                           (formControl['state']?.invalid &&
                             (formControl['state']?.dirty ||
                               formControl['state']?.touched))
-                        " class="invalid-feedback">
-                        <span *ngIf="formControl['state'].errors?.['required']">State is Required</span>
+                        "
+                        class="invalid-feedback"
+                      >
+                        <span *ngIf="formControl['state'].errors?.['required']"
+                          >State is Required</span
+                        >
                       </div>
                     </div>
                   </div>
@@ -275,21 +422,33 @@
                     <!-- Address -->
                     <div class="col-sm-12">
                       <label for="address" class="required">Address: </label>
-                      <textarea class="form-control" id="address" type="text" formControlName="address" [ngClass]="{
+                      <textarea
+                        class="form-control"
+                        id="address"
+                        type="text"
+                        formControlName="address"
+                        [ngClass]="{
                           'is-invalid':
                             (isSubmit && formControl['address'].errors) ||
                             (formControl['address'].invalid &&
                               (formControl['address'].dirty ||
                                 formControl['address'].touched))
-                        }"></textarea>
+                        }"
+                      ></textarea>
 
-                      <div *ngIf="
+                      <div
+                        *ngIf="
                           (isSubmit && formControl['address']?.errors) ||
                           (formControl['address']?.invalid &&
                             (formControl['address']?.dirty ||
                               formControl['address']?.touched))
-                        " class="invalid-feedback">
-                        <span *ngIf="formControl['address'].errors?.['required']">Address is Required</span>
+                        "
+                        class="invalid-feedback"
+                      >
+                        <span
+                          *ngIf="formControl['address'].errors?.['required']"
+                          >Address is Required</span
+                        >
                       </div>
                     </div>
                   </div>
@@ -311,16 +470,29 @@
                   </div>
                 </div> -->
                 <mat-radio-group formControlName="type" class="required">
-                  <mat-radio-button *ngFor="let option of options" [value]="option.value">{{ option.label
-                    }}</mat-radio-button>
+                  <mat-radio-button
+                    *ngFor="let option of options"
+                    [value]="option.value"
+                    >{{ option.label }}</mat-radio-button
+                  >
                 </mat-radio-group>
 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModalBtn"
-                    (click)="resetMyForm()">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                    id="closeModalBtn"
+                    (click)="resetMyForm()"
+                  >
                     Close
                   </button>
-                  <button mat-raised-button matStepperNext style="background-color: #a91be9; color: #fff" type="submit">
+                  <button
+                    mat-raised-button
+                    matStepperNext
+                    style="background-color: #a91be9; color: #fff"
+                    type="submit"
+                  >
                     Save Address
                   </button>
                 </div>
@@ -332,40 +504,55 @@
     </div>
     <div class="col-md-4 order-detail">
       <h2 class="text-center">Order Details</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col" class="table-heading">Image</th>
-            <th scope="col" class="table-heading">Name</th>
-            <th scope="col" class="table-heading">Qty</th>
-            <th scope="col" class="table-heading">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of orderItems">
-            <td>
-              <img [src]="item.path" alt="Product Image" class="img-fluid product-img" />
-            </td>
-            <td>{{ item.name }}</td>
-            <td class="text-center">
-              {{ item.qty }}
-            </td>
+      <div style="height: 400px; overflow: overlay">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="table-heading">Image</th>
+              <th scope="col" class="table-heading">Name</th>
+              <th scope="col" class="table-heading">Qty</th>
+              <th scope="col" class="table-heading">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of orderItems">
+              <td>
+                <img
+                  [src]="item.path"
+                  alt="Product Image"
+                  class="img-fluid product-img"
+                />
+              </td>
+              <td>{{ item.name }}</td>
+              <td class="text-center">
+                {{ item.qty }}
+              </td>
 
-            <td>
-              <i class="fa-solid fa-indian-rupee-sign" style="font-size: 12px"></i>
-              {{ item.subtotal }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <td>
+                <i
+                  class="fa-solid fa-indian-rupee-sign"
+                  style="font-size: 12px"
+                ></i>
+                {{ item.subtotal }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div *ngIf="checkoutdetails !== '0'">
         Delivery Charges :
         <i class="fa-solid fa-indian-rupee-sign" style="font-size: 12px"></i>
         {{ checkoutdetails }}.00
       </div>
-      <div *ngIf="checkoutdetails == '0'">Delivery Charges : Free Delivery</div>
+      <div *ngIf="checkoutdetails == '0'" class="mt-6">
+        Delivery Charges : Free Delivery
+      </div>
       <br /><br />
-      <div style="margin-right: 10px" class="row" *ngIf="checkout?.couponAvailable === '0'">
+      <div
+        style="margin-right: 10px"
+        class="row"
+        *ngIf="checkout?.couponAvailable === '0'"
+      >
         <div class="col fw-bold fs-6">Coupon value</div>
         <div class="col text-end fw-bold fs-6">
           <i class="fa-solid fa-indian-rupee-sign" style="font-size: 16px"></i>
@@ -392,20 +579,43 @@
       <div class="checkout-container">
         <!-- Other checkout details -->
         <!-- Coupon Section -->
-        <div class="" *ngIf="
-            checkout.couponAvailable == '1' ">
-          <label for="couponCode" class="coupon-label mb-1">Have a coupon?</label>
+        <!-- <div class="p-4 rounded-2" style="border: 1px solid #a91be9">
+          <label
+            for="couponCode"
+            class="coupon-label mb-1"
+            *ngIf="!couponApllied"
+            >Have a coupon?</label
+          >
           <div class="coupon-input-container">
-            <input type="text" id="couponCode" [(ngModel)]="couponCode" placeholder="Enter coupon code"
-              class="coupon-input form-control" />
-            <button (click)="applyCoupon()" class="apply-coupon-button btn btn-sm">
+            <input
+              type="text"
+              id="couponCode"
+              [(ngModel)]="couponCode"
+              (input)="convertToUpper()"
+              placeholder="Enter coupon code"
+              class="coupon-input form-control"
+              [disabled]="couponApllied"
+            />
+            <button
+              (click)="applyCoupon()"
+              class="apply-coupon-button btn btn-sm"
+              *ngIf="!couponApllied"
+            >
               Apply
             </button>
           </div>
-        </div>
-        <div class="coupon-section" *ngIf="checkout.couponAvailable == 0">
-          <label for="couponCode" class="coupon-message">{{ couponCode.toUpperCase() }} Applied Sucessfully</label>
-        </div>
+
+          <div
+            class="couponMessage-section"
+            *ngIf="checkout.couponAvailable == 0"
+          >
+            <span for="couponCode" class="coupon-message fw-bold"
+              >{{ couponCode.toUpperCase() }} </span
+            ><span for="couponCode" class="coupon-message">
+              &nbsp; Applied Sucessfully</span
+            >
+          </div>
+        </div> -->
         <!-- Order summary -->
         <div class="order-summary">
           <!-- Order details -->
@@ -436,5 +646,5 @@
   <div class="row"></div>
 </div>
 <br /><br />
-//<app-overlay></app-overlay>
+<app-overlay></app-overlay>
 <app-footer></app-footer>

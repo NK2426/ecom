@@ -7,11 +7,11 @@ import { environment } from 'src/environments/environments';
   providedIn: 'root'
 })
 export class ParameterService {
-  ApiEndPoint = environment.ApiEndPoint;
+  Api = environment.Api;
 
   constructor(private http: HttpClient) { }
 
   getParameters(uuid: any): Observable<any> {
-    return this.http.get<any>(this.ApiEndPoint + '/itemmoredetail/' + uuid)
+    return this.http.get<any>(this.Api + '/itemmoredetail/' + uuid)
   }
 }

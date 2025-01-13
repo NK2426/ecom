@@ -51,7 +51,7 @@ export class SignupComponent {
 
     this.profileForm = this.fb.group({
       region: ['1', Validators.required],
-      name: ['', [Validators.required, Validators.minLength(3)]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       mobile: ['', [Validators.required, this.mobileNumberValidator()]],
       email: ['', [Validators.required, Validators.email]],
       authkey: ['X9U2', [Validators.required, Validators.minLength(1)]],

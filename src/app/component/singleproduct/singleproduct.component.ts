@@ -35,7 +35,7 @@ export class SingleproductComponent implements OnInit {
 
   deletedItemId!: string;
   deletedItemIdSubscription!: Subscription;
-  listrecomdProduct :SimilarProduct[] =[]
+  listrecomdProduct: SimilarProduct[] = []
   sepparateProduct!: any[];
   id: any = '';
   productdata: any;
@@ -94,13 +94,13 @@ export class SingleproductComponent implements OnInit {
     private parameterService: ParameterService, private cd: ChangeDetectorRef
 
   ) {
-    this.slidesToShow = window.innerWidth < 576 ? 1 : 3;
+    this.slidesToShow = window.innerWidth < 576 ? 3 : 5;
     this.slideConfig2 = { slidesToShow: this.slidesToShow, slidesToScroll: 3 };
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    this.slidesToShow = (event.target as Window).innerWidth < 576 ? 1 : 3;
+    this.slidesToShow = (event.target as Window).innerWidth < 576 ? 3 : 5;
     this.slideConfig2 = { slidesToShow: this.slidesToShow, slidesToScroll: this.slidesToShow };
   }
 
@@ -110,6 +110,7 @@ export class SingleproductComponent implements OnInit {
     this.list(this.id);
     // this.listProd(this.id)
     this.similarProducts();
+   
     // this.getWeight();
     this.getParameter();
     if (token) {
@@ -240,6 +241,9 @@ export class SingleproductComponent implements OnInit {
           // console.log(data.data.item.rating, data.data);
           this.currentRate = data.data.item.rating;
           this.listProduct = data?.data?.item;
+
+
+          this.userRatings(this.listProduct.uuid)
           this.listvariants = data?.data?.listvariants
           // console.log(this.listvariants);
 
@@ -284,6 +288,8 @@ export class SingleproductComponent implements OnInit {
 
 
   //click variant start
+  availableVariant: any;
+  isCartVisible: boolean = true;
   getVariant() {
     this.resetProductDetailData();
     const payload = {
@@ -296,6 +302,16 @@ export class SingleproductComponent implements OnInit {
           this.showProduct = true;
           this.productdata = data;
           this.listProduct = data.data.item;
+          this.isCartVisible = true;
+          console.log(this.listProduct.status);
+          if (this.listProduct.status == 'Inactive') {
+            this.availableVariant = this.listProduct.status;
+            this.isCartVisible = !this.isCartVisible;
+            // this.isCartVisible = this.listProduct.status
+          }
+          else {
+            this.availableVariant = this.listProduct.status;
+          }
           this.productVariants = data.data.productvariants.map((variant: any) => {
             variant.productvariantvalues = variant.productvariantvalues.map((value: any) => {
               value.selected = value.selected === 'true';
@@ -326,7 +342,7 @@ export class SingleproductComponent implements OnInit {
 
 
   handleVariantClick(variantId: any, valueId: any) {
-    // console.log(this.listvariants, ">>>>>>>>>>>>>>");
+    console.log(">>>>>>>>>>>>>>", this.listvariants, valueId);
     this.selectedProductPayload(this.listvariants, { [variantId]: valueId });
     // console.log(this.listvariants, "<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>");
 
@@ -614,9 +630,12 @@ export class SingleproductComponent implements OnInit {
 
   objectEntries = Object.entries;
 
+  
 
-  scrollToReview() {
-    const reviewElement = document.getElementById('mat-tab-label-0-2');
+
+  scrollToReview(event: MouseEvent) {
+  
+    const reviewElement = document.querySelector(`[aria-setsize="3"]`);
     if (reviewElement) {
       const elementPosition = reviewElement.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - (window.innerHeight / 2 - reviewElement.clientHeight / 2);
@@ -630,19 +649,21 @@ export class SingleproductComponent implements OnInit {
     }
   }
   
-  getRating(index: number) {
+  getRating(index: number,uuid:any) {
     // console.log(index)
     if (this.tabGroup) {
       // console.log(index, this.tabGroup)
       this.tabGroup.selectedIndex = index;
     }
-    this.userRatings();
-    this.scrollToReview();
+    this.userRatings(uuid);
   }
 
   userRatingData: any[] = [];
-  userRatings() {
-    this.apiService.getRating().subscribe({
+  userRatings(uuid:any) {
+
+    console.log(this.id);
+    
+    this.apiService.getRating(uuid).subscribe({
       next: resp => {
         // console.log(resp.data);
         this.userRatingData = resp.data;

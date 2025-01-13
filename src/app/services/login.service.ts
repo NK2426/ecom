@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environments';
 })
 export class LoginService {
 
-  loginApi = environment.ApiEndPoint;
+  loginApi = environment.Api;
 
   constructor(private http: HttpClient) { }
 

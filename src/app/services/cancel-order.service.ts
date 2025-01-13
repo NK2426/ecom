@@ -8,21 +8,21 @@ import { environment } from 'src/environments/environments';
 })
 export class CancelOrderService {
 
-  ApiEndPoint = environment.ApiEndPoint;
+  Api = environment.Api;
 
   constructor(private http: HttpClient) { }
 
   getReason(uuid: any): Observable<any[]> {
-    // console.log(this.ApiEndPoint);
-    return this.http.get<any[]>(`${this.ApiEndPoint}order/reason/${uuid}`)
+    // console.log(this.Api);
+    return this.http.get<any[]>(`${this.Api}order/reason/${uuid}`)
   }
 
   cancelReason(id: any, uuid: any) {
     // console.log(id)
-    return this.http.put(`${this.ApiEndPoint}order/cancel/${uuid}`, { "reason_id": id });
+    return this.http.put(`${this.Api}order/cancel/${uuid}`, { "reason_id": id });
   }
   
   return(formData: any, uuid: any) {
-    return this.http.put(`${this.ApiEndPoint}order/return/${uuid}`, formData);
+    return this.http.put(`${this.Api}order/return/${uuid}`, formData);
   }
 }

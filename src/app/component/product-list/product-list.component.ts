@@ -303,8 +303,38 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  updateSelectedValues(): void {
+  clearFilter() {
+    // Reset all filters to false or null
+    this.variants.forEach((variant: { productvariantvalues: any[]; }) => {
+      variant.productvariantvalues.forEach((value: { selected: boolean; }) => value.selected = false);
+    });
 
+    this.parameter.forEach((param: { parametervalues: any[]; }) => {
+      param.parametervalues.forEach((value: { selected: boolean; }) => value.selected = false);
+    });
+
+    this.pricefilter.forEach((price: { selected: boolean; }) => price.selected = false);
+
+    this.discount.forEach((discount: { selected: boolean; }) => discount.selected = false);
+
+    this.brands.forEach((brand: { selected: boolean; }) => brand.selected = false);
+    this.defaultSortOption = 'pop'
+
+    // Call update function to reflect changes
+    this.updateSelectedValues();
+  }
+  isFilterApplied(): boolean {
+    return this.variants?.some((variant: { productvariantvalues: any[]; }) => 
+      variant.productvariantvalues.some((value: { selected: any; }) => value.selected)) ||
+      this.parameter?.some((param: { parametervalues: any[]; }) => 
+        param.parametervalues.some((value: { selected: any; }) => value.selected)) ||
+      this.pricefilter?.some((price: { selected: any; }) => price.selected) ||
+      this.discount?.some((discount: { selected: any; }) => discount.selected) 
+  }
+
+  filterClear: boolean = false;
+  updateSelectedValues(): void {
+    this.filterClear = true;
     this.filterClicked = true;
     this.selectedVariants = this.getSelectedValues(this.variants, 'productvariantvalues');
     this.selectedParameters = this.getSelectedValues(this.parameter, 'parametervalues');
@@ -318,7 +348,6 @@ export class ProductListComponent implements OnInit {
       params.set('variant', this.selectedVariants.join(','));
       params.set('variant_id', this.variant_id.join(','));
     }
-
     if (this.selectedPrices.length) {
       params.set('price', this.selectedPrices.join(','));
     }
@@ -349,6 +378,7 @@ export class ProductListComponent implements OnInit {
 
     // Add currentPage to params
 
+    
 
     const urlparam = this.router.snapshot.paramMap.get('id');
     this.apiService.getFilteredProducts(urlparam, params).subscribe((data: any) => {
@@ -360,7 +390,7 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  variant_id :any =[]
+  variant_id: any = []
   getSelectedValues(filterArray: any[], valueKey?: string, isPriceOrDiscount: boolean = false): number[] {
     let selectedValues: number[] = [];
 

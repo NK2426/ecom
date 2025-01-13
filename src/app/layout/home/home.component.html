@@ -3,9 +3,8 @@
 <!-- <app-home-slider></app-home-slider> -->
 
 <div *ngFor="let section of section">
-
   <!-- Banner -->
-  <div class="container-fluid slider-home" *ngIf="section.type == 'Banner'">
+  <div class="container-fluid slider-home mb-4" *ngIf="section.type == 'Banner'">
     <div class="carousel-wrapper" style="overflow: hidden">
       <ngx-slick-carousel
         class="carousel"
@@ -40,19 +39,19 @@
   </div>
 
   <!-- Short By Category -->
-  <div style="background-color: #f6f6f6" *ngIf="section.type == 'Section'">
-    <div class="container py-5">
-      <h1 class="text-left main-headings">{{ section.title }}</h1>
+  <div style="background-color: #ffffff" *ngIf="section.type == 'Section'">
+    <div class="container">
+      <h1 class="text-start main-headings">{{ section.title }}</h1>
       
       <div class="row" style="margin-top: 20px">
         <div
-          class="col-md-6 col-sm-6 col-lg-4 col-xl-3 my-2 shopby-cat"
+          class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-2 shopby-cat"
           *ngFor="let item of section.sectionitems"
         >
           <div class="card border border-0">
             <img
               style="border-radius: 10px; cursor: pointer"
-              (click)="getSubcategory(item?.link,item.type,item.title)"
+              (click)="getSubcategory(item?.link, item.type, item.title)"
               [src]="item?.path"
               class="img-fluid first-image"
               alt=""
@@ -66,13 +65,9 @@
     </div>
   </div>
   <!-- Short By saree types -->
-  <div class="container py-3" *ngIf="section.type == 'Tag'">
+  <div class="container" *ngIf="section.type == 'Tag'">
     <h1 class="text-left main-headings">{{ section.title }}</h1>
-    <div class="underline-container">
-      <span class="underline"></span>
-      <span class="diamond"></span>
-      <span class="underline"></span>
-    </div>
+    
     <div class="carousel-wrapper">
       <ngx-slick-carousel
         #slickModal4="slick-carousel"
@@ -82,7 +77,7 @@
         <div
           ngxSlickItem
           *ngFor="let item of section.sectionitems"
-          class="carousel-item"
+          class="col-md-6 col-sm-6 col-lg-4 col-xl-3 my-2 carousel-item"
         >
           <div class="testimonial-container m-auto">
             <div
@@ -95,29 +90,38 @@
                 alt="No Image"
                 class="saree-type-img tagImage"
                 style="
-                  object-fit: cover;
+                  object-fit: contain;
                   object-position: top;
                   border-radius: 15px;
                   margin: auto;
+                  height: 210px;
+                  width: 100%;
                 "
               />
-              <h4 style="color: #a91be9" class="pt-3">{{ item.title }}</h4>
+              <h4 style="color:black" class="pt-3">{{ item.title }}</h4>
             </div>
           </div>
         </div>
       </ngx-slick-carousel>
 
-      <button mat-mini-fab class="prev" (click)="slickModal4.slickPrev()">
+      <!-- <button mat-mini-fab class="prev" (click)="slickModal4.slickPrev()">
         <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
       </button>
       <button mat-mini-fab class="next" (click)="slickModal4.slickNext()">
         <i class="fa-solid fa-arrow-right" style="color: #000000"></i>
-      </button>
+      </button> -->
     </div>
   </div>
+
+
+
+
+
+
+
   <!-- Bridal collections  -->
   <div *ngIf="section.type == 'List'">
-    <div class="container py-5">
+    <div class="container">
       <h1 class="text-left main-headings">{{ section.title }}</h1>
       
       <ngx-slick-carousel
@@ -146,7 +150,7 @@
               [src]="item?.path"
               alt=""
               class="mb-2 mt-2"
-              style="margin: auto; width: 70%"
+              style="margin: auto; width: 70%; cursor: pointer"
               (click)="getSingleProduct(item?.link)"
             />
             <div
@@ -181,12 +185,19 @@
             </div>
           </div>
         </div>
-        
       </ngx-slick-carousel>
+      <!-- <button mat-mini-fab class="prev" (click)="slickModal4.slickPrev()">
+        <i class="fa-solid fa-arrow-left" style="color: #000000"></i>
+      </button>
+      <button mat-mini-fab class="next" (click)="slickModal4.slickNext()">
+        <i class="fa-solid fa-arrow-right" style="color: #000000"></i>
+      </button> -->
     </div>
   </div>
+
+  <!-- R Section -->
   <div *ngIf="section.type == 'RSection'">
-    <div class="container py-5">
+    <div class="container">
       <h1 class="text-left main-headings">{{ section.title }}</h1>
       
       <ngx-slick-carousel
@@ -215,7 +226,7 @@
               [src]="item?.path"
               alt=""
               class="mb-2 mt-2"
-              style="margin: auto; width: 70%"
+              style="margin: auto; width: 70%; cursor: pointer"
               (click)="getSingleProduct(item?.link)"
             />
             <div
@@ -234,14 +245,14 @@
               </span> -->
 
               <p
-                class="prod-name py-2 m-0 text-start"
+                class="prod-name py-2 m-0 text-center"
                 style="cursor: pointer"
                 (click)="getSingleProduct(item?.slug)"
               >
                 {{ item?.title }}
               </p>
               <p
-                class="actual-price py-2 fw-bold text-start"
+                class="actual-price py-2 fw-bold text-center"
                 style="cursor: pointer"
                 (click)="getSingleProduct(item?.slug)"
               >
@@ -250,7 +261,6 @@
             </div>
           </div>
         </div>
-        
       </ngx-slick-carousel>
     </div>
   </div>
@@ -258,62 +268,13 @@
 
 
 
-
-
 <!-- Coupon offer -->
-<!-- <div *ngIf="isCoupon == '0' || isCoupon == ''">
-  <div
-    class="coupon-container"
-    [ngClass]="{ active: isCouponActive }"
-    *ngFor="let item of couponList"
-  >
-    <div class="row offerPart">
-      <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7">
-        <div class="coupon-content">
-          <h6 class="avail">{{ item?.name }}</h6>
-          <h2 class="off">{{ item?.discount }}%</h2>
-          <h4 class="coupon">
-            Coupon Code: <span class="coupon1">{{ item?.coupon_code }}</span>
-          </h4>
-          <p class="Applicable">Applicable on your first order</p>
-          <p class="Applicable">Use Couponcode After SignIn</p>
-        </div>
-      </div>
-      <div class="col-md-5 col-lg-5 col-sm-5 col-xs-5 text-center">
-        <img src="{{ item?.path }}" alt="No image" class="shopImg" />
-      </div>
-    </div>
-  
-    <div class="row footPop">
-      <div class="col-md-5 col-lg-5 col-sm-6 col-xs-6 listttttt">
-        <i aria-hidden="true" class="fa fa-shopping-basket"></i
-        ><span>Genuine Products</span>
-      </div>
-      <div class="col-md-7 col-lg-7 col-sm-6 col-xs-6 listttttt">
-        <i aria-hidden="true" class="fa fa-exchange"></i>
-        Easy Returns
-      </div>
-    </div>
-    <button class="toggle-button" (click)="toggleCoupon()">
-      <div>
-        <div *ngIf="isCouponActive == false">
-          <i class="fa fa-caret-right me-2 fs-4"></i
-          ><span>FLAT {{ item?.discount }}% OFF</span>
-        </div>
-        <div *ngIf="isCouponActive == true">
-          <i class="fa fa-caret-left me-2 fs-4"></i
-          ><span>FLAT {{ item?.discount }}% OFF</span>
-        </div>
-      </div>
-    </button>
-  </div>
-</div> -->
 
-//<app-overlay></app-overlay>
+<app-overlay></app-overlay>
 <app-footer></app-footer>
 
-<!-- newsletter -->
-<!-- <div
+<!-- app.component.html -->
+<div
   class="modal fade"
   id="newsletterModal"
   tabindex="-1"
@@ -393,4 +354,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>

@@ -16,7 +16,7 @@
   >
     <span routerLink="/"
       ><img
-        src="../../../assets/image/logo-7.png"
+        src="../../../assets/image/logo-.jpg"
         width="50px"
         class="mobile-logo"
         alt=""
@@ -29,7 +29,7 @@
           id="product_list"
           style="color: #a91be9; font-weight: 600"
           routerLink="/"
-          >Sarees</span
+          >Home</span
         >
         <div class="dropdown1-menu" style="height: auto; padding-top: 10px">
           <div
@@ -57,7 +57,7 @@
           class="nav-link dropdown1-toggle"
           id="product_list"
           style="color: #a91be9; font-weight: 600"
-          >Kurthi's</span
+          >Online Shop</span
         >
         <div class="dropdown1-menu" style="height: auto; padding-top: 10px">
           <div
@@ -126,7 +126,7 @@
           class="nav-link dropdown1-toggle"
           id="product_list"
           style="color: #a91be9; font-weight: 600"
-          >Jwellerys </span
+          >Store Locator</span
         >
         <div class="dropdown1-menu" style="height: auto; padding-top: 10px">
           <div
@@ -194,7 +194,7 @@
         class="nav-link"
         id="product_list"
         style="color: #a91be9; font-weight: 600"
-        >Blouse</span
+        >Blog</span
       >
       <!-- <span
         routerLink="/live-events"
@@ -208,14 +208,21 @@
           class="nav-link dropdown1-toggle"
           id="product_list"
           style="color: #a91be9; font-weight: 600"
-          ><a
-          class="nav-link m-0 sub-cate-link"
-          style="line-height: 25px"
-          [routerLink]="['/contact']"
-          >Contact Us</a
-        ></span
+          >Customer Care</span
         >
-        
+        <div class="dropdown1-menu" style="height: auto; padding-top: 10px">
+          <div
+            style="overflow: auto; width: 70px; padding: 30px; margin-left: 5px"
+            class="dropdown-menu show onlineShop"
+          >
+            <a
+              class="nav-link m-0 sub-cate-link"
+              style="line-height: 25px"
+              [routerLink]="['/contact']"
+              >Contact Us</a
+            >
+          </div>
+        </div>
       </div>
       <!-- <span routerLink="/home" class="nav-link" id="product_list"
         >Live Events</span
@@ -234,15 +241,12 @@
       class="row"
     >
       <div class="w-50 d-flex justify-content-center logo-middle">
-        <span style="margin: auto; margin-top: 10px" routerLink="/"
+        <span style="margin: auto; margin-top: 20px" routerLink="/"
           ><img
             src="../../../assets/image/logo-8.png"
             class="web-logo"
             alt=""
-            style="
-              cursor: pointer;
-              width: 390px;
-            "
+            style="cursor: pointer; padding-bottom: 10px; width: 300px"
         /></span>
       </div>
       <div class="pe-4 hide-search">
@@ -257,7 +261,7 @@
             "
             class="form-control nav-search"
             [(ngModel)]="searchProduct"
-            placeholder="Search Product.."
+            placeholder="Search your fashion.."
             (ngModelChange)="onSearchChange($event)"
             (keydown.enter)="onEnterPressed()"
           />
@@ -298,7 +302,7 @@
       Cart
     </div> -->
     <div routerLink="/wishlist" class="favlist" *ngIf="this.token">
-      <i class="fa-solid fa-heart" style="color: #f60187"></i>
+      <i class="fa-solid fa-heart" style="color: #ef0c2e"></i>
       <div class="badge cart">
         <span>{{ wishlistcount }}</span>
       </div>
@@ -346,16 +350,13 @@
       </span>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" routerLink="/account">Account</a>
-        <span
-          routerLink="/orderstatus"
-          *ngIf="this.token"
-          style="cursor: pointer; margin-right: 15px"
-          class="my-orders-link dropdown-item"
-          >My Orders</span
+        <a routerLink="/orderstatus" *ngIf="this.token" class="dropdown-item"
+          >My Orders</a
         >
 
         <a
           class="dropdown-item"
+          style="cursor: pointer"
           data-toggle="modal"
           data-target="#exampleModal"
         >

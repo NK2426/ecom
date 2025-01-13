@@ -1,3 +1,7 @@
+
+
+
+
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -14,7 +18,7 @@ import { Newarrivals } from '../model/newarrivals';
   providedIn: 'root'
 })
 export class ApiserviceService {
-  apiurl = environment.ApiEndPoint;
+  apiurl = environment.Api;
   private jsonUrl = 'assets/country.json';
 
   constructor(private http: HttpClient) { }
@@ -23,6 +27,22 @@ export class ApiserviceService {
     // console.log(options);
     const url = `${this.apiurl}products/`;
     return this.http.get<any>(url, options);
+  }
+
+  getAllProudctList(options: any = {}): Observable<any> {
+    // console.log(options);
+    const url = `${this.apiurl}home/products/`;
+    return this.http.get<any>(url, options);
+  }
+  getColorsVariantsTag() {
+    return this.http.get<any>(`${this.apiurl}storefilter`)
+  }
+
+  getFilteredProductsbtTag( params: any) {
+    return this.http.get<any>(`${this.apiurl}home/products/?${params}`)
+  }
+  getPaginationProductsShop( params: any) {
+    return this.http.get<any>(`${this.apiurl}home/products/?${params}`)
   }
 
   getSubcatProducts(options: any): Observable<any> {
@@ -118,6 +138,7 @@ export class ApiserviceService {
     return this.http.get<any>(`${this.apiurl}group/items/${uuid}?${params}`)
   }
 
+
   getProfile() {
     return this.http.get<any>(`${this.apiurl}user/profile`)
   }
@@ -164,8 +185,8 @@ export class ApiserviceService {
     return this.http.post<any>(this.apiurl + 'create/request', formData)
   }
 
-  getRating(): Observable<any> {
-    return this.http.get<any>(this.apiurl + '/home/userratings')
+  getRating(id:any): Observable<any> {
+    return this.http.get<any>(this.apiurl + 'home/userratings/'+id)
   }
 
 }

@@ -21,7 +21,8 @@ export class OverlayComponent implements OnInit {
   videoCalling() {
     const dialog = this.dialog.open(VideoCallComponent, {
       width: '75%',
-      height:'75%'
+      height:'75%',
+       panelClass: 'custom-dialog-container'
     })
   }
 

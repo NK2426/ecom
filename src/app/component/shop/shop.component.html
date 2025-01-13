@@ -1,56 +1,291 @@
-<app-header></app-header>
+<app-header></app-header> <br /><br />
 
-<br><br>
-
+<!-- filters mobile view start -->
 <div class="container">
-    <div class="row">
-        <ng-container>
-           
-            <div *ngFor="let item of products"
-              class="col-sm-12 col-xs-12 col-md-4 col-xl-4 product-list justify-content-center">
-              <div class="p-2 my-3 rounded-3" (click)="getProducts(item.slug)" style="
-                  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-                  cursor: pointer;
-                  text-align: center;
-                  height: 90%;
-                ">
-                <div class="card border-0">
-                  <img src="{{ item?.path }}" alt="No Image" class="w-50 rounded-3 m-auto" />
-                </div>
-                <h4 style="color: #767676" class="py-2 m-0">{{ item.name }}</h4>
-                <h2 class="fw-bold" style="margin-bottom: 0px">
-                  <span style="color: #870a51; font-size: 15px"><i class="fa-solid fa-indian-rupee-sign"
-                      style="font-size: 15px"></i>
-                    {{ item.price }}
-                  </span>
-                  <span style="
-                      color: rgb(87, 84, 84);
-                      font-size: 12px;
-                      text-decoration: line-through;
-                    ">
-                    <i class="fa-solid fa-indian-rupee-sign"></i>{{ item.mrp }}
-                  </span>
-                </h2>
-                <p style="color: #870a51; margin-top: 0px" class="fw-bold" *ngIf="item.offer !== 0">
-                  {{ item.offer }}% off
-                </p>
-              </div>
-            </div>
-          </ng-container>
+  <div class="col-md-12 categories-mobile">
+    <div *ngIf="isFilterApplied()">
+      <button class="btn btn-sm text-white mx-5 mb-4 clear-btn" (click)="clearFilter()">
+        Clear Filters <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="d-flex justify-content-end fixed-filters-button">
+      <button (click)="toggleFilters()" mat-raised-button style="background-color: #870a51; color: #ffffff">
+        <img src="../../../assets/image/filter-icon.svg" class="img-fluid" width="20px" style="color: #ffffff" alt="" />
+      </button>
     </div>
 
-    <div class="container">
-        <div class="row justify-content-end align-items-center">
-          <div class="col-auto">
-            <span>Page: {{ currentPage + 1 }}</span> <!-- Add 1 to display the current page correctly -->
+    <!-- Demo Accordian -->
+    <div *ngIf="showFilters" class="showFilters">
+      <ngb-accordion #acc="ngbAccordion" id="filtersAccordion" [activeIds]="['ngb-panel-0']">
+        <!-- Variants Filter -->
+        <ngb-panel *ngFor="let variant of variants" [title]="variant.name">
+          <ng-template ngbPanelContent>
+            <div class="checkbox-container">
+              <div *ngFor="let value of variant.productvariantvalues" class="checkbox-item">
+                <input type="checkbox" [id]="value.value" [name]="value.value" [value]="value.value"
+                  class="custom-checkbox" [(ngModel)]="value.selected" (change)="updateSelectedValues()" />
+                <label [for]="value.value" class="checkbox-label">{{
+                  value.value
+                  }}</label>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+
+        <!-- Parameter Filter -->
+        <ngb-panel *ngFor="let variant of parameter" [title]="variant.name">
+          <ng-template ngbPanelContent>
+            <div class="checkbox-container">
+              <div *ngFor="let value of variant.parametervalues" class="checkbox-item">
+                <input type="checkbox" [id]="value.value" [name]="value.value" [value]="value.value"
+                  class="custom-checkbox" [(ngModel)]="value.selected" (change)="updateSelectedValues()" />
+                <label [for]="value.value" class="checkbox-label">{{
+                  value.value
+                  }}</label>
+              </div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+
+        <!-- Price Filter -->
+        <ngb-panel *ngIf="pricefilter?.length > 0" title="Price">
+          <ng-template ngbPanelContent>
+            <div *ngFor="let variant of pricefilter" class="checkbox-container mb-3">
+              <input type="checkbox" [id]="variant.price" [name]="variant.price" [value]="variant.price"
+                class="custom-checkbox" [(ngModel)]="variant.selected" (change)="updateSelectedValues()" />
+              <label [for]="variant.price" class="checkbox-label">{{
+                variant.name
+                }}</label>
+            </div>
+          </ng-template>
+        </ngb-panel>
+
+        <!-- Discount Filter -->
+        <ngb-panel *ngIf="discount?.length > 0" title="Discount">
+          <ng-template ngbPanelContent>
+            <div *ngFor="let variant of discount" class="checkbox-container mb-3">
+              <input type="checkbox" [id]="variant.discount" [name]="variant.discount" [value]="variant.discount"
+                class="custom-checkbox" [(ngModel)]="variant.selected" (change)="updateSelectedValues()" />
+              <label [for]="variant.discount" class="checkbox-label">{{
+                variant.name
+                }}</label>
+            </div>
+          </ng-template>
+        </ngb-panel>
+
+        <!-- Brands Filter -->
+        <ngb-panel *ngFor="let variant of brands" [title]="variant.name">
+          <ng-template ngbPanelContent>
+            <div class="checkbox-container">
+              <input type="checkbox" [id]="variant.bid" [name]="variant.bid" [value]="variant.bid"
+                class="custom-checkbox" [(ngModel)]="variant.selected" (change)="updateSelectedValues()" />
+              <label [for]="variant.bid" class="checkbox-label">{{
+                variant.name
+                }}</label>
+            </div>
+          </ng-template>
+        </ngb-panel>
+
+        <!-- Rating Filter -->
+        <ngb-panel *ngIf="rating?.length > 0" title="Rating">
+          <ng-template ngbPanelContent>
+            <div *ngFor="let variant of rating" class="checkbox-container mb-3">
+              <input type="checkbox" [id]="variant.rating" [name]="variant.rating" [value]="variant.rating"
+                class="custom-checkbox" [(ngModel)]="variant.selected" (change)="updateSelectedValues()" />
+              <label [for]="variant.rating" class="checkbox-label">{{
+                variant.name
+                }}</label>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+  </div>
+</div>
+<!-- filters mobile view end -->
+
+<div class="container-fluid pt-4" style="width: 85%; margin: 'auto'">
+  <div class="row">
+    <!-- Row 1 -->
+    <div class="col-12 col-md-3 col-lg-3 col-sm-3 categories">
+      <div class="accordion" id="filtersAccordion">
+
+        <div class="d-flex">
+          <h3>Filters <i class="fa-solid fa-filter"></i></h3>
+          <div *ngIf="isFilterApplied()">
+            <button class="btn btn-sm text-white mx-5 clear-btn" (click)="clearFilter()">
+              Clear Filters <i class="fa-solid fa-xmark"></i>
+            </button>
           </div>
-          <div class="col-auto">
-            <mat-paginator #paginator [length]="count" [pageSize]="pageSize" [pageSizeOptions]="pageSizes"
-              aria-label="Select page" (page)="handlePageChange($event)" class="custom-paginator">
-            </mat-paginator>
+        </div>
+
+        <!-- Demo Accordian -->
+        <div class="showFilters">
+          <ngb-accordion id="filtersAccordion" [activeIds]="['ngb-panel-0']">
+            <!-- Variants Filter -->
+            <ngb-panel *ngFor="let variant of variants" [title]="variant.name">
+              <ng-template ngbPanelContent>
+                <div class="checkbox-container">
+                  <div *ngFor="let value of variant.productvariantvalues" class="checkbox-item">
+                    <input type="checkbox" [id]="value.value" [name]="value.value" [value]="value.value"
+                      class="custom-checkbox" [(ngModel)]="value.selected" (change)="updateSelectedValues()" />
+                    <label [for]="value.value" class="checkbox-label">{{
+                      value.value
+                      }}</label>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-panel>
+
+            <!-- Parameter Filter -->
+            <ngb-panel *ngFor="let variant of parameter" [title]="variant.name">
+              <ng-template ngbPanelContent>
+                <div class="checkbox-container">
+                  <div *ngFor="let value of variant.parametervalues" class="checkbox-item">
+                    <input type="checkbox" [id]="value.value" [name]="value.value" [value]="value.value"
+                      class="custom-checkbox" [(ngModel)]="value.selected" (change)="updateSelectedValues()" />
+                    <label [for]="value.value" class="checkbox-label">{{
+                      value.value
+                      }}</label>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-panel>
+
+            <!-- Price Filter -->
+            <ngb-panel *ngIf="pricefilter?.length > 0" title="Price">
+              <ng-template ngbPanelContent>
+                <div *ngFor="let variant of pricefilter" class="checkbox-container mb-3">
+                  <input type="checkbox" [id]="variant.price" [name]="variant.price" [value]="variant.price"
+                    class="custom-checkbox" [(ngModel)]="variant.selected" (change)="updateSelectedValues()" />
+                  <label [for]="variant.price" class="checkbox-label">{{
+                    variant.name
+                    }}</label>
+                </div>
+              </ng-template>
+            </ngb-panel>
+
+            <!-- Discount Filter -->
+            <ngb-panel *ngIf="discount?.length > 0" title="Discount">
+              <ng-template ngbPanelContent>
+                <div *ngFor="let variant of discount" class="checkbox-container mb-3">
+                  <input type="checkbox" [id]="variant.discount" [name]="variant.discount" [value]="variant.discount"
+                    class="custom-checkbox" [(ngModel)]="variant.selected" (change)="updateSelectedValues()" />
+                  <label [for]="variant.discount" class="checkbox-label">{{
+                    variant.name
+                    }}</label>
+                </div>
+              </ng-template>
+            </ngb-panel>
+
+            <!-- Brands Filter -->
+            <ngb-panel *ngFor="let variant of brands" [title]="variant.name">
+              <ng-template ngbPanelContent>
+                <div class="checkbox-container">
+                  <input type="checkbox" [id]="variant.bid" [name]="variant.bid" [value]="variant.bid"
+                    class="custom-checkbox" [(ngModel)]="variant.selected" (change)="updateSelectedValues()" />
+                  <label [for]="variant.bid" class="checkbox-label">{{
+                    variant.name
+                    }}</label>
+                </div>
+              </ng-template>
+            </ngb-panel>
+
+            <!-- Rating -->
+            <ngb-panel *ngIf="pricefilter?.length > 0" title="Rating">
+              <ng-template ngbPanelContent>
+                <div *ngFor="let variant of rating" class="checkbox-container mb-3">
+                  <input type="checkbox" [id]="variant.rating" [name]="variant.rating" [value]="variant.rating"
+                    class="custom-checkbox" [(ngModel)]="variant.selected" (change)="updateSelectedValues()" />
+                  <label [for]="variant.rating" class="checkbox-label">{{
+                    variant.name
+                    }}</label>
+                </div>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+        </div>
+      </div>
+    </div>
+    <!-- Row 2 -->
+    <div class="col-12 col-md-9 col-lg-9 col-sm-9">
+      <div class="row">
+        <h2 class="fw-bold m-0 py-2" style="color: #a91be9">{{ tagName }}</h2>
+        <div>
+          <button class="btn btn-sm m-2" value="pop" [ngClass]="{
+              'bg-btn-success': defaultSortOption === 'pop',
+              'bg-btn-fail': defaultSortOption !== 'pop'
+            }" (click)="onSortChange($event)">
+            Popular 💥
+          </button>
+          <button class="btn btn-sm m-2" value="priceLH" [ngClass]="{
+              'bg-btn-success': defaultSortOption === 'priceLH',
+              'bg-btn-fail': defaultSortOption !== 'priceLH'
+            }" (click)="onSortChange($event)">
+            Price: Low to High ↑
+          </button>
+          <button class="btn btn-sm m-2" value="priceHL" [ngClass]="{
+              'bg-btn-success': defaultSortOption === 'priceHL',
+              'bg-btn-fail': defaultSortOption !== 'priceHL'
+            }" (click)="onSortChange($event)">
+            Price: High to Low ↓
+          </button>
+          <button class="btn btn-sm m-2" value="new" [ngClass]="{
+              'bg-btn-success': defaultSortOption === 'new',
+              'bg-btn-fail': defaultSortOption !== 'new'
+            }" (click)="onSortChange($event)">
+            New Arrivals 🌟
+          </button>
+        </div>
+        <div *ngFor="let item of listAllProudct" class="col-md-6 col-sm-6 col-lg-3">
+          <div class="p-2 my-3 rounded-3" style="box-shadow:transparent 0px 4px 12px; cursor: pointer">
+            <div class="wishlist-icon" [ngClass]="{
+                'in-wishlist': item.wishlist !== 0,
+                'not-in-wishlist': item.wishlist === 0
+              }" (click)="toggleWishlist(item)" title="Add to Wishlist">
+              <mat-icon>{{
+                item.wishlist !== 0 ? "favorite" : "favorite_border"
+                }}</mat-icon>
+            </div>
+            <div class="card border-0">
+              <img src="{{ item.path }}" alt="No Image" class="w-50 rounded-4" style="margin: auto"
+                (click)="productDetails(item.slug)" />
+            </div>
+
+            <div class="ps-3 text-center">
+              <h4 style="color: #767676" class="py-3 m-0 truncate-text">{{ item.name }}</h4>
+              <h2 class="fw-bold" style="margin-bottom: 0px; color: #a91be9; font-size: 15px">
+                <i class="fa-solid fa-indian-rupee-sign" style="color: #a91be9; font-size: 14px !important"></i>{{
+                item.price }}
+              </h2>
+            </div>
           </div>
         </div>
       </div>
+      <div *ngIf="listAllProudct?.length == 0">
+        <p class="no-items">
+          <img src="../../../assets/image/no-items-found.png" class="img-fluid nofound-img" alt="" />
+        </p>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="container">
+    <div class="row justify-content-end align-items-center">
+      <div class="col-auto">
+        <span>Page: {{ currentPage + 1 }}</span>
+        <!-- Add 1 to display the current page correctly -->
+      </div>
+      <div class="col-auto">
+        <mat-paginator #paginator [length]="count" [pageSize]="size" [pageSizeOptions]="sizes" aria-label="Select page"
+          (page)="handlePageChange($event)" class="custom-paginator">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
 </div>
-//<app-overlay></app-overlay>
+
+<app-overlay></app-overlay>
 <app-footer></app-footer>

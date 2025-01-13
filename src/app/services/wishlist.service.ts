@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environments';
   providedIn: 'root'
 })
 export class WishlistService {
-  ApiEndPoint = environment.ApiEndPoint;
+  Api = environment.Api;
 
   private wishlistCountSubject = new BehaviorSubject<number>(0);
   wishlistCount$ = this.wishlistCountSubject.asObservable();
@@ -22,8 +22,8 @@ export class WishlistService {
   constructor(private http: HttpClient) { }
 
   getWishlist(): Observable<any[]> {
-    // console.log(this.ApiEndPoint);
-    return this.http.get<any[]>(`${this.ApiEndPoint}/wishlist`)
+    // console.log(this.Api);
+    return this.http.get<any[]>(`${this.Api}/wishlist`)
   }
 
   addToWishlist(item_uuid: any) {
@@ -32,7 +32,7 @@ export class WishlistService {
     const httpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    return this.http.post<any>(`${this.ApiEndPoint}/wishlist`, { item_uuid }, { headers: httpHeaders })
+    return this.http.post<any>(`${this.Api}/wishlist`, { item_uuid }, { headers: httpHeaders })
   }
 
   addToWishlistCount(data: any) {

@@ -86,11 +86,11 @@ export class HomeComponent {
     private cd: ChangeDetectorRef, private cartService: CartService, private router: Router, private checkout: CheckoutService, private loginService: LoginService,
     private dialog: MatDialog) {
     this.slidesToShow = window.innerWidth < 576 ? 1 : window.innerWidth < 769 ? 3 : window.innerWidth <= 1024 ? 3 : window.innerWidth < 1350 ? 5 : 5;
-    this.slidesToShow3 = window.innerWidth < 576 ? 1 : 3;
-    this.slidesToShow6 = window.innerWidth < 576 ? 1 : 2;
-    this.slidesToShow4 = window.innerWidth < 450 ? 1 : window.innerWidth < 769 ? 2 : window.innerWidth < 1023 ? 2 : window.innerWidth < 1350 ? 3 : 3;
-    this.slidesToTag = window.innerWidth < 320 ? 1 : window.innerWidth < 769 ? 2 : window.innerWidth < 1023 ? 2 : 3;
-    this.slideConfig5 = window.innerWidth < 576 ? 1 : 2;
+    this.slidesToShow3 = window.innerWidth < 576 ? 3 : 5;
+    this.slidesToShow6 = window.innerWidth < 576 ? 3 : 4;
+    this.slidesToShow4 = window.innerWidth < 450 ? 1 : window.innerWidth < 769 ? 2 : window.innerWidth < 1023 ? 2 : window.innerWidth < 1350 ? 5 : 6;
+    this.slidesToTag = window.innerWidth < 250 ? 1 : window.innerWidth < 320 ? 2 : window.innerWidth < 769 ? 2 : window.innerWidth < 1023 ? 3 : 4;
+    this.slideConfig5 = window.innerWidth < 576 ? 3 : 5;
     this.slideConfig2 = {
       slidesToShow: this.slidesToShow,
       slidesToScroll: 1,
@@ -166,20 +166,14 @@ export class HomeComponent {
       this.router.navigate([`/tag/${route}`])
     } else if (type === 'Group') {
       this.router.navigate([`/product-list/${route}`])
+    }else{
+      this.router.navigate([`/product/${route}`])
     }
   }
   ngOnInit() {
     // this.homeBanner();
     this.getCategoriesFetch();
-    this.tags();
-    this.trendingRells();
-    this.exclusiveCollection();
-    this.bridalCollection();
-    this.newArrivals();
-    this.getStore();
-    this.getCoupon();
-    this.testimonials()
-    this.homeBanner()
+    
     // // this.getHomePageSubcategories();
     // this.getBridesOfMugdha();
     // this.getTestimonials();
@@ -190,12 +184,12 @@ export class HomeComponent {
     });
 
     const isPopupShown = sessionStorage.getItem('isPopupShown');
-    if (!isPopupShown) {
-      const newsletterModal = new bootstrap.Modal(document.getElementById('newsletterModal')!, {});
-      newsletterModal.show();
-      sessionStorage.setItem('isPopupShown', 'true');
-    }
-  
+    // if (!isPopupShown) {
+    //   const newsletterModal = new bootstrap.Modal(document.getElementById('newsletterModal')!, {});
+    //   newsletterModal.show();
+    //   sessionStorage.setItem('isPopupShown', 'true');
+    // }
+    this.homeBanner()
     this.isCoupon = localStorage.getItem('coupon')
   }
 
@@ -224,17 +218,17 @@ export class HomeComponent {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    this.slidesToShow = (event.target as Window).innerWidth < 576 ? 1 : 3;
+    this.slidesToShow = (event.target as Window).innerWidth < 576 ? 3 : 5;
     this.slideConfig2 = { slidesToShow: this.slidesToShow, slidesToScroll: this.slidesToShow };
     this.slidesToShow3 = (event.target as Window).innerWidth < 576 ? 3 : 5;
     this.slideConfig3 = { slidesToShow: this.slidesToShow3, slidesToScroll: this.slidesToShow3 };
-    this.slidesToShow4 = (event.target as Window).innerWidth < 576 ? 1 : 3;
+    this.slidesToShow4 = (event.target as Window).innerWidth < 576 ? 3 : 5;
     this.slideConfig4 = { slidesToShow: this.slidesToShow4, slidesToScroll: this.slidesToShow4 };
-    this.slidesToShow5 = (event.target as Window).innerWidth < 576 ? 1 : 2;
+    this.slidesToShow5 = (event.target as Window).innerWidth < 576 ? 3 : 5;
     this.slideConfig5 = { slidesToShow: this.slidesToShow5, slidesToScroll: this.slidesToShow5 };
-    this.slidesToTag = (event.target as Window).innerWidth < 576 ? 1 : 2;
+    this.slidesToTag = (event.target as Window).innerWidth < 576 ? 2 : 4;
     this.slideConfigTag = { slidesToShow: this.slidesToTag, slidesToScroll: this.slidesToTag };
-    this.slidesToShow6 = (event.target as Window).innerWidth < 576 ? 1 : 2;
+    this.slidesToShow6 = (event.target as Window).innerWidth < 576 ? 3 : 5;
     this.slideConfig6 = { slidesToShow: this.slidesToShow6, slidesToScroll: this.slidesToShow6 };
   }
 
@@ -372,14 +366,14 @@ export class HomeComponent {
     video.controls = false;
   }
 
-  getSubcategory(uuid: any,type:any,title:any) {
+  getSubcategory(uuid: any, type: any, title: any) {
 
 
     if (type === 'Group') {
       this.route.navigate(['/product-list/' + uuid])
     }
-    if(type ==='Category'){
-      this.route.navigate(['/category/'+uuid+'/'+title])
+    if (type === 'Category') {
+      this.route.navigate(['/category/' + uuid + '/' + title])
     }
     if (type === 'Tag') {
       this.route.navigate(['/tag/' + uuid])

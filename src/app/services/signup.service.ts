@@ -9,17 +9,17 @@ import { User } from '../model/user';
   providedIn: 'root'
 })
 export class SignupService {
-  ApiEndPoint = environment.ApiEndPoint;
+  Api = environment.Api;
   constructor(private http: HttpClient) { }
 
   signup(data: SingnUp): Observable<any> {
-    const postapiurl = `${this.ApiEndPoint}/auth/create`;
+    const postapiurl = `${this.Api}/auth/create`;
     // console.log(data)
     return this.http.post(postapiurl, data);
   }
 
   login(data: User): Observable<any> {
-    const postapiurl = `${this.ApiEndPoint}/auth/login`
+    const postapiurl = `${this.Api}/auth/login`
     // console.log(data)
     return this.http.post(postapiurl, data);
   }

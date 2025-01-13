@@ -272,33 +272,54 @@
   color: #85d508;
 }
 
+
 .no-items {
   font-size: 20px;
   text-align: center;
-
   position: absolute;
   margin: auto;
-  margin-top:150px;
+  margin-top: 115px;
   margin-bottom: 200px;
   width: 100%;
- 
+
 }
-.nofound-img{
+
+.nofound-img {
   width: 500px;
 }
 
-@media (max-width:992px){
-  .no-items{
+@media (max-width:992px) {
+  .no-items {
     position: absolute;
-  margin: auto;
-  margin-top:150px;
-  margin-bottom: 200px;
-  width: 100%;
+    margin: auto;
+    margin-top: 150px;
+    margin-bottom: 200px;
+    width: 100%;
   }
-  .nofound-img{
+
+  .nofound-img {
     width: 300px;
   }
 }
+
+
+
+@media (min-width:320px) and (max-width:991) {
+  .no-items {
+    position: absolute;
+    margin: auto;
+    margin-top: 150px;
+    margin-bottom: 200px;
+    width: 100%;
+  }
+
+  .nofound-img {
+    width: 200px;
+    height: 100%;
+
+  }
+}
+
 
 
 
@@ -327,14 +348,17 @@
 
 @media (max-width: 992px) {
   .prod-list-cont {
-      max-width: 991px !important;
+    max-width: 991px !important;
   }
-  .checkbox-container{
+
+  .checkbox-container {
     display: block;
   }
-  .checkbox-item{
+
+  .checkbox-item {
     width: 100%;
   }
+
   .checkbox-lable {
     width: 80%;
     margin-left: 5px;
@@ -450,71 +474,88 @@
 }
 
 .checkbox-label {
-  margin-left: 8px; /* Adjust as needed */
+  margin-left: 8px;
+  /* Adjust as needed */
 }
 
-@media (min-width:992px){
-  .categories-mobile{
+@media (min-width:992px) {
+  .categories-mobile {
     display: none;
   }
 }
 
-@media (max-width:992px){
-  .categories{
+@media (max-width:992px) {
+  .categories {
     display: none;
   }
-  .category-products{
+
+  .category-products {
     width: 100% !important;
   }
-  .categories-mobile{
+
+  .categories-mobile {
     display: block;
   }
 }
 
 .fixed-filters-button {
   position: fixed;
-  bottom: 100px; /* Adjust as needed */
-  right: 20px; /* Adjust as needed */
-  z-index: 1000; /* Ensure it appears above other elements */
+  bottom: 100px;
+  /* Adjust as needed */
+  right: 20px;
+  /* Adjust as needed */
+  z-index: 1000;
+  /* Ensure it appears above other elements */
 }
 
-.noitemsfooter{
+.noitemsfooter {
   margin-top: 600px;
-    position: absolute;
-    width: 100%;
+  position: absolute;
+  width: 100%;
 }
 
 
 .product-list {
-  position: relative; /* Ensure the card is the positioning context */
+  position: relative;
+  /* Ensure the card is the positioning context */
 }
 
 .wishlist-icon {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #fff; /* Background color to make it stand out */
+  background-color: #fff;
+  /* Background color to make it stand out */
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
   /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
-  z-index: 10; /* Ensure it appears above other elements */
+  z-index: 10;
+  /* Ensure it appears above other elements */
 }
 
 .wishlist-icon mat-icon {
-  font-size: 24px; /* Adjust size as needed */
+  font-size: 24px;
+  /* Adjust size as needed */
+}
+
+.clear-btn {
+  background-color: #a91be9;
 }
 
 .not-in-wishlist mat-icon {
-  color: #2c2424; /* White color when not in wishlist */
+  color: #2c2424;
+  /* White color when not in wishlist */
 }
 
 .in-wishlist mat-icon {
-  color: #a91be9; /* Red color when in wishlist */
+  color: #ef0c2e;
+  /* Red color when in wishlist */
 }
 
 .wishlist-icon:hover mat-icon {
-  color: #a91be9; /* Change color on hover for visual feedback */
+  color: #a91be9;
+  /* Change color on hover for visual feedback */
 }
 
 .bg-btn-success {
@@ -526,4 +567,75 @@
   color: #000000;
   border: 1px solid #a91be9;
   background-color: white;
+}
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+::ng-deep #filtersAccordion .accordion-button {
+  background-color: #a91be9;
+  color: white;
+  border: none;
+}
+
+
+::ng-deep #filtersAccordion .accordion-button:not(.collapsed) {
+  background-color: #a91be9;
+  color: white;
+}
+
+::ng-deep #filtersAccordion .accordion-button:hover {
+  background-color: #a91be9;
+  color: white;
+}
+
+
+::ng-deep #filtersAccordion .accordion-button.collapsed {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.filterBtn {
+  width: 150px;
+}
+
+.filterBtnMobile {
+  bottom: 100px;
+  /* Adjust as needed */
+  right: 50px;
+  /* Adjust as needed */
+  z-index: 1000;
+}
+
+@media(max-width:360px) {
+  .filterBtnMobile {
+    top: 30%;
+    right: 5%;
+  }
+}
+
+@media(min-width:361px)and (max-width:450px) {
+  .filterBtnMobile {
+    top: 20%;
+  }
+}
+
+@media(min-width:451px) and (max-width:992px) {
+  .filterBtnMobile {
+    top: 20%;
+  }
+}
+
+@media (max-width:992px) {
+  .filterIcon {
+    display: block;
+  }
+}
+
+@media (min-width:993px) {
+  .filterIcon {
+    display: none;
+  }
 }

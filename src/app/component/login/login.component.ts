@@ -156,6 +156,7 @@ export class LoginComponent implements OnInit {
               popup: 'large-sa-popup',
             },
           });
+          this.router.navigate(['/signup'])
           this.clearErrors();
         } else if (data.status === 'success') {
           this.isLogin = true;
@@ -250,7 +251,7 @@ export class LoginComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'error',
-            title: 'Please Enter The Correct Otp',
+            title: data.message,
             showConfirmButton: false,
             width: '300px',
             timer: 2000,

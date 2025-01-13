@@ -1,33 +1,90 @@
-.image-container {
+.image-container {}
+
+.dialog-content {
     position: relative;
     display: inline-block;
-    width: 100%;
     height: 100%;
-    /* Optional: keeps the container only as wide as the image */
+    width: 100%;
+    align-content: center;
 }
 
-.image {
-    display: block;
-    /* Ensures no gaps around the image */
-    width: 100%;
-    /* Optional: ensures the image fills the container */
-    height: 100%;
+@media (max-width:768px) {
+    .dialog-content {
+        background-image: url('../../../assets/image/videocall5.jpg');
+        background-size: cover;
+        background-position: top;
+        height: 100%;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    .language {
+        font-size: 12px;
+    }
+
+    .popup-box {
+        width: 60%;
+        margin: auto;
+    }
+}
+
+@media (min-width:769px) {
+    .dialog-content {
+        background-image: url('../../../assets/image/videocall1.webp');
+        background-size: cover;
+        background-position: top;
+        height: 100%;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+
+    .language {
+        font-size: 16px;
+    }
+}
+
+@media (min-width:769px) and (max-width:1024px) {
+    .formDiv {
+        width: 60%;
+        margin: auto;
+    }
+}
+
+@media (min-width:1025px) and (max-width:1440px) {
+    .formDiv {
+        width: 40%;
+        margin: auto;
+    }
+}
+
+@media (min-width:1441px) {
+    .formDiv {
+        width: 40%;
+        margin: auto;
+    }
 }
 
 .centered-content {
-    position: absolute;
+    padding: 15px 0px;
+    /* position: absolute; */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%); */
     color: white;
     /* Optional: change text color */
     /* text-align: center; */
     /* Additional styling as needed */
+    width: 90%;
+    margin: auto;
 }
 
 .h3 {
     margin: 0;
-    font-size: 28px;
+    /* font-size: 28px; */
     font-weight: bold;
     padding-bottom: 5px;
     text-align: center;
@@ -66,11 +123,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px;
+    padding: 10px;
     background-color: #7bd5ea;
     /* border: 1px solid #ccc; */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    width: 65%;
+    /* width: 65%; */
     z-index: 2;
     border-radius: 5px;
 }
@@ -101,4 +158,8 @@
     .vdoImg {
         width: 100%;
     }
+}
+
+.custom-dialog-container {
+    overflow: hidden !important;
 }
