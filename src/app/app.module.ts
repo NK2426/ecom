@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+  import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -128,7 +128,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     MatToolbarModule,
     SlickCarouselModule,
     MatButtonModule,
-    MatExpansionModule,
+    MatExpansionModule, 
     MatIconModule,
     MatTabsModule,
     FormsModule,

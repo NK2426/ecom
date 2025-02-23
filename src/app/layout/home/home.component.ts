@@ -218,7 +218,7 @@ export class HomeComponent {
       this.section.forEach((section:any,index:any)=>{
        if(section.type =='Tags'){       
         tagcount ++
-        debugger
+     
         if(tagcount > 1) this.section.splice(index,1)
        } 
       })
